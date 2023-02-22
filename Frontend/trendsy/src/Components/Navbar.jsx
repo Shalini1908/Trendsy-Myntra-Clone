@@ -16,7 +16,7 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { FaRegUser } from 'react-icons/fa';
 import { GrFavorite } from 'react-icons/gr';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
-// import logo from '../Images/Trendsy-1.png';
+import logo from '../../src/Images/trendsy.png';
 import Dropdown from './Dropdown';
 
 const Navbar = () => {
@@ -24,7 +24,7 @@ const Navbar = () => {
     <Box boxShadow="2xl" p="15px" rounded="md" bg="white" >
       <Flex align="center">
         <Box>
-          {/* <Image w="50px" src={logo} alt="Trednsy" /> */}
+          <Image w="50px" src={logo} alt="Trednsy" />
         </Box>
         <Spacer />
         <HStack spacing="4" fontWeight="600">
@@ -77,7 +77,7 @@ const Navbar = () => {
         </HStack>
       </Flex>
       <Box >
-      <Dropdown />
+      {/* <Dropdown /> */}
       </Box>
     </Box>
   );
