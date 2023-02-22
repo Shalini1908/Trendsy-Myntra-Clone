@@ -1,0 +1,24 @@
+
+#nav {
+    box-shadow:rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+}
+
+#logo{
+
+    margin-left:-38px;
+}
+
+
+
+#sidebar{
+    border: 1px solid black;
+    width: 40%;
+    margin: auto;
+    background-color: #f41cb2;
+   
+}
+
+/* @media screen and (min-width: 48em){
+    flex-direction: row;
+} */

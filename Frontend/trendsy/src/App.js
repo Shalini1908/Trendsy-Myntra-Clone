@@ -1,8 +1,7 @@
 
 import { Products } from "./Pages/Products";
 import './App.css';
-import {Routes , Route} from "react-router-dom";
-import Home from './Pages/Home';
+import AllRoutes from './Routes/AllRoutes';
 
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
@@ -13,9 +12,10 @@ import Footer from './Components/Footer';
 function App() {
   return (
     <div className="App">
-
-    <Navbar/>
- <Routes>
+ <Navbar/>
+    
+<AllRoutes/>
+<Routes>
   <Route path='/' element={<Home/>}></Route>
   <Route path='/login' element={<Login/>}></Route>
   <Route path='/signup' element={<Signup/>}></Route>
@@ -23,8 +23,6 @@ function App() {
  </Routes>
 
   <Footer/>
-
-
     </div>
   );
 }
