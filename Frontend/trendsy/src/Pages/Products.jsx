@@ -9,6 +9,13 @@ import {
 import { FiltersTop } from "../Components/Products-page/FiltersTop";
 import { BreadCrumb } from "../Components/Products-page/BreadCrumb";
 import { Product } from "../Components/Products-page/Product";
+import { CheckBoxPerson } from "../Components/Products-page/Filters/CheckBoxPerson";
+import { CheckBoxCategory } from "../Components/Products-page/Filters/CheckBoxCategory";
+import { CheckBoxPrice } from "../Components/Products-page/Filters/CheckBoxPrice";
+import { CheckBoxBrands } from "../Components/Products-page/Filters/CheckBoxBrands";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { CheckBoxColors } from "../Components/Products-page/Filters/CheckBoxColors";
 
 const products = [
   {
@@ -386,9 +393,50 @@ const products = [
 
 export const Products = () => {
   const items = 399;
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialCategory = searchParams.getAll("category");
+  const [category, setCategory] = useState(initialCategory || []);
+
+  const initialBrands = searchParams.getAll("brands");
+  const [brands, setBrands] = useState(initialBrands || []);
+
+  const initialColors = searchParams.getAll("colors");
+  const [colors, setColors] = useState(initialColors || []);
+
+  const initialPrice = searchParams.getAll("price");
+  const [price, setPrice] = useState(initialPrice || []);
+
+  const initialSize = searchParams.getAll("size");
+  const [size, setSize] = useState(initialSize || []);
+
+  useEffect(() => {
+    const params = {
+      brands,
+      category,
+      colors,
+      price,
+      size,
+    };
+
+    setSearchParams(params);
+  }, [brands, category, colors, price, size]);
+
+  const handleClear = () => {
+    setCategory([]);
+    setBrands([]);
+    setColors([]);
+    setPrice([]);
+    setSize([]);
+  };
+
   return (
     <>
-      <Stack w={"100%"} p={"20px"}>
+      <Stack
+        w={"100%"}
+        p={{ base: "10px", sm: "10px", md: "15px", lg: "25px" }}
+      >
         <Box mb={"15px"}>
           <BreadCrumb />
 
@@ -407,8 +455,8 @@ export const Products = () => {
           templateColumns={{
             base: "repeat(1, 100%)",
             sm: "repeat(1, 100%)",
-            md: "repeat(2, 20% 80%)",
-            lg: "repeat(2, 17% 83%)",
+            md: "repeat(2, 25% 75%)",
+            lg: "repeat(2, 18% 82%)",
           }}
           w={"100%"}
           boxSizing={"border-box"}
@@ -417,8 +465,8 @@ export const Products = () => {
             display={{ base: "none", sm: "none", md: "block", lg: "block" }}
             marginLeft={"0px"}
           >
-            <Stack w={"100%"}>
-              <HStack justify={"space-between"}>
+            <Stack w={"100%"} maxW={"240px"}>
+              <HStack justify={"space-between"} mb={"12px"}>
                 <Text fontSize={"16px"} fontWeight={"650"}>
                   FILTERS
                 </Text>
@@ -426,21 +474,114 @@ export const Products = () => {
                   pr={{ base: "5px", sm: "5px", md: "10px", lg: "20px" }}
                   fontSize={"13px"}
                   fontWeight={"500"}
-                  color={"orangered"}
+                  color={"#ff3f6c"}
                   cursor={"pointer"}
+                  onClick={handleClear}
                 >
                   CLEAR ALL
                 </Text>
               </HStack>
+              <Stack
+                w={"95%"}
+                borderRight={"1px solid #f2f2f2"}
+                position={"relative"}
+                top={"5px"}
+              >
+                <CheckBoxPerson
+                  setCategory={setCategory}
+                  setBrands={setBrands}
+                  setColors={setColors}
+                  setPrice={setPrice}
+                  setSize={setSize}
+                  initialCategory={initialCategory}
+                  initialBrands={initialBrands}
+                  initialColors={initialColors}
+                  initialPrice={initialPrice}
+                  initialSize={initialSize}
+                />
+
+                <CheckBoxCategory
+                  options={[
+                    "Tshirts",
+                    "Shirts",
+                    "Kurtas",
+                    "Dress",
+                    "Trausers",
+                    "Kurta sets",
+                  ]}
+                  name={"Category"}
+                  setCategory={setCategory}
+                  category={category}
+                />
+
+                <CheckBoxBrands
+                  options={[
+                    "Roadster",
+                    "Tommy Hilfiger",
+                    "Jack & Jones",
+                    "WROGN",
+                    "max",
+                    "HERE&NOW",
+                    "HRX",
+                    "U.S. Polo Assn.",
+                  ]}
+                  name={"Brands"}
+                  setBrands={setBrands}
+                  brands={brands}
+                />
+
+                <CheckBoxColors
+                  options={[
+                    "Black",
+                    "Navy Blue",
+                    "Blue",
+                    "White",
+                    "Green",
+                    "Maroon",
+                    "Mustard",
+                  ]}
+                  name={"Colors"}
+                  setColors={setColors}
+                  colors={colors}
+                />
+
+                <CheckBoxPrice
+                  options={[
+                    "Rs.149 to Rs.500",
+                    "Rs.500 to Rs.999",
+                    "Rs.1000 to Rs.1499",
+                    "Rs.1500 to Rs.1999",
+                    "Rs.2000 to Rs.2499",
+                    "Rs.2500 to Rs.2999",
+                    "Rs.3000 to Rs.3499",
+                    "Rs.3499 to Rs.4000",
+                  ]}
+                  setPrice={setPrice}
+                  price={price}
+                />
+              </Stack>
             </Stack>
           </UnorderedList>
 
           <Stack>
-            <HStack w={"100%"}>
-              <FiltersTop />
+            <HStack w={"100%"} mt={"0px"}>
+              <FiltersTop
+                category={category}
+                brands={brands}
+                colors={colors}
+                price={price}
+                size={size}
+                setSize={setSize}
+                setCategory={setCategory}
+                setBrands={setBrands}
+                setColors={setColors}
+                setPrice={setPrice}
+              />
             </HStack>
 
             <Grid
+              position={"relative"}
+              top={"-40px"}
               templateColumns={{
                 base: "repeat(1, 1fr)",
                 sm: "repeat(2, 1fr)",
