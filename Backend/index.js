@@ -12,7 +12,7 @@ app.use("/user" ,userRouter)
 app.use("/data", dataroutes);
 app.use("/cart", cartroutes);
 
-app.listen(process.env.PORT || 3000, async () => {
+app.listen(process.env.PORT , async () => {
   try {
     await connection;
   } catch (error) {}

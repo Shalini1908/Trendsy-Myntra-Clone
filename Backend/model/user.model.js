@@ -11,7 +11,7 @@ email:String,
 })
 
 
-const userModel = mongoose.model("otp" , signupSchema )
+const userModel = mongoose.model("otp" , userSchema )
 
 
 module.exports= {userModel}
