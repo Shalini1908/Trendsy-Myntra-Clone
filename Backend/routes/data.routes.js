@@ -23,11 +23,20 @@ dataroutes.get("/search", async (req, res) => {
 
 // for other all get request parameters and all sorting
 dataroutes.get("/alldata", async (req, res) => {
-  const { ideal, cat, brand, lsprice, gtprice, color } = req.query;
+  const { ideal, cat1, cat2, cat3, brand, lsprice, gtprice, color } = req.query;
 
   const query = {};
   if (ideal) query.ideal_for = ideal;
-  if (cat) query.product_type = cat;
+  // for categories
+
+  if (cat1 && cat2 && cat3) {
+    query.product_type = { or: [cat1, cat2, cat3] };
+  } else if (cat1 && cat2) {
+    query.product_type = { or: [cat1, cat2] };
+  } else if (cat1) {
+    query.product_type = cat1;
+  }
+
   if (brand) query.brand = brand;
   if (lsprice && gtprice) {
     query.variant_price = { $lte: lsprice, $gte: gtprice };
@@ -45,7 +54,6 @@ dataroutes.get("/alldata", async (req, res) => {
   }
 });
 
-
 dataroutes.get("/:id", async (req, res) => {
   try {
     const data = await DataModel.findById(req.params.id);
@@ -57,9 +65,6 @@ dataroutes.get("/:id", async (req, res) => {
     res.send(data);
   } catch (error) {}
 });
-
-
-
 
 // for admin only
 // update data
@@ -82,7 +87,6 @@ dataroutes.delete("/:id", async (req, res) => {
 module.exports = {
   dataroutes,
 };
-
 /*
  {
       "id": 4332137,
