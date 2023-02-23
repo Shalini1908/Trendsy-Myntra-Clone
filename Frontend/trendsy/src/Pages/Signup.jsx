@@ -10,13 +10,46 @@ const Signup = () => {
     const [email,Setemail]  = useState("")
     const[gender,Setgender] = useState("")
 
-    console.log(gender)
+  
 
+
+     const submit = ()=>{
+      
+   const payload = {
+    num,
+pass,
+name,
+email,
+gender
+
+   }
+   
+if(num,pass,name,email,gender){
+
+  fetch("http://localhost:8080/user/register" ,{
+    method:"POST",
+    body:JSON.stringify(payload),
+    headers:{
+      "Content-type":"application/json"
+    }
+
+  }).then(res=>res.json())
+ 
+  .then(res=>{localStorage.setItem("trendsyToken",res.token);console.log(res);  {res.Msg=="user already present"?alert("user already present"):alert("user registered successfully")}})
+.catch(err=>console.log(err))
+
+}else{
+  alert("fill all the required fields")
+}
+
+
+
+     }
 
 
 
   return (
-    <Box height="100vh" bg="pink.100" > 
+    <Box height="100vh" bg="#fdefec" > 
     <Box bg="white" padding="20px" display="inline-block"  width="500px" margin="50px auto" >
         <Heading fontSize='20px'>complete your sign up</Heading>
         <InputGroup mt="30px" >
@@ -41,7 +74,7 @@ const Signup = () => {
   </Checkbox>
 </Stack>
     </Flex>
-    <Button mt="20px" width="100%" bgColor={"pink.400"} color="white" cursor="pointer"  _hover={{bgColor:"pink.500"}} >Create Account</Button>
+    <Button onClick={submit} mt="20px" width="100%" bgColor={"#f41cb2"} color="white" cursor="pointer"  _hover={{bgColor:"pink.500"}} >Create Account</Button>
     </Box>
     </Box>
   )
