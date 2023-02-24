@@ -12,13 +12,36 @@ import {
   Image,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
 export default function AdminSignin() {
 
-const handleOnclick = ()=>{
- window.location.href = "/admin"
+  const [email,setEmail] = useState("");
+ 
+  const [pass,setPass] = useState("");
+  // const [icon , setIcon] = useState("")
 
-}
+  const handleSubmit = ()=>{
+      const payload={
+    
+          email,
+          pass,
+          // icon
+      }
+
+      console.log(payload)
+      fetch("http://localhost:8080/admin/register",{
+          method:"POST",
+          body:JSON.stringify(payload),
+          headers:{
+              "Content-type":"application/json"
+          } 
+      })
+      .then(res=>console.log(res))
+      .catch(err=>console.log(err))
+   
+  }
+
 
   return (
     <Box display={"flex"} m={'auto'} mt={"30px"} >
@@ -43,11 +66,11 @@ const handleOnclick = ()=>{
           <Stack spacing={4}>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
             </FormControl>
-            <FormControl id="password" isRequired>
+            <FormControl id="password" isRequired >
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input type="password" value={pass} onChange={(e)=>setPass(e.target.value)}/>
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -63,7 +86,7 @@ const handleOnclick = ()=>{
                 _hover={{
                   bg: '#ff3f6c',
                 }}
-                onClick={handleOnclick} >
+                onClick={handleSubmit} >
                 Sign in
               </Button>
             </Stack>
