@@ -41,7 +41,7 @@ const Inventory = () => {
           <Thead>
             <Tr>
               <Th>
-                Name
+                <p style={{display:show?"none":"flex"}}>Name</p>
                 {show ? (
                   <Input type={"search"} w={"180px"} h={"20px"}></Input>
                 ) : null}
@@ -49,7 +49,7 @@ const Inventory = () => {
                   <button onClick={() => setShow(true)}>
                     <AiOutlineSearch fontSize={22} />
                   </button>
-                  <button onClick={() => setShow(false)}>
+                  <button onClick={() => setShow(false)} style={{display:show?"flex":"none"}}>
                     <CloseButton fontSize={15} mt={"-6px"} ml={"18px"} />
                   </button>
                 </div>
