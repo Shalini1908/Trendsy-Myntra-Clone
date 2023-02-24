@@ -17,7 +17,7 @@ const cartSchema = new mongoose.Schema({
   ideal_for: String,
   is_in_stock: String,
   TimeInStock: Number,
-  User_Id: String,
+  userID: String,
 });
 
 const CartModel = mongoose.model("cartitems", cartSchema);
