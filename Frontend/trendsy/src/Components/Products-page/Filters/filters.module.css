@@ -1,0 +1,34 @@
+.filterPeople {
+  width: 100px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filterPeopleInput {
+  accent-color: #ff3f6c;
+  width: 17px;
+  height: 17px;
+}
+
+.CheckBoxFilter {
+  width: 180px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CheckBox {
+  accent-color: #ff3f6c;
+  width: 17px;
+  height: 17px;
+}
+
+.CheckBoxTop {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
