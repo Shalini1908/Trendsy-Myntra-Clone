@@ -12,15 +12,12 @@ const authenticate = (req,res,next)=>{
 
        if(decoded){
       const id =  decoded.userID
-
       req.body.userID = id
         next()
 
        }else{
       res.send("please login first")
        }
-
-
    }else{
 
        res.send("please login first")
@@ -29,4 +26,4 @@ const authenticate = (req,res,next)=>{
 
 }
 
-module.exports = {authenticate} 
+module.exports = { authenticate } 
