@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   Text,
+  VStack,
 } from '@chakra-ui/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useThrottle } from '../Hooks/Throttle';
@@ -101,6 +102,7 @@ const Search = () => {
         />
       </InputGroup>
      { show&&<Box
+     align="start"
         maxH="300px"
         pos="absolute"
         width="95%"
