@@ -1,21 +1,19 @@
 import { Box, HStack, Image, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import { Ratings } from "./Ratings";
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from "react-router-dom";
 
 export const Product = ({ props }) => {
-  const { title, brand, size, variant_price, variant_mrp, images } = props;
+  const { title, brand, ideal_for, variant_price, variant_mrp, images, id } =
+    props;
 
-  // const navigate = useNavigate()
-
-  // const singleProductData = (prod) => {
-  //     navigate({ pathname: '/SingleProduct' }, { state: prod })
-  // }
+  const navigate = useNavigate();
 
   let shortTitle = title.split("")?.filter((el, i) => i <= 18);
 
   return (
     <Box
+      p={"5px"}
       maxW={"250px"}
       m={{
         base: "15px auto",
@@ -26,10 +24,12 @@ export const Product = ({ props }) => {
       fontSize={"13px"}
       overflow={"hidden"}
       cursor={"pointer"}
+      boxShadow={"rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"}
+      transition={"0.3s"}
       _hover={{
-        boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
+        boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       }}
-      // onClick={()=>{singleProductData(props)}}
+      onClick={() => navigate(`/products/${ideal_for}/${title}/${id}`)}
     >
       <Box w={"100%"}>
         {/* <Ratings rating={rating} /> */}
