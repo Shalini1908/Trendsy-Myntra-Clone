@@ -1,9 +1,10 @@
-import { Box, Button, FormControl, Heading, Input, InputGroup, InputLeftElement, Text, VStack, FormErrorMessage } from '@chakra-ui/react'
+import { Box, Button, FormControl, Heading, Input, InputGroup, InputLeftElement, Text, VStack, FormErrorMessage,Image } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { PhoneIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
 import * as yup from "yup"
 import { useFormik } from 'formik'
+import swal from 'sweetalert';
 
 const Login = () => {
   const navigate = useNavigate()
@@ -68,7 +69,7 @@ const Login = () => {
         "Content-type": "application/json"
       },
     }).then(res => res.json())
-      .then(res => { localStorage.setItem("trendsyToken", res.token); console.log(res); alert("login successfull") })
+      .then(res => { localStorage.setItem("trendsyToken", res.token); console.log(res); swal("login Successfull", "you are being redirected" , "success") })
       .catch(err => console.log(err))
 
   }
@@ -78,7 +79,7 @@ const Login = () => {
     <Box bg="#fdefec" height="100vh" >
       <Box mt="100px" display={seen === true ? "inline-block" : "none"}  >
         <Box bg="white" padding="20px" width="500px" margin="auto"  >
-
+     
           <Heading size="lg" >Login<span style={{ fontSize: "20px" }} >  or</span> Signup</Heading>
           <FormControl isInvalid={formik.errors.num && formik.touched.num} >
             <InputGroup mt="30px" >
