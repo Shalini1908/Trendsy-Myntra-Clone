@@ -1,7 +1,6 @@
-// import Navbar from "./Components/Navbar";
-// import Footer from "./Components/Footer";
 
 import "./App.css";
+
 import AllRoutes from "./Routes/AllRoutes";
 
 function App() {
@@ -10,8 +9,10 @@ function App() {
       {/* <Navbar /> */}
 
       <AllRoutes />
+    {/* <Admin/> */}
 
       {/* <Footer /> */}
+ 
     </div>
   );
 }

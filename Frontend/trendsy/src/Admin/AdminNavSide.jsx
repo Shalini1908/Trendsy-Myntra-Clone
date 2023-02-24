@@ -137,7 +137,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Flex border="2px solid white" 
+      <Flex 
       w={{base:"95%",sm:"95%",md:"79%",lg:"82.5%"}}
         ml={{ base: 0, md: 60 }}
         px={{ base: 4, md: 4 }}
@@ -207,7 +207,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
           </Flex>
         </HStack>
       </Flex>
-      {/* <Dashboard /> */}
+   
     </>
   );
 };

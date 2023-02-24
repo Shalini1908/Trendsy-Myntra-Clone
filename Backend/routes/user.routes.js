@@ -17,11 +17,12 @@ userRouter.get("/" ,(req,res)=>{
 
 userRouter.post("/register" , async (req,res)=>{
 
-   const {num,pass,name,email} = req.body
+   const {num,pass,name,email,gender} = req.body
 
   const pre =  await userModel.find({num:num})
   if(pre.length>0){
    return res.send({"Msg":"user already present"})
+
   }
     try{
 
@@ -30,7 +31,7 @@ userRouter.post("/register" , async (req,res)=>{
            if(err){
                console.log(err)
            }
-   const user = new userModel({num,name,pass:hash,email})
+   const user = new userModel({num,name,pass:hash,email,gender})
        await user.save()
        // res.send("user registered successfully")
 
@@ -86,8 +87,8 @@ userRouter.post("/login" , async (req,res)=>{
       
 
            const token = jwt.sign({ userID: user[0]._id  }, 'masai') ;
-                   
-    res.send({"msg":"Login successfull","token":token})
+         
+    res.send({"msg":"Login successfull","num":user[0].num})
        
        
 
@@ -99,6 +100,42 @@ userRouter.post("/login" , async (req,res)=>{
 
 })
 
+
+ // log in route //
+
+ userRouter.post("/login1" , async (req,res)=>{
+  
+ 
+    const {num,pass} = req.body
+ 
+    try{
+ 
+       let user =  await userModel.find({num:num})
+ 
+       if(user.length===0){
+        return res.send({"msg":"user not found"})
+       }
+       
+
+       bcrypt.compare(pass, user[0].pass, (err, result)=> {
+         
+        if(result){
+            const token = jwt.sign({ userID: user[0]._id  }, 'masai');
+            
+     res.send({"msg":"login successfull","token":token})
+        }else{
+            res.send({"err":"login failed"})
+        }
+
+    })
+ 
+        
+    }catch(err){
+        console.log(err)
+    }
+ 
+ })
+ 
 
 module.exports = {userRouter}
 

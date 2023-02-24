@@ -9,7 +9,7 @@ import "./css/Admin.css"
 const Admin = () => {
   return (
   <>
-{/* <AdminNav/> */}
+
 
 <AdminNavSide/>
 

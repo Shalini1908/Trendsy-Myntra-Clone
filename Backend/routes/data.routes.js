@@ -23,12 +23,23 @@ dataroutes.get("/search", async (req, res) => {
 
 // for other all get request parameters and all sorting
 dataroutes.get("/alldata", async (req, res) => {
-  const { ideal, cat1, cat2, cat3, brand, lsprice, gtprice, color } = req.query;
+  const {
+    ideal,
+    cat1,
+    cat2,
+    cat3,
+    brand,
+    lsprice,
+    gtprice,
+    color,
+    limit,
+    page,
+    sortBy,
+  } = req.query;
 
   const query = {};
   if (ideal) query.ideal_for = ideal;
   // for categories
-
   if (cat1 && cat2 && cat3) {
     query.product_type = { or: [cat1, cat2, cat3] };
   } else if (cat1 && cat2) {
@@ -42,8 +53,21 @@ dataroutes.get("/alldata", async (req, res) => {
     query.variant_price = { $lte: lsprice, $gte: gtprice };
   }
   if (color) query.actual_color = color;
+  // Pagination code
+  const pageNo = parseInt(page, 10) || 1;
+  const setlimit = parseInt(limit, 10) || 15;
+  // sorting code
+  const sort = {};
+  if (sortBy) {
+    const parts = sortBy.split(":");
+    // console.log(sort\);
+    sort.variant_price = parts[0] === "desc" ? -1 : 1;
+  }
   try {
-    const data = await DataModel.find(query);
+    const data = await DataModel.find(query)
+      .skip((pageNo - 1) * setlimit)
+      .limit(setlimit)
+      .sort(sort);
     if (data) {
       res.send(data);
     } else {
