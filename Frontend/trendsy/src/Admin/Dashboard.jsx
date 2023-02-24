@@ -6,18 +6,26 @@ import { BsCartCheckFill, BsFillBagFill } from "react-icons/bs";
 import "./css/Admin.css";
 
 export const Dashboard = () => {
-  const [data , setData] = useState();
+  const [data , setData] = useState("");
 
-
-  useEffect(() =>{
-    async function fetchData(){
-       let res= await axios.get(`http://localhost:8080/data/alldata`)
-       console.log(res.data.length)
-       setData(res.data)
-      }
-      fetchData()
-  },[])
+  // const fetchData =async() =>{
+  //   let res= await axios.get(`http://localhost:8080/data/alldata`)
   
+  //   setData(res.data)
+  //   console.log(res)
+  // }
+
+
+    useEffect(() => {
+      async function fetchData() {
+        let res = await axios.get(`http://localhost:8080/data/alldata`);
+        console.log(res.data);
+        setData(res.data);
+      }
+      fetchData();
+    }, []);
+
+
 
   return (
 <>
@@ -57,7 +65,7 @@ export const Dashboard = () => {
       >
         <BsFillBagFill color="black" fontSize={40} />
         <Text color={"#ff912e"}  fontSize={30}>Inventory</Text>
-        <Text color={"#ff912e"}  fontSize={30}>{data.length}</Text>
+        <Text color={"#ff912e"}  fontSize={30}>{data.length?data.length:"..."}</Text>
       </Card>
       <Card
         minW={{ base: 120, md: 190 }}

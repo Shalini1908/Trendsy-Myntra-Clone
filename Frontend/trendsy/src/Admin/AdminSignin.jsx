@@ -15,33 +15,42 @@ import {
 import { useState } from 'react';
 
 export default function AdminSignin() {
+const [token , setToken] = useState("")
 
   const [email,setEmail] = useState("");
- 
   const [pass,setPass] = useState("");
-  // const [icon , setIcon] = useState("")
 
   const handleSubmit = ()=>{
       const payload={
-    
+         
           email,
-          pass,
-          // icon
+          pass
       }
 
-      console.log(payload)
-      fetch("http://localhost:8080/admin/register",{
+      // console.log(payload)
+      fetch("http://localhost:8080/admin/login",{
           method:"POST",
           body:JSON.stringify(payload),
           headers:{
               "Content-type":"application/json"
           } 
-      })
-      .then(res=>console.log(res))
-      .catch(err=>console.log(err))
-   
+      }).then(res=>res.json())
+      .then(res=>setToken(res.token)
+      )
+      .catch(err=>console.log(err)
+      
+      )
+     
   }
 
+  if(token.length>0){
+window.location.href="/admin"
+  }
+
+// const handleOnclick = ()=>{
+//  window.location.href = "/admin"
+
+// }
 
   return (
     <Box display={"flex"} m={'auto'} mt={"30px"} >
@@ -68,7 +77,7 @@ export default function AdminSignin() {
               <FormLabel>Email address</FormLabel>
               <Input type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
             </FormControl>
-            <FormControl id="password" isRequired >
+            <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <Input type="password" value={pass} onChange={(e)=>setPass(e.target.value)}/>
             </FormControl>
