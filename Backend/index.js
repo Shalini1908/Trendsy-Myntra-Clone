@@ -17,6 +17,10 @@ app.listen(process.env.PORT , async () => {
     await connection;
     console.log("Connected to db")
   } catch (error) {
+
+    console.log("Can't connect to db")
+
     console.log({"msg":error.message})
+
   }
 });
