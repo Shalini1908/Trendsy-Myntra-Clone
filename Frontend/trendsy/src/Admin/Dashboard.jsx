@@ -18,7 +18,13 @@ export const Dashboard = () => {
 
     useEffect(() => {
       async function fetchData() {
-        let res = await axios.get(`http://localhost:8080/data/alldata`);
+        let res = await axios.get(`http://localhost:8080/data/alldata`,{
+
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("token"))
+        },
+        });
+        
         console.log(res.data);
         setData(res.data);
       }

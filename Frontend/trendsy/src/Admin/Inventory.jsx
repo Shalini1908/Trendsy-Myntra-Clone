@@ -21,36 +21,63 @@ import axios from "axios";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 
+
 const Inventory = () => {
+ 
   const [data, setData] = useState();
+  const [page , setPage] = useState(0)
   const [show, setShow] = useState(false);
+  
 
   useEffect(() => {
     async function fetchData() {
-      let res = await axios.get(`http://localhost:8080/data/alldata`);
+      let res = await axios.get(`http://localhost:8080/data/alldata?limit=10&skip=${page}`,{
+
+      headers: {
+        Authorization: JSON.parse(localStorage.getItem("token"))
+      },
+      });
       console.log(res.data);
       setData(res.data);
+  
+    
     }
     fetchData();
-  }, []);
+  }, [page]);
+  // box1=[name,sIcon]
+  // box2=[input,sIcon,Cross]
+  // show?box1:box2
+
+  const deleteNote = (noteID) => {
+    fetch(`http://localhost:8080/data/${noteID}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("token")
+      },
+    });
+  };
+
 
   return (
     <>
-      <TableContainer fontSize={"12px"}>
+      <TableContainer fontSize={"14px"}>
         <Table variant="simple">
           <Thead>
             <Tr>
               <Th>
+               
+                <div style={{ display: "flex" ,  justifyContent:"space-between" ,  width:"235px" }} >
                 <p style={{display:show?"none":"flex"}}>Name</p>
                 {show ? (
-                  <Input type={"search"} w={"180px"} h={"20px"}></Input>
+                  
+                  <Input type={"search"} w={"280px"} h={"20px"}></Input>
                 ) : null}
-                <div style={{ display: "flex" }}>
+                {/* <div style={{ display: "flex" , justifyContent:"space-between"  , width:"180px"}} > */}
                   <button onClick={() => setShow(true)}>
-                    <AiOutlineSearch fontSize={22} />
+                    <AiOutlineSearch fontSize={15} mt={"-2px"}/>
                   </button>
                   <button onClick={() => setShow(false)} style={{display:show?"flex":"none"}}>
-                    <CloseButton fontSize={15} mt={"-6px"} ml={"18px"} />
+                    <CloseButton fontSize={10} mt={"-2px"} ml={"14px"} />
                   </button>
                 </div>
               </Th>
@@ -80,7 +107,8 @@ const Inventory = () => {
                       <Td>{ele.ideal_for}</Td>
                       <Td>{ele.is_in_stock}</Td>
                       <Td><FiEdit fontSize={15} color={"#ff912e"}/></Td>
-                      <Td><MdDelete fontSize={15} color={"#f41cb2"}/></Td>
+                      <Button onClick={()=>deleteNote(ele._id)} w={10} h={10}><Td><MdDelete fontSize={15} color={"#f41cb2"}/></Td></Button>
+               
                     </Tr>
                   </Tbody>
                 </>
@@ -88,6 +116,8 @@ const Inventory = () => {
             })}
         </Table>
       </TableContainer>
+      <Button onClick={()=>setPage(page-5)}>Previous</Button>
+      <Button onClick={()=>setPage(page+5)}>Next</Button>
     </>
   );
 };

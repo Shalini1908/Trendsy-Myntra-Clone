@@ -13,9 +13,11 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 
 export default function AdminSignin() {
 const [token , setToken] = useState("")
+const navigate = useNavigate()
 
   const [email,setEmail] = useState("");
   const [pass,setPass] = useState("");
@@ -35,17 +37,24 @@ const [token , setToken] = useState("")
               "Content-type":"application/json"
           } 
       }).then(res=>res.json())
-      .then(res=>setToken(res.token)
+      .then(res=>{localStorage.setItem("token",JSON.stringify(res.token))
+      if(email==="singhparmar1908@gmail.com" && pass==="Shalini1908"){
+        navigate("/admin")
+    }else{
+        navigate("/")
+    }
+    
+    }
       )
       .catch(err=>console.log(err)
       
       )
      
   }
-
-  if(token.length>0){
-window.location.href="/admin"
-  }
+console.log(token)
+//   if(token.length>0){
+// window.location.href="/admin"
+//   }
 
 // const handleOnclick = ()=>{
 //  window.location.href = "/admin"
