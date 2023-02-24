@@ -4,27 +4,23 @@ import {
   Flex,
   HStack,
   Text,
-  InputGroup,
-  Input,
-  InputLeftElement,
   VStack,
   Image,
-  Spacer,
   Avatar,
   Button,
   Heading,
 } from '@chakra-ui/react';
-// import Link from "react-router-dom"
 
-import { SearchIcon } from '@chakra-ui/icons';
+
+
 import { FaRegUser } from 'react-icons/fa';
 import { GrFavorite } from 'react-icons/gr';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import logo from '../Images/Trendsy-1.png';
 import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom';
-import { useThrottle } from '../Hooks/Throttle';
-import { getData } from '../api';
+
+import Search from './Search';
 const navColor = {
   men: 'tomato',
   women: 'pink.700',
@@ -32,8 +28,6 @@ const navColor = {
   'home & living': '#e5b230',
   beauty: 'teal',
 };
-
-const initialSuggest = { title: [], category: [], brand: [] };
 
 const Navbar = () => {
   const [dropdown, setdropdown] = useState({
@@ -43,9 +37,6 @@ const Navbar = () => {
 
   const [hover, setHover] = useState(false);
 
-  const [suggestion, setSuggestion] = useState(initialSuggest);
-
- 
   const isAuth = false;
   const handleNav = category => {
     const newDropdown = { status: true, category: category };
@@ -55,16 +46,6 @@ const Navbar = () => {
     setdropdown({ ...dropdown, status: false });
   };
 
-   const handleSearch = async (e) => {
-  //   const query = e.target.value;
-  //   console.log(query);
-
-  //   const result = await getData('/search', { query: query });
-  //   //console.log(result);
-  //  throttle()
-   };
-  const throttle = useThrottle(getData, 10000);
-  console.log(throttle)
   return (
     <Box boxShadow="2xl" rounded="md" bg="white" position="relative">
       <Flex align="center" justify="space-around">
@@ -97,20 +78,9 @@ const Navbar = () => {
             NEW
           </Text>
         </HStack>
-        <HStack onMouseLeave={() => setHover(false)}>
-          <InputGroup>
-            <InputLeftElement children={<SearchIcon color="gray.500" />} />
-
-            <Input
-              variant="filled"
-              fontSize="14px"
-              w="500px"
-              type="text"
-              placeholder="Search for products,brands and more"
-              onChange={handleSearch}
-            />
-          </InputGroup>
-        </HStack>
+        <Box onMouseLeave={() => setHover(false)}>
+          <Search />
+        </Box>
 
         <HStack spacing="25px">
           <VStack onMouseEnter={() => setHover(true)}>
@@ -142,8 +112,7 @@ const Navbar = () => {
                 {!isAuth ? (
                   <Link to="/login">
                     <Button size="sm" variant="outline" colorScheme="pink">
-                      {' '}
-                      LOGIN / SIGNUP{' '}
+                      LOGIN / SIGNUP
                     </Button>
                   </Link>
                 ) : (
@@ -176,7 +145,7 @@ const Navbar = () => {
           zIndex={10}
           boxShadow="md"
           p="20px"
-          // rounded="md"
+        
           bg="white"
           onMouseLeave={handleDropdown}
         >

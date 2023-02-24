@@ -1,20 +1,30 @@
 import { useState, useEffect } from 'react';
 
-export const useThrottle=(callback, delay)=> {
+export const useThrottle = (callback, delay) => {
   const [lastRun, setLastRun] = useState(Date.now());
-  
+  const [timerId, setTimerId] = useState(null);
+
+  const callCallback = (args) => {
+    setLastRun(Date.now());
+    callback(args);
+  };
+
   useEffect(() => {
-    const handler = setTimeout(function() {
-      const now = Date.now();
-      const timeSinceLastRun = now - lastRun;
-      if (timeSinceLastRun >= delay) {
-        callback();
-        setLastRun(now);
-      }
-    }, delay - (Date.now() - lastRun));
-    return () => clearTimeout(handler);
-  }, [callback, delay, lastRun]);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [timerId]);
 
-  return callback;
-}
+  return (args) => {
+    const now = Date.now();
+    const timeSinceLastRun = now - lastRun;
 
+    if (timeSinceLastRun >= delay) {
+      callCallback(args);
+    } else {
+      clearTimeout(timerId);
+      const newTimerId = setTimeout(() => callCallback(args), delay - timeSinceLastRun);
+      setTimerId(newTimerId);
+    }
+  };
+};
