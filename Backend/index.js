@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+// const {authenticate}= require(".././Backend/middleware/Authentication")
 const { connection } = require("./config/db");
 const { dataroutes } = require("./routes/data.routes");
 const { cartroutes } = require("./routes/cart.routes");
@@ -22,6 +23,12 @@ app.listen(process.env.PORT, async () => {
     await connection;
     console.log("Connected to db");
   } catch (error) {
+
     console.log({ msg: error.message });
+
+    console.log("Can't connect to db")
+
+    console.log({"msg":error.message})
+
   }
 });

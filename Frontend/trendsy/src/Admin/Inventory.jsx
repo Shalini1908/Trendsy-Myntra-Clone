@@ -1,108 +1,95 @@
 import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-    Box,
-    Input,
-    CloseButton,
-  } from '@chakra-ui/react'
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Box,
+  Input,
+  CloseButton,
+  useDisclosure,
+  Button,
+} from "@chakra-ui/react";
 
-
-import React from 'react'
+import { AiOutlineSearch } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { FiEdit } from "react-icons/fi";
+import { MdDelete } from "react-icons/md";
 
 const Inventory = () => {
+  const [data, setData] = useState();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      let res = await axios.get(`http://localhost:8080/data/alldata`);
+      console.log(res.data);
+      setData(res.data);
+    }
+    fetchData();
+  }, []);
+
   return (
-    
-    <Box marginTop={10}>
-    <TableContainer>
-  <Table variant="simple">
-   
-    <Thead border={"1px solid white"}>
-      <Tr>
-        <Th display={"flex"}>To convert
-        {/* <Input type={"search"} m={2} w={"140px"} h={25}></Input><CloseButton/></Th> */}
-     </Th>
-        <Th>into </Th>
-        <Th>multiply by</Th>
-        <Th>multiply by</Th>
-        <Th>multiply by</Th>
-        <Th>into</Th>
-  
-        
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr>
-   
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        
-      </Tr>
-      <Tr>
-      
-      <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-      </Tr>
-      <Tr>
-   
-      <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-      </Tr>
-    </Tbody>
-    <Tbody>
-      <Tr>
+    <>
+      <TableContainer fontSize={"12px"}>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th>
+                <p style={{display:show?"none":"flex"}}>Name</p>
+                {show ? (
+                  <Input type={"search"} w={"180px"} h={"20px"}></Input>
+                ) : null}
+                <div style={{ display: "flex" }}>
+                  <button onClick={() => setShow(true)}>
+                    <AiOutlineSearch fontSize={22} />
+                  </button>
+                  <button onClick={() => setShow(false)} style={{display:show?"flex":"none"}}>
+                    <CloseButton fontSize={15} mt={"-6px"} ml={"18px"} />
+                  </button>
+                </div>
+              </Th>
 
-      <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-      </Tr>
-      <Tr>
-  
-      <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-       
-      </Tr>
-      <Tr>
+              <Th>PID</Th>
+              <Th>MRP(INR)</Th>
+              <Th>PRICE(INR)</Th>
+              {/* <Th>BRAND</Th> */}
+              <Th>CATEGORY</Th>
+              <Th>STOCK</Th>
+              <Th>Edit</Th>
+              <Th>Delete</Th>
+            </Tr>
+          </Thead>
 
-      <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-        <Td>Lorem</Td>
-      
-      </Tr>
-    </Tbody>
-  </Table>
-</TableContainer>
-    </Box>
-  )
-}
+          {data &&
+            data.map((ele) => {
+              return (
+                <>
+                  <Tbody>
+                    <Tr>
+                      <Td fontSize={"12px"}>{ele.title.substring(0, 35)}</Td>
+                      <Td>{ele.id}</Td>
+                      <Td>{ele.variant_mrp}</Td>
+                      <Td>{ele.variant_price}</Td>
+                      {/* <Td>{ele.brand}</Td> */}
+                      <Td>{ele.ideal_for}</Td>
+                      <Td>{ele.is_in_stock}</Td>
+                      <Td><FiEdit fontSize={15} color={"#ff912e"}/></Td>
+                      <Td><MdDelete fontSize={15} color={"#f41cb2"}/></Td>
+                    </Tr>
+                  </Tbody>
+                </>
+              );
+            })}
+        </Table>
+      </TableContainer>
+    </>
+  );
+};
 
-export default Inventory
-
+export default Inventory;
