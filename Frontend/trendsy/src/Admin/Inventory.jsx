@@ -1,94 +1,95 @@
 import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-    Box,
-    Input,
-    CloseButton,
-  } from '@chakra-ui/react'
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Box,
+  Input,
+  CloseButton,
+  useDisclosure,
+  Button,
+} from "@chakra-ui/react";
 
-
-import React, { useEffect, useState } from 'react';
-import axios from "axios"
+import { AiOutlineSearch } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { FiEdit } from "react-icons/fi";
+import { MdDelete } from "react-icons/md";
 
 const Inventory = () => {
-const [data , setData] = useState();
+  const [data, setData] = useState();
+  const [show, setShow] = useState(false);
 
-
-
-useEffect(() =>{
-  async function fetchData(){
-     let res= await axios.get(`http://localhost:8080/data/alldata`)
-     console.log(res.data)
-     setData(res.data)
+  useEffect(() => {
+    async function fetchData() {
+      let res = await axios.get(`http://localhost:8080/data/alldata`);
+      console.log(res.data);
+      setData(res.data);
     }
-    fetchData()
-},[])
+    fetchData();
+  }, []);
 
-
-return (
-  <>
-  
-  
-   <TableContainer border={"1px solid yellow"} fontSize={"12px"}>
-   <Table variant="simple">
-   
-    <Thead>
- <Tr>
-<Th display={"flex"}>Name
- {/* <Input type={"search"} m={2} w={"140px"} h={25}></Input><CloseButton/></Th> */}
- </Th>
- <Th>PID</Th>
-<Th>MRP(INR)</Th>
-<Th>PRICE(INR)</Th>
-<Th>BRAND</Th>
-<Th>CATEGORY</Th>
-<Th>STOCK</Th>
-  
-        
- </Tr>
-</Thead>
-
-{data&&data.map((ele)=>{
-  return(
+  return (
     <>
-    <Tbody>
-     <Tr>
-   
-   <Td noOfLines={2} border={"1px solid red"} w={"290px"} fontSize={"12px"}>{ele.title}</Td>
-   <Td>{ele.id}</Td>
-   <Td>{ele.variant_mrp}</Td>
-   <Td>{ele.variant_price}</Td>
-   <Td>{ele.brand}</Td>
-    <Td>{ele.ideal_for}</Td>
-   <Td>{ele.is_in_stock}</Td>
-    </Tr>
-    </Tbody>
+      <TableContainer fontSize={"12px"}>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th>
+                Name
+                {show ? (
+                  <Input type={"search"} w={"180px"} h={"20px"}></Input>
+                ) : null}
+                <div style={{ display: "flex" }}>
+                  <button onClick={() => setShow(true)}>
+                    <AiOutlineSearch fontSize={22} />
+                  </button>
+                  <button onClick={() => setShow(false)}>
+                    <CloseButton fontSize={15} mt={"-6px"} ml={"18px"} />
+                  </button>
+                </div>
+              </Th>
+
+              <Th>PID</Th>
+              <Th>MRP(INR)</Th>
+              <Th>PRICE(INR)</Th>
+              {/* <Th>BRAND</Th> */}
+              <Th>CATEGORY</Th>
+              <Th>STOCK</Th>
+              <Th>Edit</Th>
+              <Th>Delete</Th>
+            </Tr>
+          </Thead>
+
+          {data &&
+            data.map((ele) => {
+              return (
+                <>
+                  <Tbody>
+                    <Tr>
+                      <Td fontSize={"12px"}>{ele.title.substring(0, 35)}</Td>
+                      <Td>{ele.id}</Td>
+                      <Td>{ele.variant_mrp}</Td>
+                      <Td>{ele.variant_price}</Td>
+                      {/* <Td>{ele.brand}</Td> */}
+                      <Td>{ele.ideal_for}</Td>
+                      <Td>{ele.is_in_stock}</Td>
+                      <Td><FiEdit fontSize={15} color={"#ff912e"}/></Td>
+                      <Td><MdDelete fontSize={15} color={"#f41cb2"}/></Td>
+                    </Tr>
+                  </Tbody>
+                </>
+              );
+            })}
+        </Table>
+      </TableContainer>
     </>
-  )
-})}
+  );
+};
 
- 
-
-
-
-</Table>
-</TableContainer>
-
-</>
-       
-        )
-     
-
-
-
-}
-
-export default Inventory
-
+export default Inventory;
