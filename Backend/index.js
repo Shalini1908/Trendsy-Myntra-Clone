@@ -15,5 +15,8 @@ app.use("/cart", cartroutes);
 app.listen(process.env.PORT , async () => {
   try {
     await connection;
-  } catch (error) {}
+    console.log("Connected to db")
+  } catch (error) {
+    console.log("Can't connect to db")
+  }
 });
