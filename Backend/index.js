@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer")
 const {authenticate}= require("../Backend/middleware/Authentication")
 const { connection } = require("./config/db");
 const { dataroutes } = require("./routes/data.routes");
@@ -15,10 +16,30 @@ app.get("/", (req, res) => {
 });
 app.use("/user", userRouter);
 app.use("/admin" , adminRouter)
-app.use(authenticate);
+
 
 app.use("/data", dataroutes);
+app.use(authenticate);
 app.use("/cart", cartroutes);
+
+
+
+const upload = multer({
+storage:multer.diskStorage({
+  destination:function(req,file,cb){
+  cb(null,"uploads")
+
+  },
+  filename:function(req,file,cb){
+    cb(null,file.fieldname +"-"+Date.now()+".jpg")
+  }
+})
+
+}).single("picture")
+
+app.post("/upload",upload,(req,res)=>{
+  res.send("Uploded")
+})
 
 
 app.listen(process.env.PORT, async () => {

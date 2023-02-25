@@ -21,6 +21,19 @@ dataroutes.get("/search", async (req, res) => {
   }
 });
 
+//for add products
+
+dataroutes.post("/create", async (req, res) => {
+  try {
+      const data = new DataModel(req.body)
+      await data.save()
+      res.send({ "msg": "Product has been added" })
+  } catch (err) {
+      res.send({ "msg": "Product is not added" })
+  }
+})
+
+
 // for other all get request parameters and all sorting
 dataroutes.get("/alldata", async (req, res) => {
   const {
