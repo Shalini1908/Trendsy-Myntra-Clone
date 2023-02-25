@@ -21,6 +21,11 @@ app.use("/user",userRouter)
 app.use("/admin" , adminRouter)
 
 
+app.use("/user", userRouter);
+app.use(authenticate);
+
+
+
 app.use("/data", dataroutes);
 app.use(authenticate);
 app.use("/cart", cartroutes);
