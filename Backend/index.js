@@ -5,7 +5,7 @@ const { connection } = require("./config/db");
 const { dataroutes } = require("./routes/data.routes");
 const { cartroutes } = require("./routes/cart.routes");
 const { userRouter } = require("./routes/user.routes");
- const { authenticate } = require("./middleware/Authentication");
+const { authenticate } = require("./middleware/Authentication");
 const {adminRouter} = require("./routes/admin.routes")
 
 
@@ -22,9 +22,6 @@ app.use("/admin" , adminRouter)
 
 
 app.use("/user", userRouter);
-app.use(authenticate);
-
-
 
 app.use("/data", dataroutes);
 app.use(authenticate);
@@ -32,22 +29,6 @@ app.use("/cart", cartroutes);
 
 
 
-const upload = multer({
-storage:multer.diskStorage({
-  destination:function(req,file,cb){
-  cb(null,"uploads")
-
-  },
-  filename:function(req,file,cb){
-    cb(null,file.fieldname +"-"+Date.now()+".jpg")
-  }
-})
-
-}).single("picture")
-
-app.post("/upload",upload,(req,res)=>{
-  res.send("Uploded")
-})
 
 
 app.listen(process.env.PORT, async () => {
