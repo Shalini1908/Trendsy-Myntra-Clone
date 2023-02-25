@@ -101,7 +101,7 @@ const text = [
 ];
 const Footer = () => {
   return (
-    <Box>
+    <Box >
       <Center pt="70px">
         <HStack gap="40px" alignItems="start">
           <Box>
