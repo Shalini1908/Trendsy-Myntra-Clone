@@ -33,7 +33,7 @@ const Login = () => {
 
       //  console.log(payload)
 
-      fetch("http://localhost:8080/user/login", {
+      fetch("https://wild-red-bunny-tux.cyclic.app/user/login", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -62,7 +62,7 @@ const Login = () => {
       pass
     }
 
-    fetch("http://localhost:8080/user/login1", {
+    fetch("https://wild-red-bunny-tux.cyclic.app/user/login1", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {

@@ -17,7 +17,7 @@ const addproduct= async()=>{
 
     
   }
-let res = await axios.post(`http://localhost:8080/data/create`,payload)
+let res = await axios.post(`https://wild-red-bunny-tux.cyclic.app/data/create`,payload)
 console.log(res)
 }
 

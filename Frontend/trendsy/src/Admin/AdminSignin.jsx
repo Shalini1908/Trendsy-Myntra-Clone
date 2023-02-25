@@ -29,7 +29,7 @@ export default function AdminSignin() {
     };
 
     // console.log(payload)
-    fetch("http://localhost:8080/admin/login", {
+    fetch("https://wild-red-bunny-tux.cyclic.app/admin/login", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {

@@ -44,7 +44,7 @@ const Inventory = () => {
 
   async function fetchData() {
     let res = await axios.get(
-      `http://localhost:8080/data?limit=10&page=${page}`,
+      `https://wild-red-bunny-tux.cyclic.app/data?limit=10&page=${page}`,
       {
         headers: {
           Authorization: JSON.parse(localStorage.getItem("token")),
@@ -82,14 +82,14 @@ const Inventory = () => {
       mrp,
       stock,
     };
-    let res = await axios.patch(`http://localhost:8080/data/${id}`, payload);
+    let res = await axios.patch(`https://wild-red-bunny-tux.cyclic.app/data/${id}`, payload);
     fetchData();
     console.log(res);
   }
 
   const handleQuery = useCallback((search) => {
     if (search) {
-      const url = `http://localhost:8080/data/search?q=${search}`;
+      const url = `https://wild-red-bunny-tux.cyclic.app/data/search?q=${search}`;
       axios
         .get(url)
         .then((res) => {
