@@ -1,6 +1,6 @@
 
 import "./App.css";
-import Address from "./Pages/Address";
+
 
 import AllRoutes from "./Routes/AllRoutes";
 
@@ -11,7 +11,7 @@ function App() {
 
       <AllRoutes />
     {/* <Admin/> */}
-<Address/>
+
       {/* <Footer /> */}
  
     </div>
