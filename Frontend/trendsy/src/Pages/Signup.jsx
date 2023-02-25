@@ -17,7 +17,7 @@ const Signup = () => {
       const formik = useFormik({
         
         initialValues:{
-          num:"" ,
+          num:  localStorage.getItem("num") ,
           name:"" ,
             email:"" ,
             pass:"" ,
@@ -35,7 +35,7 @@ const Signup = () => {
       // console.log(values)
      
       const payload = {
-      num: values.num,
+      num:  values.num,
     pass:values.pass,
     name : values.name,
     email : values.email,
@@ -68,16 +68,16 @@ const Signup = () => {
 
   return (
     <Box height="100vh" bg="#fdefec" > 
-    <Box bg="white" padding="20px" display="inline-block"  width="500px" margin="50px auto" >
-        <Heading fontSize='20px'>Create your account</Heading>
+    <Box bg="white" padding="20px" display="inline-block"  width={["300px","400px","400px","500px"]} margin="50px auto" >
+        <Heading size={["sm","md","lg","xl"]}>Create your account</Heading>
         <FormControl isInvalid={formik.errors.num && formik.touched.num } > 
-        <InputGroup mt="30px" >
+        <InputGroup mt={[ "5px","10px","10px", "10px" ]}>
     <InputLeftElement  mt="30px"
       pointerEvents='none'
       children={<PhoneIcon color='gray.300' />}
     />
      
-    <Input mt="30px" name="num"  max={10} border="1px solid black" type='tel' placeholder='Phone number'  onChange={formik.handleChange}  value={formik.values.num} onBlur={formik.handleBlur} />
+    <Input mt="30px" name="num"  max={10} border="1px solid black" type='tel' placeholder='Phone number' disabled  onChange={formik.handleChange}  value={formik.values.num} onBlur={formik.handleBlur} />
    
    
    
@@ -85,19 +85,19 @@ const Signup = () => {
   <FormErrorMessage>{formik.errors.num}</FormErrorMessage>
   </FormControl>
   <FormControl isInvalid={formik.errors.pass && formik.touched.pass } > 
-    <Input mt="30px"  name="pass"  border="1px solid black" type='password' placeholder='enter password'  onChange={formik.handleChange}  value={formik.values.pass} onBlur={formik.handleBlur} /> 
+    <Input mt={[ "10px","10px","20px", "20px" ]}  name="pass"  border="1px solid black" type='password' placeholder='enter password'  onChange={formik.handleChange}  value={formik.values.pass} onBlur={formik.handleBlur} /> 
     <FormErrorMessage>{formik.errors.pass}</FormErrorMessage>
     </FormControl>
     <FormControl isInvalid={formik.errors.name && formik.touched.name } > 
-    <Input mt="30px" name="name"   border="1px solid black" type='text' placeholder='Full name'  onChange={formik.handleChange}  value={formik.values.name}  onBlur={formik.handleBlur}/>   
+    <Input mt={[ "10px","10px","20px", "20px" ]} name="name"   border="1px solid black" type='text' placeholder='Full name'  onChange={formik.handleChange}  value={formik.values.name}  onBlur={formik.handleBlur}/>   
     <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
     </FormControl>
     <FormControl isInvalid={formik.errors.email && formik.touched.email } > 
-    <Input mt="30px"  name="email"  border="1px solid black" type="email" placeholder='Email'  onChange={formik.handleChange}  value={formik.values.email} onBlur={formik.handleBlur} />  
+    <Input mt={[ "10px","10px","20px", "20px" ]}  name="email"  border="1px solid black" type="email" placeholder='Email'  onChange={formik.handleChange}  value={formik.values.email} onBlur={formik.handleBlur} />  
     <FormErrorMessage>{formik.errors.email}</FormErrorMessage> 
     </FormControl>  
-    <Flex  mt="30px" alignItems="center"  >
-  <Text>Select Gender</Text>  <Stack  ml="50px" spacing={5} direction='row'>
+    <Flex mt={[ "10px","10px","20px", "20px" ]} alignItems="center"  >
+  <Text >Select Gender</Text>  <Stack  ml="50px" spacing={5} direction='row'>
   <FormControl isInvalid={formik.errors.gender && formik.touched.gender } > 
   <Checkbox name="gender"  colorScheme={formik.values.gender[0]==="male"?'red':""} value="male"  onChange={formik.handleChange} onBlur={formik.handleBlur}   >
     Male
