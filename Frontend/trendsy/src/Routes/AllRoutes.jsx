@@ -10,6 +10,7 @@ import AdminNavSide from "../Admin/AdminNavSide";
 import { SingleProduct } from "../Pages/SingleProduct";
 
 import Admin from "../Admin/Admin";
+import Address from "../Pages/Address";
 
 
 const AllRoutes = () => {
@@ -27,6 +28,7 @@ const AllRoutes = () => {
           path="/products/:Q/:title/:id"
           element={<SingleProduct />}
         ></Route>
+         <Route path="/address" element={<Address/>}></Route>
       </Routes>
     </>
   );
