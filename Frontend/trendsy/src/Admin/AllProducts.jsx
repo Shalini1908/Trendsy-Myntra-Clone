@@ -17,7 +17,7 @@ const addproduct= async()=>{
 
     
   }
-let res = await axios.post(`http://localhost:8080/data/alldata/create`,payload)
+let res = await axios.post(`http://localhost:8080/data/create`,payload)
 console.log(res)
 }
 

@@ -13,11 +13,6 @@ const Signup = () => {
     const [email,Setemail]  = useState("")
     const[gender,Setgender] = useState("")
 
-  
-
-
-   
-      
 
       const formik = useFormik({
         
@@ -104,13 +99,13 @@ const Signup = () => {
     <Flex  mt="30px" alignItems="center"  >
   <Text>Select Gender</Text>  <Stack  ml="50px" spacing={5} direction='row'>
   <FormControl isInvalid={formik.errors.gender && formik.touched.gender } > 
-  <Checkbox name="gender"  colorScheme={formik.values.gender[0]=="male"?'red':""} value="male"  onChange={formik.handleChange} onBlur={formik.handleBlur}   >
+  <Checkbox name="gender"  colorScheme={formik.values.gender[0]==="male"?'red':""} value="male"  onChange={formik.handleChange} onBlur={formik.handleBlur}   >
     Male
   </Checkbox>
   <FormErrorMessage>{formik.errors.gender}</FormErrorMessage> 
   </FormControl> 
   <FormControl isInvalid={formik.errors.gender && formik.touched.gender } > 
-  <Checkbox name="gender"  colorScheme ={formik.values.gender[0]=="female"?'green':""} value="female"  onChange={formik.handleChange} onBlur={formik.handleBlur}   >
+  <Checkbox name="gender"  colorScheme ={formik.values.gender[0]==="female"?'green':""} value="female"  onChange={formik.handleChange} onBlur={formik.handleBlur}   >
     Female
   </Checkbox>
   <FormErrorMessage>{formik.errors.gender}</FormErrorMessage> 

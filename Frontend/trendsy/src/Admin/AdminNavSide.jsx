@@ -71,8 +71,8 @@ const AdminNavSide = () => {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }}  p="4" w={{base:"70%",md:"85%",lg:"80%"}} m="auto">
        {/* <Dashboard/> */}
-       {/* <Inventory/> */}
-        <AllProducts/>
+       <Inventory/>
+        {/* <AllProducts/> */}
       </Box>
     </>
   );

@@ -1,18 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-
 const multer = require("multer")
-const {authenticate}= require("../Backend/middleware/Authentication")
-
-
-
-
 const { connection } = require("./config/db");
 const { dataroutes } = require("./routes/data.routes");
 const { cartroutes } = require("./routes/cart.routes");
 const { userRouter } = require("./routes/user.routes");
-
-const { authenticate } = require("./middleware/Authentication");
+ const { authenticate } = require("./middleware/Authentication");
 const {adminRouter} = require("./routes/admin.routes")
 
 
@@ -24,11 +17,12 @@ app.get("/", (req, res) => {
   res.send("Hello trends");
 });
 
+app.use("/user",userRouter)
 app.use("/admin" , adminRouter)
+
 
 app.use("/user", userRouter);
 app.use(authenticate);
-
 
 
 
