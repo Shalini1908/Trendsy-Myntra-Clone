@@ -3,6 +3,8 @@ import { Box, Flex, Heading, Input, InputGroup, InputLeftElement, Stack, TagLabe
 import React, { useState } from 'react'
 import * as yup from "yup"
 import { useFormik } from 'formik'
+import swal from 'sweetalert';
+
 const Signup = () => {
 
   const[num,Setnum] = useState("")
@@ -57,7 +59,7 @@ const Signup = () => {
     
       }).then(res=>res.json())
      
-      .then(res=>{localStorage.setItem("trendsyToken",res.token);console.log(res);  {res.Msg=="user already present"?alert("user already present"):alert("user registered successfully")}})
+      .then(res=>{localStorage.setItem("trendsyToken",res.token);console.log(res);  {res.Msg=="user already present"?swal("user already present"):swal("account created Successfully", "you are being redirected" , "success") }})
     .catch(err=>console.log(err))
         
         }
@@ -72,7 +74,7 @@ const Signup = () => {
   return (
     <Box height="100vh" bg="#fdefec" > 
     <Box bg="white" padding="20px" display="inline-block"  width="500px" margin="50px auto" >
-        <Heading fontSize='20px'>complete your sign up</Heading>
+        <Heading fontSize='20px'>Create your account</Heading>
         <FormControl isInvalid={formik.errors.num && formik.touched.num } > 
         <InputGroup mt="30px" >
     <InputLeftElement  mt="30px"

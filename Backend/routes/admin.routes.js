@@ -37,7 +37,7 @@ adminRouter.post("/login", async (req, res) => {
       if (result) {
         const token = jwt.sign({ userID: user[0]._id }, "masai");
 
-        res.send({ msg: "admin login successfull", token: token });
+        res.send({ msg: "admin login successfull", token: token ,icon:user[0].icon});
       } else {
         res.send({ err: "login failed" });
       }
