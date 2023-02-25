@@ -37,8 +37,8 @@ const navigate = useNavigate()
               "Content-type":"application/json"
           } 
       }).then(res=>res.json())
-      .then(res=>{localStorage.setItem("token",JSON.stringify(res.token))
-      if(email==="singhparmar1908@gmail.com" && pass==="Shalini1908"){
+      .then(res=>{localStorage.setItem("token",JSON.stringify(res.token),console.log(res))
+      if(email==="singhparmar1908@gmail.com" && pass==="Shalini1908" ){
         navigate("/admin")
     }else{
         navigate("/")
@@ -51,7 +51,7 @@ const navigate = useNavigate()
       )
      
   }
-console.log(token)
+
 //   if(token.length>0){
 // window.location.href="/admin"
 //   }
