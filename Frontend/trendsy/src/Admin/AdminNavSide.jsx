@@ -34,6 +34,7 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Admin from "../../src/Images/admin.png";
 import Trendsy from "../../src/Images/trendsy.png";
 import { Dashboard } from "./Dashboard";
+import AllProducts from "./AllProducts";
 import Inventory from "./Inventory";
 
 const LinkItems = [
@@ -70,7 +71,8 @@ const AdminNavSide = () => {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }}  p="4" w={{base:"70%",md:"85%",lg:"80%"}} m="auto">
        <Dashboard/>
-       <Inventory/>
+       {/* <Inventory/> */}
+        {/* <AllProducts/> */}
       </Box>
     </>
   );

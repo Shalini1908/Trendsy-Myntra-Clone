@@ -1,9 +1,10 @@
 import { RadioGroup, Stack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import filterStyles from "./filters.module.css";
 
 export const CheckBoxPerson = ({
+  Q,
   setCategory,
   setBrands,
   setColors,
@@ -15,7 +16,6 @@ export const CheckBoxPerson = ({
   initialPrice,
   initialSize,
 }) => {
-  const { Q } = useParams();
   const [person, setPerson] = useState(Q);
   const navigate = useNavigate();
 

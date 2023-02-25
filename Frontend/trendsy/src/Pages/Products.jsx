@@ -14,8 +14,9 @@ import { CheckBoxCategory } from "../Components/Products-page/Filters/CheckBoxCa
 import { CheckBoxPrice } from "../Components/Products-page/Filters/CheckBoxPrice";
 import { CheckBoxBrands } from "../Components/Products-page/Filters/CheckBoxBrands";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { CheckBoxColors } from "../Components/Products-page/Filters/CheckBoxColors";
+import { FiltersDrawer } from "../Components/Products-page/Filters/FiltersDrawer";
 
 const products = [
   {
@@ -392,6 +393,7 @@ const products = [
 ];
 
 export const Products = () => {
+  const { Q } = useParams();
   const items = 399;
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -439,15 +441,41 @@ export const Products = () => {
       >
         <Box mb={"15px"}>
           <BreadCrumb />
-
           <HStack w={"100%"}>
-            <Text fontSize={"14px"} fontWeight={"650"} textAlign={"left"}>
-              Myntra Fashion Store
-            </Text>
-            <Text fontSize={"14px"} color={"#696d7f"} fontWeight={"450"}>
-              {" "}
-              - {items} items
-            </Text>
+            <HStack w={"100%"}>
+              <Text fontSize={"16px"} fontWeight={"650"} textAlign={"left"}>
+                Myntra Fashion Store
+              </Text>
+              <Text fontSize={"14px"} color={"#696d7f"} fontWeight={"450"}>
+                {" "}
+                - {items} items
+              </Text>
+            </HStack>
+            <UnorderedList
+              display={{ base: "block", sm: "block", md: "none", lg: "none" }}
+            >
+              <Stack w={"100%"} justify={"flex-start"} align={"flex-start"}>
+                <FiltersDrawer
+                  Q={Q}
+                  category={category}
+                  setCategory={setCategory}
+                  brands={brands}
+                  setBrands={setBrands}
+                  colors={colors}
+                  setColors={setColors}
+                  price={price}
+                  setPrice={setPrice}
+                  size={size}
+                  setSize={setSize}
+                  handleClear={handleClear}
+                  initialCategory={initialCategory}
+                  initialBrands={initialBrands}
+                  initialColors={initialColors}
+                  initialPrice={initialPrice}
+                  initialSize={initialSize}
+                />
+              </Stack>
+            </UnorderedList>
           </HStack>
         </Box>
 
@@ -467,13 +495,13 @@ export const Products = () => {
           >
             <Stack w={"100%"} maxW={"240px"}>
               <HStack justify={"space-between"} mb={"12px"}>
-                <Text fontSize={"16px"} fontWeight={"650"}>
+                <Text fontSize={"18px"} fontWeight={"600"}>
                   FILTERS
                 </Text>
                 <Text
                   pr={{ base: "5px", sm: "5px", md: "10px", lg: "20px" }}
-                  fontSize={"13px"}
-                  fontWeight={"500"}
+                  fontSize={"14px"}
+                  fontWeight={"600"}
                   color={"#ff3f6c"}
                   cursor={"pointer"}
                   onClick={handleClear}
@@ -488,6 +516,7 @@ export const Products = () => {
                 top={"5px"}
               >
                 <CheckBoxPerson
+                  Q={Q}
                   setCategory={setCategory}
                   setBrands={setBrands}
                   setColors={setColors}
@@ -592,7 +621,7 @@ export const Products = () => {
               boxSizing={"border-box"}
             >
               {products.map((item) => (
-                <Product key={item.id + item.title} props={item} />
+                <Product key={item.id} props={item} />
               ))}
             </Grid>
           </Stack>

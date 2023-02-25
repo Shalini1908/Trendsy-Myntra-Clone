@@ -2,8 +2,8 @@ import { Box } from "@chakra-ui/react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 
-export const BreadCrumb = () => {
-  const { Q } = useParams();
+export const BreadCrumbSPP = () => {
+  const { Q, title, id } = useParams();
 
   const person =
     Q === "Men"
@@ -32,22 +32,34 @@ export const BreadCrumb = () => {
       <Box mb={"10px"}>
         <Breadcrumb
           fontWeight="medium"
-          fontSize={{ base: "10px", sm: "13px", md: "14px", lg: "14px" }}
+          fontSize={{ base: "8px", sm: "10px", md: "14px", lg: "14px" }}
         >
           <BreadcrumbItem
+            _hover={{ color: "black" }}
             color={"#696d7f"}
             fontWeight={"500"}
-            _hover={{ color: "black" }}
           >
             <Link to={"/"}>Home</Link>
           </BreadcrumbItem>
 
-          <BreadcrumbItem fontWeight={"600"} textDecor={"none"}>
+          <BreadcrumbItem
+            _hover={{ color: "black" }}
+            textDecor={"none"}
+            color={"#696d7f"}
+          >
             <Link to={`/products/${person}`}>Myntra Fashion Store</Link>
           </BreadcrumbItem>
 
-          <BreadcrumbItem fontWeight={"600"} textDecor={"none"} isCurrentPage>
+          <BreadcrumbItem
+            _hover={{ color: "black" }}
+            textDecor={"none"}
+            color={"#696d7f"}
+          >
             <Link to={`/products/${person}`}>{NewPerson}</Link>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem fontWeight={"600"} textDecor={"none"} isCurrentPage>
+            <Link to={`/products/${person}/${title}/${id}`}>{title}</Link>
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>
