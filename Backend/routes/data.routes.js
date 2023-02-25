@@ -4,15 +4,15 @@ const dataroutes = express.Router();
 // for serach parameter get request parameters
 dataroutes.get("/search", async (req, res) => {
   const { q } = req.query;
-  const titel = {};
+  const title = {};
   const brand = {};
   const type = {};
   if (q) {
-    titel.titel = new RegExp(q, "i");
+    title.title = new RegExp(q, "i");
     brand.brand = new RegExp(q, "i");
     type.product_type = new RegExp(q, "i");
   }
-  const query = { $or: [titel, brand, type] };
+  const query = { $or: [title, brand, type] };
   try {
     const data = await DataModel.find(query);
     res.send(data);
@@ -35,7 +35,7 @@ dataroutes.post("/create", async (req, res) => {
 
 
 // for other all get request parameters and all sorting
-dataroutes.get("/alldata", async (req, res) => {
+dataroutes.get("/", async (req, res) => {
   const {
     ideal,
     cat1,
