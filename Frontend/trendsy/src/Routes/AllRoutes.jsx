@@ -5,9 +5,9 @@ import Home from "../Pages/Home";
 import Signup from "../Pages/Signup";
 import Login from "../Pages/Login";
 import { Products } from "../Pages/Products";
-
 import AdminNavSide from "../Admin/AdminNavSide";
 import { SingleProduct } from "../Pages/SingleProduct";
+import Graph from "../Admin/Graph";
 
 import Admin from "../Admin/Admin";
 import Address from "../Pages/Address";
@@ -29,6 +29,7 @@ const AllRoutes = () => {
           path="/products/:Q/:title/:_id"
           element={<SingleProduct />}
         ></Route>
+        <Route path="/graph" element={<Graph/>}></Route>
          <Route path="/address" element={<Address/>}></Route>
          <Route path="/payment" element={<Payment/>}></Route>
       </Routes>

@@ -23,6 +23,7 @@ import {
   useColorMode,
   Stack,
   Button,
+  Center,
 } from "@chakra-ui/react";
 import { FiBell, FiChevronDown, FiMenu } from "react-icons/fi";
 import { AiOutlineDashboard } from "react-icons/ai";
@@ -31,13 +32,13 @@ import { MdOutlineAddToPhotos } from "react-icons/md";
 import { TbChecklist } from "react-icons/tb";
 import { HiUsers } from "react-icons/hi";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import Admin from "../../src/Images/admin.png";
 import Trendsy from "../../src/Images/trendsy.png";
 import { Dashboard } from "./Dashboard";
-import AllProducts from "./AllProducts";
+import AddProducts from "./AddProducts";
 import Inventory from "./Inventory";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
+import Customers from "./Customers";
 
 const LinkItems = [
   { name: "Dashboard", icon: AiOutlineDashboard },
@@ -49,15 +50,16 @@ const LinkItems = [
 
 const AdminNavSide = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-
-
+  const [pageOpen, setPageOpen] = React.useState(LinkItems[0].name);
+  
 
   return (
     <>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
+        pageOpen={pageOpen}
+        setPageOpen={setPageOpen}
       />
       <Drawer
         isOpen={isOpen}
@@ -78,15 +80,25 @@ const AdminNavSide = () => {
         w={{ base: "70%", md: "85%", lg: "80%" }}
         m="auto"
       >
-        {/* <Dashboard/> */}
-        <Inventory />
-        {/* <AllProducts/> */}
+
+        {pageOpen === "Dashboard" ? (
+          <Dashboard />
+        ) : pageOpen === "Inventory" ? (
+          <Inventory />
+        ) : pageOpen === "Add Products" ? (
+          <AddProducts />
+        ) : pageOpen === "Customers" ? (
+          <Customers />
+        ) : (
+          <Dashboard />
+        )}
+       
       </Box>
     </>
   );
 };
 
-const SidebarContent = ({ onClose, ...rest }) => {
+const SidebarContent = ({ onClose, setPageOpen, pageOpen, ...rest }) => {
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -103,7 +115,13 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem
+          key={link.name}
+          icon={link.icon}
+          onClick={() => {
+            setPageOpen(link.name);
+          }}
+        >
           {link.name}
         </NavItem>
       ))}
@@ -145,20 +163,18 @@ const NavItem = ({ icon, children, ...rest }) => {
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const { colorMode, toggleColorMode } = useColorMode();
-  let icondata =JSON.parse(localStorage.getItem("token"))
-  console.log(icondata)
-  const navigate = useNavigate()
+  let icondata = JSON.parse(localStorage.getItem("token"));
+  console.log(icondata);
+  const navigate = useNavigate();
 
-  function logout(){
-  navigate("/adminsignin")
-
+  function logout() {
+    navigate("/adminsignin");
   }
-
 
   return (
     <>
       <Flex
-        w={{ base: "95%", sm: "95%", md: "79%", lg: "82.5%" }}
+        w={{ base: "100%", sm: "100%", md: "85%", lg: "82.5%" }}
         ml={{ base: 0, md: 60 }}
         px={{ base: 4, md: 4 }}
         height="20"
@@ -178,23 +194,17 @@ const MobileNav = ({ onOpen, ...rest }) => {
         />
 
         <Flex alignItems={"center"} justifyContent={"space-between"}></Flex>
-        <Box bg={useColorModeValue("gray.100", "gray.900")}></Box>
-
-        <Flex alignItems={"center"}>
+ 
+         <Flex alignItems={"center"}>
           <Stack direction={"row"} spacing={7}>
-            <Button onClick={toggleColorMode}>
+            <Button onClick={toggleColorMode} mr={4}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             </Button>
           </Stack>
-        </Flex>
+        </Flex> 
 
         <HStack spacing={{ base: "0", md: "6" }}>
-          <IconButton
-            size="lg"
-            variant="ghost"
-            aria-label="open menu"
-            icon={<FiBell />}
-          />
+    
           <Flex alignItems={"center"}>
             <Menu>
               <MenuButton py={2}>
@@ -213,16 +223,25 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   </Box>
                 </HStack>
               </MenuButton>
-              <MenuList
-                bg={useColorModeValue("white", "gray.900")}
-                borderColor={useColorModeValue("gray.200", "gray.700")}
-              >
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>Settings</MenuItem>
-                <MenuItem>Billing</MenuItem>
-                <MenuDivider />
-                <MenuItem onClick={()=>logout()}>Sign out</MenuItem>
-              </MenuList>
+        
+                  <MenuList alignItems={'center'} mt={1}>
+                  <br />
+                  <Center>
+                    <Avatar
+                      size={'2xl'}
+                      src={icondata.icon}
+                    />
+                  </Center>
+                  <br />
+                  <Center>
+                    <p>Username</p>
+                  </Center>
+                  <br />
+                  <MenuDivider />
+                  <MenuItem>Admin Profile</MenuItem>
+            
+                  <MenuItem onClick={()=>logout}>Logout</MenuItem>
+                  </MenuList>
             </Menu>
           </Flex>
         </HStack>

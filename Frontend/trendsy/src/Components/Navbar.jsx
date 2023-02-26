@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Flex,
@@ -9,36 +9,34 @@ import {
   Avatar,
   Button,
   Heading,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
+import { FaRegUser } from "react-icons/fa";
+import { GrFavorite } from "react-icons/gr";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import logo from "../Images/Trendsy-1.png";
+import Dropdown from "./Dropdown";
+import { Link } from "react-router-dom";
 
-
-import { FaRegUser } from 'react-icons/fa';
-import { GrFavorite } from 'react-icons/gr';
-import { HiOutlineShoppingBag } from 'react-icons/hi';
-import logo from '../Images/Trendsy-1.png';
-import Dropdown from './Dropdown';
-import { Link } from 'react-router-dom';
-
-import Search from './Search';
+import Search from "./Search";
 const navColor = {
-  men: 'tomato',
-  women: 'pink.700',
-  kids: 'red.400',
-  'home & living': '#e5b230',
-  beauty: 'teal',
+  men: "tomato",
+  women: "pink.700",
+  kids: "red.400",
+  "home & living": "#e5b230",
+  beauty: "teal",
 };
 
 const Navbar = () => {
   const [dropdown, setdropdown] = useState({
     status: false,
-    category: 'beauty',
+    category: "beauty",
   });
 
   const [hover, setHover] = useState(false);
 
   const isAuth = false;
-  const handleNav = category => {
+  const handleNav = (category) => {
     const newDropdown = { status: true, category: category };
     setdropdown(newDropdown);
   };
@@ -47,29 +45,43 @@ const Navbar = () => {
   };
 
   return (
-    <Box boxShadow="2xl" rounded="md" bg="white" position="relative">
+    <Box
+      boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px"}
+      rounded="md"
+      bg="white"
+      position="relative"
+    >
       <Flex align="center" justify="space-around">
         <Box ml="20px" onMouseEnter={handleDropdown}>
-          <Image w="80px" src={logo} alt="Trednsy" />
+          <Image w="80px" src={logo} alt="Trendsy" />
         </Box>
 
         <HStack fontWeight="600" position="relative">
           {Object.keys(navColor).map((category, i) => (
             <Text
               key={700 + i}
-              fontSize={'sm'}
+              fontSize={"sm"}
               p="30px 10px"
               onMouseEnter={() => handleNav(category)}
             >
               {category.toUpperCase()}
             </Text>
           ))}
-          <Text fontSize={'sm'} p="30px 10px" onMouseEnter={handleDropdown}>
+          <Text
+            fontSize={"sm"}
+            p="30px 10px"
+            onMouseEnter={handleDropdown}
+            color={"#3e4152"}
+            fontWeight={750}
+            fontFamily={
+              'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
+            }
+          >
             STUDIO
           </Text>
           <Text
             fontSize="9px"
-            color="tomato"
+            color="#ff7494"
             fontWeight="900"
             position="absolute"
             top="25px"
@@ -145,7 +157,6 @@ const Navbar = () => {
           zIndex={10}
           boxShadow="md"
           p="20px"
-        
           bg="white"
           onMouseLeave={handleDropdown}
         >

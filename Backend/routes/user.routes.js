@@ -1,9 +1,5 @@
-
-
 const {userModel} = require("../model/user.model")
-
 const express = require("express")
-
 const userRouter = express.Router()
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
