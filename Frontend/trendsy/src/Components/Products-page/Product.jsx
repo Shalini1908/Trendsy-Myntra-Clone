@@ -17,6 +17,7 @@ export const Product = ({ props }) => {
   let shortTitle = title.split("")?.filter((el, i) => i <= 18);
 
   return (
+
     <Box
       p={"5px"}
       maxW={"250px"}

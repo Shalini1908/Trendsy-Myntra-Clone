@@ -41,6 +41,13 @@ cartroutes.delete("/deletecart/:id", async (req, res) => {
   }
 });
 
+cartroutes.delete("/deletecart", async (req, res) => {
+  try {
+    const data = await CartModel.deleteMany({ userID: req.body.userID });
+    res.send("cart deleted");
+  } catch (error) {}
+});
+
 module.exports = {
   cartroutes,
 };

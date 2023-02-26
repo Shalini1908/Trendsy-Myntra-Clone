@@ -240,7 +240,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   <MenuDivider />
                   <MenuItem>Admin Profile</MenuItem>
             
-                  <MenuItem onClick={()=>logout}>Logout</MenuItem>
+                  <MenuItem onClick={()=>logout()}>Logout</MenuItem>
                   </MenuList>
             </Menu>
           </Flex>

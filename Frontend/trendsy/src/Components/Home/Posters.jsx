@@ -2,7 +2,6 @@ import { Box, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 
 
-
 const posterData = [
 
   {
@@ -121,9 +120,10 @@ const posterData = [
 // TRENDING OUTFITS BY INFLUENCERS
 
 const Posters = () => {
-
   
   return (
+<>
+  
     <Box m="15px">
       {posterData.map((ele, i) => (
         <Box key={1100 + i}>
@@ -138,6 +138,8 @@ const Posters = () => {
         </Box>
       ))}
     </Box>
+
+    </>
   );
 };
 

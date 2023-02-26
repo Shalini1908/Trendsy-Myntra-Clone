@@ -338,6 +338,7 @@ const data=`[
   }
  ]`
 export const getData=(route,filter)=>{
+  
   const getdata=JSON.parse(data)
    return getdata
 }

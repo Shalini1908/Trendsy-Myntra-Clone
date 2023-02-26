@@ -28,6 +28,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { PriceFilter } from "../Components/Products-page/Filters/PriceFilter";
 import { Pagination } from "../Components/Products-page/Pagination";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer"
 
 export const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -142,6 +144,7 @@ export const Products = () => {
 
   return (
     <>
+    <Navbar/>
       <Stack
         w={"100%"}
         p={{ base: "10px", sm: "10px", md: "15px", lg: "25px" }}
@@ -306,6 +309,7 @@ export const Products = () => {
           </Stack>
         </Grid>
       </Stack>
+      <Footer/>
     </>
   );
 };

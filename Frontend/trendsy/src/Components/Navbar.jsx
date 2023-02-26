@@ -58,6 +58,7 @@ const Navbar = () => {
 
         <HStack fontWeight="600" position="relative">
           {Object.keys(navColor).map((category, i) => (
+            <Link to={`/products/${category}`}>
             <Text
               key={700 + i}
               fontSize={"sm"}
@@ -66,16 +67,17 @@ const Navbar = () => {
             >
               {category.toUpperCase()}
             </Text>
+            </Link>
           ))}
           <Text
             fontSize={"sm"}
             p="30px 10px"
             onMouseEnter={handleDropdown}
-            color={"#3e4152"}
-            fontWeight={750}
-            fontFamily={
-              'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
-            }
+            color={"black"}
+            // fontWeight={750}
+            // fontFamily={
+            //   'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
+            // }
           >
             STUDIO
           </Text>
@@ -141,12 +143,14 @@ const Navbar = () => {
               Wishlist
             </Text>
           </VStack>
+          <Link to="/cart">
           <VStack>
             <HiOutlineShoppingBag />
             <Text fontSize="12px" fontWeight="700">
               Bag
             </Text>
           </VStack>
+          </Link>
         </HStack>
       </Flex>
       {dropdown.status && (

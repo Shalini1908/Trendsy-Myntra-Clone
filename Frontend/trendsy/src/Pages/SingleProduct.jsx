@@ -36,6 +36,7 @@ import {
   addToCartPostSuccessAction,
   getProducts,
 } from "../Redux/actions";
+import Navbar from "../Components/Navbar";
 
 export const SingleProduct = () => {
   const { products, isLoading } = useSelector((store) => {
@@ -84,7 +85,12 @@ export const SingleProduct = () => {
       .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data)
       .then((res) => {
         console.log(res);
-        dispatch(addToCartPostSuccessAction(res.data));
+        if(res.data="please login first"){
+          alert("please login first")
+        }else{
+          dispatch(addToCartPostSuccessAction(res.data));
+        }
+   
       })
       .catch((err) => {
         dispatch(addToCartPostErrorAction());
@@ -101,7 +107,8 @@ export const SingleProduct = () => {
   // console.log(singleProduct);
   return (
     <>
-      <Box w={"100%"} onClick={() => handleAddToCart(products)}>
+    <Navbar/>
+      <Box w={"100%"} >
         <Stack
           w={"100%"}
           p={{ base: "15px", sm: "30px", md: "15px", lg: "25px" }}
@@ -354,6 +361,7 @@ export const SingleProduct = () => {
                   borderRadius={"2px"}
                   fontWeight={"600"}
                   transition={"0.3s"}
+                  onClick={() => handleAddToCart(products)}
                 >
                   <Text>
                     <HiShoppingBag />
