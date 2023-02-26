@@ -11,6 +11,7 @@ import { SingleProduct } from "../Pages/SingleProduct";
 
 import Admin from "../Admin/Admin";
 import Address from "../Pages/Address";
+import Payment from "../Pages/Payment";
 
 const AllRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AllRoutes = () => {
           element={<SingleProduct />}
         ></Route>
          <Route path="/address" element={<Address/>}></Route>
+         <Route path="/payment" element={<Payment/>}></Route>
       </Routes>
     </>
   );

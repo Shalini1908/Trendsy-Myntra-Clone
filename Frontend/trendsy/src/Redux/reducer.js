@@ -1,17 +1,22 @@
+
 import {
   GET_PRODUCTS_ERROR,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-  GET_TOTAL_PRODUCTS_ERROR,
+  LoginSuccess,
+   GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
-} from "./action.type";
+} from "./action.types";
+
 
 const initialState = {
   isLoading: false,
   isError: false,
   products: [],
   TotalData: [],
+   isAuth:false,
+  name:""
 };
 
 export const ProductReducer = (state = initialState, { type, payload }) => {
@@ -58,7 +63,10 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
         error: true,
       };
     }
-    default: {
+    case LoginSuccess:{
+      return{...state,isAuth:true,name:payload.name}
+    }
+      default: {
       return state;
     }
   }

@@ -1,12 +1,18 @@
 import axios from "axios";
+
+
 import {
   GET_PRODUCTS_ERROR,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-  GET_TOTAL_PRODUCTS_ERROR,
+   LoginSuccess
+   GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
+
 } from "./action.type";
+
+ 
 
 export const productsGetRequestAction = () => {
   return { type: GET_PRODUCTS_REQUEST };
@@ -22,11 +28,20 @@ export const productsGetErrorAction = () => {
 
 export const totalProductsGetRequestAction = () => {
   return { type: GET_TOTAL_PRODUCTS_REQUEST };
+
 };
 
 export const totalProductsGetSuccessAction = (data) => {
   return { type: GET_TOTAL_PRODUCTS_SUCCESS, payload: data };
 };
+
+
+
+export const LoginFunctionSuccess = (payload)=>{
+  return{
+      type: LoginSuccess , payload
+  }
+}
 
 export const totalProductsGetErrorAction = () => {
   return { type: GET_TOTAL_PRODUCTS_ERROR };
@@ -80,3 +95,4 @@ export const getProducts = (Q) => (dispatch) => {
 //         console.log(err.message);
 //       });
 //   };
+
