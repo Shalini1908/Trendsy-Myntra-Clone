@@ -4,10 +4,15 @@ import { Ratings } from "./Ratings";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const Product = ({ props }) => {
-  const { title, brand, ideal_for, variant_price, variant_mrp, images, id } =
+  const { title, brand, ideal_for, variant_price, variant_mrp, images, _id } =
     props;
 
   const navigate = useNavigate();
+
+  const handleProduct = () => {
+    navigate(`/products/${ideal_for}/${title}/${_id}`);
+    window.scrollTo(0, 0);
+  };
 
   let shortTitle = title.split("")?.filter((el, i) => i <= 18);
 
@@ -29,7 +34,7 @@ export const Product = ({ props }) => {
       _hover={{
         boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       }}
-      onClick={() => navigate(`/products/${ideal_for}/${title}/${id}`)}
+      onClick={handleProduct}
     >
       <Box w={"100%"}>
         {/* <Ratings rating={rating} /> */}
