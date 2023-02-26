@@ -12,20 +12,20 @@ import { SingleProduct } from "../Pages/SingleProduct";
 import Admin from "../Admin/Admin";
 import Address from "../Pages/Address";
 
-
 const AllRoutes = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
+        <Route path="/" element={<Home />}></Route>
       
         <Route path="/admin" element={<Admin/>}></Route>
         <Route path="/adminsignin" element={<AdminSignin/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<Signup/>}></Route>
+
         <Route path="/products/:Q" element={<Products />}></Route>
         <Route
-          path="/products/:Q/:title/:id"
+          path="/products/:Q/:title/:_id"
           element={<SingleProduct />}
         ></Route>
          <Route path="/address" element={<Address/>}></Route>

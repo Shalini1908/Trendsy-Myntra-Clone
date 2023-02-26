@@ -7,9 +7,12 @@ import {
   Box,
   Text,
   Stack,
+  Select,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { BsFilterCircle } from "react-icons/bs";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { useSelector } from "react-redux";
 import { CheckBoxSize } from "./Filters/CheckBoxSize";
 import { CommonFilter } from "./Filters/CommonFilter";
 import { Filters } from "./Filters/Filters";
@@ -25,7 +28,18 @@ export const FiltersTop = ({
   setBrands,
   setColors,
   setPrice,
+  collections,
+  value,
+  setValue,
 }) => {
+  const { products, isLoading, TotalData } = useSelector((store) => {
+    return {
+      products: store.products,
+      isLoading: store.isLoading,
+      TotalData: store.TotalData,
+    };
+  });
+
   return (
     <>
       <Stack
@@ -159,25 +173,39 @@ export const FiltersTop = ({
                   />
                 ))}
               </Box>
+              <Box>
+                <Select
+                  onChange={(e) => setValue(e.target.value)}
+                  variant="filled"
+                  focusBorderColor={"#e2e8f0"}
+                  placeholder="Sort by Recomended."
+                >
+                  <option name={"asc"} value="asc">
+                    Price: Low to High
+                  </option>
+                  <option name={"dsc"} value="dsc">
+                    Price: High to Low
+                  </option>
+                </Select>
+              </Box>
             </TabPanel>
 
-            <TabPanel mb={"12px"} pt={"8px"} h={"50px"}>
+            <TabPanel mb={"12px"} pt={"8px"}>
               <CommonFilter options={["Bundles", "Singles Styles"]} />
             </TabPanel>
 
-            <TabPanel mb={"12px"} pt={"8px"} h={"50px"}>
+            <TabPanel mb={"12px"} pt={"8px"}>
               <CommonFilter options={["All Countries", "India"]} />
             </TabPanel>
 
             <TabPanel
               mb={{ base: "25px", sm: "12px", md: "12px", lg: "12px" }}
               pt={"8px"}
-              h={"50px"}
             >
               <CheckBoxSize
                 setSize={setSize}
                 size={size}
-                options={["XS", "S", "M", "L", "XL", "XXL", "Onesize"]}
+                options={collections(TotalData, "size")}
               />
             </TabPanel>
           </TabPanels>
