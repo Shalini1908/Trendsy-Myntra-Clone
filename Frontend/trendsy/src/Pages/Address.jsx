@@ -11,16 +11,38 @@ const Address = () => {
 
     const navigate = useNavigate()
   
-    const[close,Setclose] = useState(false) //button disabled
-    const[name,Setname] = useState("")
-    const[email,Setemail] = useState("")
-    const[num,Setnum] = useState("")
-    const[pass,Setpass] = useState("")
-    const [pin,Setpin] = useState("")
-    const [add,Setadd] = useState("")
-    const [town,Settown] = useState("")
-    const [state,Setstate] = useState("")
-    const [save,Setsave] = useState("")
+    // cartTotals={total:10,discount:10,coupen:20,social:10,fee:200,total_Amount:250}
+
+//     const total =  useSelector((store)=>
+//     store.total
+//    )
+//    const discount =  useSelector((store)=>
+//    store.discount
+//   )
+//   const coupen =  useSelector((store)=>
+//    store.coupen
+//   )
+//   const social =  useSelector((store)=>
+//    store.social
+//   )
+//   const fee =  useSelector((store)=>
+//    store.fee
+//   )
+//   const total_Amount =  useSelector((store)=>
+//   store.total_Amount
+//  )
+
+    // const[close,Setclose] = useState(false) //button disabled
+    // const[name,Setname] = useState("")
+    // const[email,Setemail] = useState("")
+    // const[num,Setnum] = useState("")
+    // const[pass,Setpass] = useState("")
+    // const [pin,Setpin] = useState("")
+    // const [add,Setadd] = useState("")
+    // const [town,Settown] = useState("")
+    // const [state,Setstate] = useState("")
+    // const [save,Setsave] = useState("")
+
     const formik = useFormik({
       initialValues:{
         name:"" ,
