@@ -81,7 +81,7 @@ const Signup = () => {
         .then((res) => res.json())
 
         .then((res) => {
-          localStorage.setItem("trendsyToken", res.token);
+          localStorage.setItem("trendsyToken", JSON.stringify(res.token));
           console.log(res);dispatch(LoginFunctionSuccess({name:values.name}));
           {
             res.Msg == "user already present"

@@ -31,14 +31,6 @@ export const getData = (path, filter) => async (dispatch) => {
     console.log(err.message);
   
   }
-<<<<<<< HEAD
- ]`
-export const getData=(route,filter)=>{
-  
-  const getdata=JSON.parse(data)
-   return getdata
-}
-=======
 };
 // const data=`[
 //   {
@@ -346,7 +338,6 @@ export const getData=(route,filter)=>{
 //   const getdata=JSON.parse(data)
 //    return getdata
 // }
->>>>>>> 83e1e928aae6f7a18898875822f98f76ffa2b39b
 
 export const postData = (path, data) => async (dispatch) => {
   // console.log(filter)

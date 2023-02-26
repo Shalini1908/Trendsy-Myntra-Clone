@@ -80,25 +80,12 @@ const Navbar = () => {
             </Text>
             </Link>
           ))}
-<<<<<<< HEAD
-          <Text
-            fontSize={"sm"}
-            p="30px 10px"
-            onMouseEnter={handleDropdown}
-            color={"black"}
-            // fontWeight={750}
-            // fontFamily={
-            //   'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
-            // }
-          >
-=======
 
           <Text  p="30px 10px" onMouseEnter={handleDropdown}  color={"#3e4152"}
             fontWeight={750}
             fontFamily={
               'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
             }>
->>>>>>> 83e1e928aae6f7a18898875822f98f76ffa2b39b
             STUDIO
           </Text>
           <Text

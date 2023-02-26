@@ -82,7 +82,11 @@ export const SingleProduct = () => {
   const handleAddToCart = (data) => {
     dispatch(addToCartPostRequestAction());
     axios
-      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data)
+      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`,data,{
+        headers:{
+         Authorization : JSON.parse(localStorage.getItem("token"))
+        }
+      })
       .then((res) => {
         console.log(res);
         if(res.data="please login first"){

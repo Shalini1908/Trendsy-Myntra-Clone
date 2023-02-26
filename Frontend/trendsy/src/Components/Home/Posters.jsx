@@ -1,10 +1,6 @@
 import { Box, Flex, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 83e1e928aae6f7a18898875822f98f76ffa2b39b
 const posterData = [
   {
     heading: 'DEAL OF THE DAY',
@@ -282,10 +278,6 @@ const posterData = [
 //
 
 const Posters = () => {
-<<<<<<< HEAD
-  
-=======
->>>>>>> 83e1e928aae6f7a18898875822f98f76ffa2b39b
   return (
 <>
   
