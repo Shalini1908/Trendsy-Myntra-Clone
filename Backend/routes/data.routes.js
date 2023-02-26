@@ -21,6 +21,21 @@ dataroutes.get("/search", async (req, res) => {
   }
 });
 
+//get alldata 
+dataroutes.get("/all",async(req,res)=>{
+try{
+const data = await DataModel.find()
+res.send(data)
+
+}catch(err){
+console.log(err)
+}
+
+})
+
+
+
+
 //for add products
 
 dataroutes.post("/create", async (req, res) => {
@@ -117,6 +132,7 @@ dataroutes.patch("/:id", async (req, res) => {
     res.send("update success");
   } catch (error) {}
 });
+
 // delete data
 
 dataroutes.delete("/:id", async (req, res) => {

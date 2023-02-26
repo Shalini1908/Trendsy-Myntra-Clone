@@ -1,19 +1,22 @@
 import axios from "axios";
 
-
 import {
   GET_PRODUCTS_ERROR,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-   LoginSuccess,
-   GET_TOTAL_PRODUCTS_ERROR,
+  LoginSuccess,
+  GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
+
   SET_CART_TOTALS,
 
-} from "./action.type";
 
- 
+  POST_ADDTOCART_REQUEST,
+  POST_ADDTOCART_SUCCESS,
+  POST_ADDTOCART_ERROR,
+
+} from "./action.type";
 
 export const productsGetRequestAction = () => {
   return { type: GET_PRODUCTS_REQUEST };
@@ -29,23 +32,33 @@ export const productsGetErrorAction = () => {
 
 export const totalProductsGetRequestAction = () => {
   return { type: GET_TOTAL_PRODUCTS_REQUEST };
-
 };
 
 export const totalProductsGetSuccessAction = (data) => {
   return { type: GET_TOTAL_PRODUCTS_SUCCESS, payload: data };
 };
 
-
-
-export const LoginFunctionSuccess = (payload)=>{
-  return{
-      type: LoginSuccess , payload
-  }
-}
-
 export const totalProductsGetErrorAction = () => {
   return { type: GET_TOTAL_PRODUCTS_ERROR };
+};
+
+export const addToCartPostRequestAction = () => {
+  return { type: POST_ADDTOCART_REQUEST };
+};
+
+export const addToCartPostSuccessAction = (data) => {
+  return { type: POST_ADDTOCART_SUCCESS, payload: data };
+};
+
+export const addToCartPostErrorAction = () => {
+  return { type: POST_ADDTOCART_ERROR };
+};
+
+export const LoginFunctionSuccess = (payload) => {
+  return {
+    type: LoginSuccess,
+    payload,
+  };
 };
 
 export const getProducts = (Q) => (dispatch) => {
@@ -61,6 +74,7 @@ export const getProducts = (Q) => (dispatch) => {
     });
 };
 
+
 export const setCartTotals = (payload)=>{
   return{
       type:SET_CART_TOTALS , payload
@@ -69,13 +83,14 @@ export const setCartTotals = (payload)=>{
 
 // export const AddToCart = (_id) => (dispatch) => {
 //   dispatch(totalProductsGetRequestAction());
+
 //   axios
-//     .get(`${process.env.REACT_APP_TRENDZY_ALL_DATA_URL}?ideal=${Q}&limit=200`)
+//     .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data)
 //     .then((res) => {
-//       dispatch(totalProductsGetSuccessAction(res.data));
+//       dispatch(addToCartPostSuccessAction(res.data));
 //     })
 //     .catch((err) => {
-//       dispatch(totalProductsGetErrorAction());
+//       dispatch(addToCartPostErrorAction());
 //       console.log(err.message);
 //     });
 // };

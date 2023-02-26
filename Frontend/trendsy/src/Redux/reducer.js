@@ -1,21 +1,26 @@
-
 import {
   GET_PRODUCTS_ERROR,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
   LoginSuccess,
-   GET_TOTAL_PRODUCTS_ERROR,
+  GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
-  SET_CART_TOTALS
-} from "./action.type";
 
+  SET_CART_TOTALS
+
+  POST_ADDTOCART_REQUEST,
+  POST_ADDTOCART_SUCCESS,
+  POST_ADDTOCART_ERROR,
+
+} from "./action.type";
 
 const initialState = {
   isLoading: false,
   isError: false,
   products: [],
   TotalData: [],
+
    isAuth:false,
   name:"",
   CartTotals : {
@@ -26,6 +31,11 @@ const initialState = {
     fee: 0,
     total_Amount: 0,
   }
+
+  isAuth: false,
+  name: "",
+  cart: [],
+
 };
 
 export const ProductReducer = (state = initialState, { type, payload }) => {
@@ -72,9 +82,31 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
         error: true,
       };
     }
-    case LoginSuccess:{
-      return{...state,isAuth:true}
+    case LoginSuccess: {
+      return { ...state, isAuth: true };
     }
+    case POST_ADDTOCART_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case POST_ADDTOCART_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        cart: [...state.cart, payload],
+      };
+    }
+    case POST_ADDTOCART_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+
     case SET_CART_TOTALS: {
       return {
         ...state,
@@ -83,6 +115,9 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
       };
     }
       default: {
+
+  
+
       return state;
     }
   }

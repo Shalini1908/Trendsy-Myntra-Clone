@@ -176,7 +176,6 @@ export const FiltersTop = ({
               <Box>
                 <Select
                   onChange={(e) => setValue(e.target.value)}
-                  variant="filled"
                   focusBorderColor={"#e2e8f0"}
                   placeholder="Sort by Recomended."
                 >
