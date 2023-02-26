@@ -52,8 +52,7 @@ console.log(name,isAuth)
       }).then(res => res.json())
 
 
-        .then(res => { res.msg === "Login successfull" ? localStorage.setItem("num", res.num) : navigate("/signup"); Setseen(false) ; 
-        dispatch(LoginFunctionSuccess())
+        .then(res => { res.msg === "Login successfull" ? localStorage.setItem("num", res.num) : navigate("/signup");Setseen(false) 
        })
 
         .catch(err => console.log(err))
@@ -79,7 +78,7 @@ console.log(name,isAuth)
         "Content-type": "application/json"
       },
     }).then(res => res.json())
-      .then(res => { localStorage.setItem("trendsyToken", res.token); console.log(res); swal("login Successfull", "you are being redirected" , "success") })
+      .then(res => { localStorage.setItem("trendsyToken", res.token);dispatch(LoginFunctionSuccess()); console.log(res); swal("login Successfull", "you are being redirected" , "success");navigate("/") })
       .catch(err => console.log(err))
 
   }
