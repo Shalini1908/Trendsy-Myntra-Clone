@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminSignin() {
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -28,8 +28,7 @@ export default function AdminSignin() {
       pass,
     };
 
-    // console.log(payload)
-    fetch("https://wild-red-bunny-tux.cyclic.app/admin/login", {
+    fetch("https://wild-red-bunny-tux.cyclic.app//admin/login", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {
@@ -40,7 +39,7 @@ export default function AdminSignin() {
       .then((res) => {
         localStorage.setItem(
           "token",
-          JSON.stringify(res.token),
+          JSON.stringify(res),
           console.log(res)
         );
         if (
@@ -59,14 +58,7 @@ export default function AdminSignin() {
       .catch((err) => console.log(err));
   };
 
-  //   if(token.length>0){
-  // window.location.href="/admin"
-  //   }
-
-  // const handleOnclick = ()=>{
-  //  window.location.href = "/admin"
-
-  // }
+ 
 
   return (
     <Box display={"flex"} m={"auto"} mt={"30px"}>
@@ -134,3 +126,36 @@ export default function AdminSignin() {
     </Box>
   );
 }
+
+
+
+// const [form, setForm] = useState(initState);
+// const {email, pass} =form
+
+
+// const navigate = useNavigate()
+
+//   const handleSubmit = async()=>{
+
+//     let {data} =  await axios.post("https://wild-red-bunny-tux.cyclic.app/admin/login",form)
+   
+//     localStorage.setItem("admindata",JSON.stringify(data))
+//     // localStorage.setItem("token",data.token)
+
+
+//    if( data.token){
+
+//     navigate('/admin')
+
+//    }
+
+//   }
+  
+// const handleChange=(e)=>{
+// e.preventDefault();
+// const {value, name} = e.target;
+
+// setForm({...form,[name]:value})
+// //  console.log(form)
+
+// }

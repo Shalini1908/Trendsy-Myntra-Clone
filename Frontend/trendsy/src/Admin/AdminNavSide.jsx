@@ -36,6 +36,8 @@ import Trendsy from "../../src/Images/trendsy.png";
 import { Dashboard } from "./Dashboard";
 import AllProducts from "./AllProducts";
 import Inventory from "./Inventory";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LinkItems = [
   { name: "Dashboard", icon: AiOutlineDashboard },
@@ -48,6 +50,9 @@ const LinkItems = [
 const AdminNavSide = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+
+
+
   return (
     <>
       <SidebarContent
@@ -55,11 +60,9 @@ const AdminNavSide = () => {
         display={{ base: "none", md: "block" }}
       />
       <Drawer
-        // autoFocus={false}
         isOpen={isOpen}
         placement="left"
         onClose={onClose}
-        // returnFocusOnClose={false}
         onOverlayClick={onClose}
         size="full"
       >
@@ -69,9 +72,14 @@ const AdminNavSide = () => {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }}  p="4" w={{base:"70%",md:"85%",lg:"80%"}} m="auto">
-       {/* <Dashboard/> */}
-       <Inventory/>
+      <Box
+        ml={{ base: 0, md: 60 }}
+        p="4"
+        w={{ base: "70%", md: "85%", lg: "80%" }}
+        m="auto"
+      >
+        {/* <Dashboard/> */}
+        <Inventory />
         {/* <AllProducts/> */}
       </Box>
     </>
@@ -137,10 +145,20 @@ const NavItem = ({ icon, children, ...rest }) => {
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  let icondata =JSON.parse(localStorage.getItem("token"))
+  console.log(icondata)
+  const navigate = useNavigate()
+
+  function logout(){
+  navigate("/adminsignin")
+
+  }
+
+
   return (
     <>
-      <Flex 
-      w={{base:"95%",sm:"95%",md:"79%",lg:"82.5%"}}
+      <Flex
+        w={{ base: "95%", sm: "95%", md: "79%", lg: "82.5%" }}
         ml={{ base: 0, md: 60 }}
         px={{ base: 4, md: 4 }}
         height="20"
@@ -181,7 +199,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
             <Menu>
               <MenuButton py={2}>
                 <HStack>
-                  <Avatar size={"sm"} src={Admin} />
+                  <Avatar size={"sm"} src={icondata.icon} />
                   <VStack
                     display={{ base: "none", md: "flex" }}
                     alignItems="flex-start"
@@ -203,13 +221,12 @@ const MobileNav = ({ onOpen, ...rest }) => {
                 <MenuItem>Settings</MenuItem>
                 <MenuItem>Billing</MenuItem>
                 <MenuDivider />
-                <MenuItem>Sign out</MenuItem>
+                <MenuItem onClick={()=>logout()}>Sign out</MenuItem>
               </MenuList>
             </Menu>
           </Flex>
         </HStack>
       </Flex>
-   
     </>
   );
 };
