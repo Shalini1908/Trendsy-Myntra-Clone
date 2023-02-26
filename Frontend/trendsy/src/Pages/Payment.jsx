@@ -9,6 +9,25 @@ const Payment = () => {
 
     const navigate = useNavigate()
 
+    
+//     const total =  useSelector((store)=>
+//     store.total
+//    )
+//    const discount =  useSelector((store)=>
+//    store.discount
+//   )
+//   const coupen =  useSelector((store)=>
+//    store.coupen
+//   )
+//   const social =  useSelector((store)=>
+//    store.social
+//   )
+//   const fee =  useSelector((store)=>
+//    store.fee
+//   )
+//   const total_Amount =  useSelector((store)=>
+//   store.total_Amount
+//  )
 
 
     const formik = useFormik({
