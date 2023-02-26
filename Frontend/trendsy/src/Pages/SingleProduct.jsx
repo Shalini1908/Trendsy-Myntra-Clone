@@ -29,7 +29,13 @@ import {
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { getProducts } from "../Redux/actions";
+import {
+  AddToCart,
+  addToCartPostErrorAction,
+  addToCartPostRequestAction,
+  addToCartPostSuccessAction,
+  getProducts,
+} from "../Redux/actions";
 
 export const SingleProduct = () => {
   const { products, isLoading } = useSelector((store) => {
@@ -72,6 +78,20 @@ export const SingleProduct = () => {
       });
   };
 
+  const handleAddToCart = (data) => {
+    dispatch(addToCartPostRequestAction());
+    axios
+      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data)
+      .then((res) => {
+        console.log(res);
+        dispatch(addToCartPostSuccessAction(res.data));
+      })
+      .catch((err) => {
+        dispatch(addToCartPostErrorAction());
+        console.log(err.message);
+      });
+  };
+
   useEffect(() => {
     getSingleProduct(_id);
   }, [_id, img]);
@@ -81,7 +101,7 @@ export const SingleProduct = () => {
   // console.log(singleProduct);
   return (
     <>
-      <Box w={"100%"}>
+      <Box w={"100%"} onClick={() => handleAddToCart(products)}>
         <Stack
           w={"100%"}
           p={{ base: "15px", sm: "30px", md: "15px", lg: "25px" }}

@@ -80,7 +80,7 @@ export const Products = () => {
   const [value, setValue] = useState();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
-  console.log(value);
+  // console.log(value);
 
   const { Q } = useParams();
   const ideal =
@@ -299,7 +299,7 @@ export const Products = () => {
             <Stack minW={"300px"} justify={"space-between"} align={"center"}>
               <Pagination
                 current={page}
-                total={Math.ceil(TotalData.length / limit)}
+                total={Math.ceil(products.length / limit)}
                 onChange={(value) => setPage(value)}
               />
             </Stack>
