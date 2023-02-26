@@ -1,5 +1,6 @@
 
 import "./App.css";
+import Payment from "./Pages/Payment";
 
 
 import AllRoutes from "./Routes/AllRoutes";
@@ -11,7 +12,7 @@ function App() {
 
       <AllRoutes />
     {/* <Admin/> */}
-
+<Payment/>
       {/* <Footer /> */}
  
     </div>
