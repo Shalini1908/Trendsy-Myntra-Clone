@@ -12,6 +12,7 @@ import {
   Checkbox,
   CheckboxGroup,
   Text,
+  Image,
   Button,
   FormControl,
   FormErrorMessage,
@@ -93,17 +94,24 @@ const Signup = () => {
   });
 
   return (
-    <Box height="100vh" bg="#fdefec">
+    <Box height={["100vh","100vh","100vh","100vh"]} bg="#fdefec" w={["100%","100%","100%","100%"]}>
+    
       <Box
         bg="white"
         padding="20px"
         display="inline-block"
-        width={["300px", "400px", "400px", "500px"]}
+        width={["310px", "310px", "310px", "380px"]}
         margin="50px auto"
       >
-        <Heading size={["sm", "md", "lg", "xl"]}>Create your account</Heading>
+          <Image
+          src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/2023/1/25/f5e9a029-33c3-4a92-811b-ef7917fe6d441674670210687-offer-banner-300-600x240-code-_-MYNTRA300.jpg"
+          alt="signupimage"
+         m={"auto"}
+         w={"380px"}
+        />
+        {/* <Heading size={["xs", "xs", "sm", "md"]} color={"#342c34"}>Create your account</Heading> */}
         <FormControl isInvalid={formik.errors.num && formik.touched.num}>
-          <InputGroup mt={["5px", "10px", "10px", "10px"]}>
+          <InputGroup mt={["5px", "10px", "10px", "-10px"]}>
             <InputLeftElement
               mt="30px"
               pointerEvents="none"
@@ -114,10 +122,11 @@ const Signup = () => {
               mt="30px"
               name="num"
               max={10}
-              border="1px solid black"
+              border="1px solid #f5f5f6"
               type="tel"
               placeholder="Phone number"
-              disabled
+              // disabled
+              backgroundColor={"white"}
               onChange={formik.handleChange}
               value={formik.values.num}
               onBlur={formik.handleBlur}
@@ -129,8 +138,9 @@ const Signup = () => {
           <Input
             mt={["10px", "10px", "20px", "20px"]}
             name="pass"
-            border="1px solid black"
+            border="1px solid #f5f5f6"
             type="password"
+            backgroundColor={"white"}
             placeholder="enter password"
             onChange={formik.handleChange}
             value={formik.values.pass}
@@ -142,8 +152,9 @@ const Signup = () => {
           <Input
             mt={["10px", "10px", "20px", "20px"]}
             name="name"
-            border="1px solid black"
+            border="1px solid #f5f5f6"
             type="text"
+            backgroundColor={"white"}
             placeholder="Full name"
             onChange={formik.handleChange}
             value={formik.values.name}
@@ -155,8 +166,9 @@ const Signup = () => {
           <Input
             mt={["10px", "10px", "20px", "20px"]}
             name="email"
-            border="1px solid black"
+            border="1px solid #f5f5f6"
             type="email"
+            backgroundColor={"white"}
             placeholder="Email"
             onChange={formik.handleChange}
             value={formik.values.email}
@@ -165,7 +177,7 @@ const Signup = () => {
           <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
         </FormControl>
         <Flex mt={["10px", "10px", "20px", "20px"]} alignItems="center">
-          <Text>Select Gender</Text>{" "}
+          <Text fontSize={["xs", "xs", "sm", "sm"]}>Select Gender</Text>{" "}
           <Stack ml="50px" spacing={5} direction="row">
             <FormControl
               isInvalid={formik.errors.gender && formik.touched.gender}
@@ -202,11 +214,11 @@ const Signup = () => {
         <Button
           onClick={formik.handleSubmit}
           mt="20px"
-          width="100%"
-          bgColor={"#f41cb2"}
+          width={["85%","90%","90%","100%"]}
+          bgColor={"#ff3f6c"}
           color="white"
           cursor="pointer"
-          _hover={{ bgColor: "pink.500" }}
+          _hover={{ bgColor: "#ff3f6c" }}
         >
           Create Account
         </Button>

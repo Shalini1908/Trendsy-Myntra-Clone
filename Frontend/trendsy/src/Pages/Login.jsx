@@ -78,29 +78,29 @@ const Login = () => {
   return (
     <Box bg="#fdefec" height="100vh" >
       <Box mt="100px" display={seen === true ? "inline-block" : "none"}  >
-        <Box bg="white" padding="20px" width={["300px","400px","400px","500px"]} margin="auto"  >
+        <Box bg="white" padding="20px"  width={["310px", "310px", "310px", "380px"]} margin="auto"  >
         <Image src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/2023/2/7/59a76460-3a85-4d4b-b517-faef119c50551675792734635-offer-banner-200-600x240-code-_-MYNTRA200.jpg" />
-          <Heading size={["sm","md","lg","xl"]} mt="10px" >Login  <Text display="inline-block" size={["sm","sm","md","md"]} > or </Text>  Signup</Heading>
+          <Heading size={["xs", "xs", "sm", "lg"]} mt="10px" color={"#342c34"}>Login  <Text display="inline-block" size={["sm","sm","md","md"]} > or </Text>  Signup</Heading>
           <FormControl isInvalid={formik.errors.num && formik.touched.num} >
             <InputGroup mt={[ "5px","10px","10px", "10px" ]} >
               <InputLeftElement mt={[ "5px","10px","10px", "10px" ]}
                 pointerEvents='none'
                 children={<PhoneIcon color='gray.300' />}
               />
-              <Input mt={[ "5px","10px","10px", "10px" ]} name="num" onChange={formik.handleChange} value={formik.values.num} onBlur={formik.handleBlur} max={10} border="1px solid black" type='tel' placeholder='Phone number' />
+              <Input mt={[ "5px","10px","10px", "10px" ]} name="num" onChange={formik.handleChange} value={formik.values.num} onBlur={formik.handleBlur} max={10} border="1px solid #dbdbdb" type='tel' placeholder='Phone number' />
 
             </InputGroup>
             <FormErrorMessage>{formik.errors.num}</FormErrorMessage>
           </FormControl>
 
 
-          <Text mt="10px" >By continuing, I agree to the <span style={{ color: "blue" }} >  Terms of Use</span> &  <span style={{ color: "blue" }} >Privacy policy</span></Text>
+          <Text mt="10px" >By continuing, I agree to the <span style={{ color: "#ff3f6c" }} >  Terms of Use</span> &  <span style={{ color: "#ff3f6c" }} >Privacy policy</span></Text>
 
 
-          <Button mt="20px" onClick={formik.handleSubmit} width="100%" bg="#f41cb2" _hover={{ bgColor: "pink.500", color: "white" }} >Continue</Button>
+          <Button mt="20px" onClick={formik.handleSubmit}    width={["85%","90%","90%","100%"]} color={"white"} bg="#ff3f6c" _hover={{ bgColor: "#ff3f6c", color: "white" }} >Continue</Button>
 
 
-          <Button mt="20px" width="100%" bg="#f41cb2" _hover={{ bgColor: "pink.500", color: "white" }} onClick={() => Setseen(false)} >Sign in as Admin</Button>
+          <Button mt="20px"    width={["85%","90%","90%","100%"]} bg="#ff3f6c"   color={"white"}  _hover={{ bgColor: "#ff3f6c", color: "white" }} onClick={() => Setseen(false)} >Sign in as Admin</Button>
 
         </Box>
       </Box>
@@ -120,10 +120,10 @@ const Login = () => {
 
 
           <Box>
-            <Text mt="10px" >By continuing, I agree to the <span style={{ color: "blue" }} >  Terms of Use</span> &  <span style={{ color: "blue" }} >Privacy policy</span></Text>
+            <Text mt="10px" >By continuing, I agree to the <span style={{ color: "#ff3f6c" }} >  Terms of Use</span> &  <span style={{ color: "#ff3f6c" }} >Privacy policy</span></Text>
           </Box>
 
-          <Button mt="20px" onClick={finalLogin} width="100%" bg="pink.400" _hover={{ bgColor: "pink.500", color: "white" }} >Continue</Button>
+          <Button mt="20px" onClick={finalLogin}    width={["85%","90%","90%","100%"]} color={"white"} backgroundColor="#ff3f6c" _hover={{ bgColor: "#ff3f6c", color: "white" }} cursor={"pointer"}>Continue</Button>
 
 
 

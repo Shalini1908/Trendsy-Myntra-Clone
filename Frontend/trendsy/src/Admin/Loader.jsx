@@ -1,5 +1,16 @@
+import { Spinner } from "@chakra-ui/react";
+
 function Loader() {
-    return <h3 data-testid="loading-container">...Loading</h3>;
+  return <>
+  <Spinner
+  thickness='4px'
+  speed='0.65s'
+  emptyColor='gray.200'
+  color='blue.500'
+  size='xl'
+/>
+    
+ </>
   }
   
   export default Loader;
