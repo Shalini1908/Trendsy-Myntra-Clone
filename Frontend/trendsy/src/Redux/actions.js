@@ -9,6 +9,7 @@ import {
    GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
+  SET_CART_TOTALS,
 
 } from "./action.type";
 
@@ -59,6 +60,12 @@ export const getProducts = (Q) => (dispatch) => {
       console.log(err.message);
     });
 };
+
+export const setCartTotals = (payload)=>{
+  return{
+      type:SET_CART_TOTALS , payload
+  }
+}
 
 // export const AddToCart = (_id) => (dispatch) => {
 //   dispatch(totalProductsGetRequestAction());

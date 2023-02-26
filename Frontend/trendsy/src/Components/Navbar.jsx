@@ -21,6 +21,7 @@ import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom';
 
 import Search from './Search';
+import { useSelector } from 'react-redux';
 const navColor = {
   men: 'tomato',
   women: 'pink.700',
@@ -30,6 +31,8 @@ const navColor = {
 };
 
 const Navbar = () => {
+
+  //const {isAuth,name}=useSelector((store)=>store.ProductReducer)
   const [dropdown, setdropdown] = useState({
     status: false,
     category: 'beauty',
@@ -37,7 +40,8 @@ const Navbar = () => {
 
   const [hover, setHover] = useState(false);
 
-  const isAuth = false;
+   const isAuth = false;
+   const name=""
   const handleNav = category => {
     const newDropdown = { status: true, category: category };
     setdropdown(newDropdown);
@@ -53,22 +57,22 @@ const Navbar = () => {
           <Image w="80px" src={logo} alt="Trednsy" />
         </Box>
 
-        <HStack fontWeight="600" position="relative">
+        <HStack fontWeight="600" position="relative"  fontSize={[ "5px","7px","10px","xs",'sm']}>
           {Object.keys(navColor).map((category, i) => (
             <Text
               key={700 + i}
-              fontSize={'sm'}
-              p="30px 10px"
+             
+              p={["10px 5px","20px 7px","30px 10px"]}
               onMouseEnter={() => handleNav(category)}
             >
               {category.toUpperCase()}
             </Text>
           ))}
-          <Text fontSize={'sm'} p="30px 10px" onMouseEnter={handleDropdown}>
+          <Text  p="30px 10px" onMouseEnter={handleDropdown}>
             STUDIO
           </Text>
           <Text
-            fontSize="9px"
+            fontSize={["4px","6px","8px","9px"]}
             color="tomato"
             fontWeight="900"
             position="absolute"
@@ -78,22 +82,22 @@ const Navbar = () => {
             NEW
           </Text>
         </HStack>
-        <Box onMouseLeave={() => setHover(false)}>
+        <Box onMouseLeave={() => setHover(false)} W={["200px","300px","500px"]}>
           <Search />
         </Box>
 
-        <HStack spacing="25px">
+        <HStack spacing={["10px","15px","25px"]}>
           <VStack onMouseEnter={() => setHover(true)}>
             {!isAuth ? (
               <FaRegUser />
             ) : (
               <Avatar
                 size="sm"
-                name="Ryan Florence"
-                src="https://bit.ly/ryan-florence"
+                name={name||"MK"}
+                // src="https://bit.ly/ryan-florence"
               />
             )}
-            <Text fontSize="12px" fontWeight="700">
+            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
               Profile
             </Text>
             {hover && (
@@ -125,13 +129,13 @@ const Navbar = () => {
           </VStack>
           <VStack onMouseLeave={() => setHover(false)}>
             <GrFavorite />
-            <Text fontSize="12px" fontWeight="700">
+            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
               Wishlist
             </Text>
           </VStack>
           <VStack>
             <HiOutlineShoppingBag />
-            <Text fontSize="12px" fontWeight="700">
+            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
               Bag
             </Text>
           </VStack>

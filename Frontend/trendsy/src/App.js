@@ -9,6 +9,7 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 
 import AllRoutes from "./Routes/AllRoutes";
+import Cart from "./Pages/Cart";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       {/* <Navbar /> */}
 
       <AllRoutes />
-
+{/* <Cart/> */}
     {/* <Admin/> */}
 
 

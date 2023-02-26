@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 import { useThrottle } from '../Hooks/Throttle';
 import { getData } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -18,7 +19,7 @@ const Search = () => {
   const [active, setActive] = useState();
   const [show,setShow]=useState(false)
   const scrollDiv = useRef([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleSearch = async searchTerm => {
     let data = await getData('/search', { query: searchTerm });
     if(data.length>0){
@@ -42,7 +43,7 @@ const Search = () => {
       const scrollbox = scrollDiv.current;
       switch (e.keyCode) {
         case 38:
-          console.log(scrollbox.scrollTop);
+         
           if (active == null) {
             setActive(suggestions);
             break;
@@ -81,13 +82,13 @@ const Search = () => {
     }
   }, [active]);
 
-  const handleSelection = id => {
-    console.log(id);
-    //navigate(`/product/${id}`);
+  const handleSelection = (result) => {
+   const {ideal_for,title,_id}=result
+    navigate(`/products/${ideal_for}/${title}/${_id}`);
   };
   console.log(scrollDiv);
   return (
-    <HStack w="500px" pos="relative" onKeyUp={handleSuggetion}>
+    <HStack  pos="relative" onKeyUp={handleSuggetion}>
       <InputGroup>
         <InputLeftElement children={<SearchIcon color="gray.500" />} />
 
@@ -123,7 +124,7 @@ const Search = () => {
             pb="3px"
             key={i + 730}
             cursor="pointer"
-            onClick={() => handleSelection(result.ID)}
+            onClick={() => handleSelection(result)}
             onMouseEnter={() => setActive(i)}
           >
             {result.name}
