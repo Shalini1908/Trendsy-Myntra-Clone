@@ -6,9 +6,13 @@ import {
   GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
+
+  SET_CART_TOTALS
+
   POST_ADDTOCART_REQUEST,
   POST_ADDTOCART_SUCCESS,
   POST_ADDTOCART_ERROR,
+
 } from "./action.type";
 
 const initialState = {
@@ -16,9 +20,22 @@ const initialState = {
   isError: false,
   products: [],
   TotalData: [],
+
+   isAuth:false,
+  name:"",
+  CartTotals : {
+    total: 0,
+    discount: 0,
+    coupen: 0,
+    social: 0,
+    fee: 0,
+    total_Amount: 0,
+  }
+
   isAuth: false,
   name: "",
   cart: [],
+
 };
 
 export const ProductReducer = (state = initialState, { type, payload }) => {
@@ -89,7 +106,18 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
         error: true,
       };
     }
-    default: {
+
+    case SET_CART_TOTALS: {
+      return {
+        ...state,
+       
+        CartTotals: payload,
+      };
+    }
+      default: {
+
+  
+
       return state;
     }
   }
