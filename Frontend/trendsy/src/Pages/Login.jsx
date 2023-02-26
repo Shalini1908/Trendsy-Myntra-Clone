@@ -25,7 +25,7 @@ const Login = () => {
     onSubmit: (values, actions) => {
 
       console.log(values)
-
+      localStorage.setItem("num", values.num)
       const payload = {
         num: values.num,
 
@@ -33,7 +33,7 @@ const Login = () => {
 
       //  console.log(payload)
 
-      fetch("http://localhost:8080/user/login", {
+      fetch("https://wild-red-bunny-tux.cyclic.app/user/login", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -62,7 +62,7 @@ const Login = () => {
       pass
     }
 
-    fetch("http://localhost:8080/user/login1", {
+    fetch("https://wild-red-bunny-tux.cyclic.app/user/login1", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {
@@ -78,16 +78,16 @@ const Login = () => {
   return (
     <Box bg="#fdefec" height="100vh" >
       <Box mt="100px" display={seen === true ? "inline-block" : "none"}  >
-        <Box bg="white" padding="20px" width="500px" margin="auto"  >
-     
-          <Heading size="lg" >Login<span style={{ fontSize: "20px" }} >  or</span> Signup</Heading>
+        <Box bg="white" padding="20px" width={["300px","400px","400px","500px"]} margin="auto"  >
+        <Image src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/2023/2/7/59a76460-3a85-4d4b-b517-faef119c50551675792734635-offer-banner-200-600x240-code-_-MYNTRA200.jpg" />
+          <Heading size={["sm","md","lg","xl"]} mt="10px" >Login  <Text display="inline-block" size={["sm","sm","md","md"]} > or </Text>  Signup</Heading>
           <FormControl isInvalid={formik.errors.num && formik.touched.num} >
-            <InputGroup mt="30px" >
-              <InputLeftElement mt="30px"
+            <InputGroup mt={[ "5px","10px","10px", "10px" ]} >
+              <InputLeftElement mt={[ "5px","10px","10px", "10px" ]}
                 pointerEvents='none'
                 children={<PhoneIcon color='gray.300' />}
               />
-              <Input mt="30px" name="num" onChange={formik.handleChange} value={formik.values.num} onBlur={formik.handleBlur} max={10} border="1px solid black" type='tel' placeholder='Phone number' />
+              <Input mt={[ "5px","10px","10px", "10px" ]} name="num" onChange={formik.handleChange} value={formik.values.num} onBlur={formik.handleBlur} max={10} border="1px solid black" type='tel' placeholder='Phone number' />
 
             </InputGroup>
             <FormErrorMessage>{formik.errors.num}</FormErrorMessage>
@@ -108,12 +108,12 @@ const Login = () => {
 
 
       <Box mt="100px" display={seen === false ? "inline-block" : "none"}  >
-        <Box bg="white" padding="20px" width="500px" margin="auto"  >
+        <Box bg="white" padding="20px"  width={["300px","400px","400px","500px"]} margin="auto"  >
+        <Image src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/2023/2/7/59a76460-3a85-4d4b-b517-faef119c50551675792734635-offer-banner-200-600x240-code-_-MYNTRA200.jpg" />
+          <Heading size={["sm","md","md","md"]} mt="10px" >Enter your password</Heading>
 
-          <Heading size="lg" >Enter your password</Heading>
 
-
-          <Input mt="30px" value={pass} max={10} border="1px solid black" type='password' placeholder='enter password' onChange={(e) => Setpass(e.target.value)} />
+          <Input mt={[ "10px","10px","20px", "20px" ]} value={pass} max={10} border="1px solid black" type='password' placeholder='enter password' onChange={(e) => Setpass(e.target.value)} />
 
 
 

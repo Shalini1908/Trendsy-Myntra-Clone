@@ -8,7 +8,17 @@ const userRouter = express.Router()
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
-userRouter.get("/" ,(req,res)=>{
+// getting all user
+
+userRouter.get("/" ,async (req,res)=>{
+try{
+
+    const user = await userModel.find()
+      res.send(user)
+}catch(err){
+ res.send({"msg":"user not found",err:err.message})
+}
+
    res.send("otp sent successfully")
 } )
 
