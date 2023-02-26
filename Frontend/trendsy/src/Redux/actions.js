@@ -35,7 +35,7 @@ export const totalProductsGetErrorAction = () => {
 export const getProducts = (Q) => (dispatch) => {
   dispatch(totalProductsGetRequestAction());
   axios
-    .get(`${process.env.REACT_APP_TRENDZY_ALL_DATA_URL}?ideal=${Q}&limit=200`)
+    .get(`${process.env.REACT_APP_TRENDZY_BASE_URL}/data?ideal=${Q}&limit=200`)
     .then((res) => {
       dispatch(totalProductsGetSuccessAction(res.data));
     })

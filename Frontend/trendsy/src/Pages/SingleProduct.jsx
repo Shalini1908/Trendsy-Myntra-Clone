@@ -61,7 +61,7 @@ export const SingleProduct = () => {
 
   const getSingleProduct = (_id) => {
     axios
-      .get(`${process.env.REACT_APP_TRENDZY_SINGLE_DATA_URL}/${_id}`)
+      .get(`${process.env.REACT_APP_TRENDZY_BASE_URL}/data/${_id}`)
       .then((res) => {
         console.log(res.data);
         setData(res.data);

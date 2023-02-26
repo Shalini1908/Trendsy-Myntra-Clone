@@ -58,7 +58,7 @@ export const Products = () => {
   const collections = (data, name) => {
     const unique = [];
 
-    data.forEach((item) => {
+    data?.forEach((item) => {
       if (!unique.includes(item[name])) {
         unique.push(item[name]);
       }
@@ -105,7 +105,7 @@ export const Products = () => {
     dispatch(productsGetRequestAction());
     axios
       .get(
-        `${process.env.REACT_APP_TRENDZY_ALL_DATA_URL}?ideal=${ideal}&${brandCollection}${categoryCollection}${colorsCollection}${sizeCollection}sortBy=${value}&page=${page}&limit=${limit}`
+        `${process.env.REACT_APP_TRENDZY_BASE_URL}/data?ideal=${ideal}&${brandCollection}${categoryCollection}${colorsCollection}${sizeCollection}sortBy=${value}&page=${page}&limit=${limit}`
       )
       .then((res) => {
         dispatch(productsGetSuccessAction(res.data));
