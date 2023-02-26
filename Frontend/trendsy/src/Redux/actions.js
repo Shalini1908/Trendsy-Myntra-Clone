@@ -75,7 +75,8 @@ export const getProducts = (Q) => (dispatch) => {
 };
 
 
-export const setCartTotals = (payload)=>{
+export const setCartTotalS = (payload)=>{
+  console.log(payload)
   return{
       type:SET_CART_TOTALS , payload
   }

@@ -6,31 +6,32 @@ import swal from 'sweetalert';
 import { useNavigate  } from 'react-router-dom';
 import { PhoneIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import CartNav from '../Components/Cart/CartNav';
 const Address = () => {
 
 
     const navigate = useNavigate()
   
-    // cartTotals={total:10,discount:10,coupen:20,social:10,fee:200,total_Amount:250}
+  
+    const total =  useSelector((store)=>
+    store.CartTotals.total
+   )
+   const discount =  useSelector((store)=>
+   store.CartTotals.discount
+  )
+  const coupen =  useSelector((store)=>
+   store.CartTotals.coupen
+  )
+  const social =  useSelector((store)=>
+   store.CartTotals.social
+  )
+  const fee =  useSelector((store)=>
+   store.CartTotals.fee
+  )
+  const total_Amount =  useSelector((store)=>
+  store.CartTotals.total_Amount
+ )
 
-//     const total =  useSelector((store)=>
-//     store.total
-//    )
-//    const discount =  useSelector((store)=>
-//    store.discount
-//   )
-//   const coupen =  useSelector((store)=>
-//    store.coupen
-//   )
-//   const social =  useSelector((store)=>
-//    store.social
-//   )
-//   const fee =  useSelector((store)=>
-//    store.fee
-//   )
-//   const total_Amount =  useSelector((store)=>
-//   store.total_Amount
-//  )
 
     // const[close,Setclose] = useState(false) //button disabled
     // const[name,Setname] = useState("")
@@ -75,6 +76,8 @@ const Address = () => {
   return (
 
     <Box  >
+  
+  < CartNav/>
 
  <Flex  justifyContent="center"  flexDirection={["column","column","row","row"  ]} >
  <VStack  margin="auto" mt="20px" as="form" border="1px solid black" onSubmit={formik.handleSubmit}  p={5}   width={[ "90%","90%","400px","500px"]} >
@@ -153,26 +156,27 @@ const Address = () => {
     </VStack>
     <VStack margin="0 auto" ml={[ "","","60px","100px"]} width={[ "90%","90%","300px","400px"]}  padding="20px" >
     <FormLabel mt="20px" >Price Details</FormLabel>
+    
     <Flex width="100%"  >
-            <Text>Total MRP</Text> <Spacer/> <Text>$</Text>
+            <Text>Total MRP</Text> <Spacer/> <Text>₹ {total}</Text>
             
         </Flex>
         <Flex width="100%"   >
-            <Text>Discount on MRP</Text> <Spacer/> <Text>$</Text>
+            <Text>Discount on MRP</Text> <Spacer/> <Text>₹ {discount}</Text>
             
         </Flex>
         <Flex width="100%"  >
-            <Text>Coupon Discount</Text> <Spacer/> <Text>$</Text>
+            <Text>Coupon Discount</Text> <Spacer/> <Text>₹ {coupen}</Text>
             
         </Flex>
         <Flex width="100%"  >
-            <Text>Convienience Fee</Text> <Spacer/> <Text>$</Text>
+            <Text>Convienience Fee</Text> <Spacer/> <Text>₹ {fee}</Text>
             
         </Flex>
         
       < Divider/>
       <Flex width="100%"  >
-            <Text>Total Amount</Text> <Spacer/> <Text>$</Text>
+            <Text>Total Amount</Text> <Spacer/> <Text>₹ {total_Amount}</Text>
             
         </Flex>
     </VStack>
