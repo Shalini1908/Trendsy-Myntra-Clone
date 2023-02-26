@@ -132,7 +132,7 @@ userRouter.post("/login" , async (req,res)=>{
         if(result){
             const token = jwt.sign({ userID: user[0]._id  }, 'masai');
             
-     res.send({"msg":"login successfull","token":token})
+     res.send({"msg":"login successfull","token":token,"name":user[0].name})
         }else{
             res.send({"err":"login failed"})
         }
