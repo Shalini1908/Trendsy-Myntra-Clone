@@ -26,7 +26,7 @@ const Payment = () => {
         ,
         onSubmit: (values, actions) => {
     
-            swal("Payment Successfull", "you are being redirected to home Page" , "success") ; navigate("/login")
+            swal("Payment Successfull", "you are being redirected to home Page" , "success") ; navigate("/")
        
         }
       })
@@ -37,9 +37,9 @@ const Payment = () => {
 
   return (
    <Box>
-    <Flex   border="1px solid black"  >
+    <Flex  flexDirection={["column","column","column","row"  ]}  >
         <Box margin="0 auto"> 
- <VStack height="100px" padding="0 10px"  border="1px solid black" width={[ "90%","90%","300px","800px"]}>
+ <VStack height="100px" padding="0 10px"  border="1px solid black" width={[ "90%","90%","700px","800px"]}>
     <Flex width="100%" >
     <FormLabel>Bank Offer</FormLabel> 
     </Flex>
@@ -50,13 +50,13 @@ const Payment = () => {
         
 
  </VStack>
- <VStack padding="0 10px" mt="20px"  border="1px solid black" width={[ "90%","90%","300px","800px"]}>
+ <VStack padding="0 10px" mt="20px"  width={[ "90%","90%","700px","800px"]}>
 
- <Flex width="100%" >
+ <Flex width="100%" margin="auto" >
  <FormLabel>Choose Payment Mode</FormLabel> 
     </Flex>
     <Flex width="100%" border="1px solid black" >
-        <Stack width="200px"   >
+        <Stack width="200px" display={["none","none","block","block"]}   >
             <Flex  p={3} >
                 <FormLabel   >Credit/debit card</FormLabel>
             </Flex>
@@ -73,11 +73,12 @@ const Payment = () => {
                 <FormLabel  p={3} >Net / banking</FormLabel>
             </Flex>
         </Stack>
-        <Stack width="400px" ml="100px"  >
-            <FormLabel>Credit/Debit card</FormLabel>
+
+        <Stack margin="auto" width="400px" ml={["","" , "100px","100px"]}  >
+            <FormLabel p={2}>Credit/Debit card</FormLabel>
             <Text>Please ensure Your card be used for online transactions</Text>
 
-            <VStack  margin="auto" mt="20px" as="form" border="1px solid black" onSubmit={formik.handleSubmit}  p={5}    >
+            <VStack  margin="auto" mt="20px" as="form"  onSubmit={formik.handleSubmit}  p={5}    >
   
 
   
@@ -127,7 +128,7 @@ const Payment = () => {
 
  </Box>
 
-  <VStack  margin="0 auto" ml={[ "","","60px","-100px"]} width={[ "90%","90%","300px","400px"]}  padding="20px" >
+  <VStack  margin="0 auto" ml={[ "","","","100px"]} width={[ "90%","300px","300px","400px"]}  padding="20px" >
     <FormLabel mt="20px" >Price Details</FormLabel>
     <Flex width="100%"  >
             <Text>Total MRP</Text> <Spacer/> <Text>$</Text>

@@ -24,12 +24,12 @@ const Address = () => {
       initialValues:{
         name:"" ,
         num:"" ,
-          email:"" ,
-          password:"" ,
+       
           pin:"",
           add:"",
-          town:"",
+         
           state:"",
+          town:"",
           save:""
       } ,
       validationSchema: yup.object({
@@ -37,20 +37,14 @@ const Address = () => {
           num: yup.string().required("number Required").min(10).max(10,"Please enter valid number") ,
           pin : yup.string().required("Please enter your pin").min(6).max(6,"Please enter valid pin") ,
           add : yup.string().required("Please enter Address") ,
-          town : yup.string().required("Please enter your city") ,
+        
           state : yup.string().required("Please enter your state")  ,
+          town : yup.string().required("Please enter your city") ,
           save : yup.string().required("Please check the checkbox")  
       }),
       onSubmit :  (values,actions) =>{
-        Setclose(true)
-    // const emails = values.email; const names = values.name
-    // createUserWithEmailAndPassword(auth,values.email,values.password).then(res=>{console.log(res);dispatch(SignupFunctionSuccess({names,emails})); navigate("/Login");
-    // swal("Signup Success", "You are redirected to Login Page!", "success") ;} )
-
-          .catch(err=>console.log(err));
-  
-          Setclose(false)
-          actions.resetForm()
+       
+        swal("address added Successfully", "you are being redirected to payments page" , "success"); navigate("/payment") 
       }
   })
       
@@ -62,7 +56,7 @@ const Address = () => {
  <Flex  justifyContent="center"  flexDirection={["column","column","row","row"  ]} >
  <VStack  margin="auto" mt="20px" as="form" border="1px solid black" onSubmit={formik.handleSubmit}  p={5}   width={[ "90%","90%","400px","500px"]} >
   
-{/* <Text>Contact details</Text> */}
+
 
  
 
@@ -121,19 +115,18 @@ const Address = () => {
 
 <Flex mt={[ "10px","10px","20px", "20px" ]}   alignItems="center"   >
     <Stack  mt="5px" mr="10px"    >
-  <FormControl isInvalid={formik.errors.gender && formik.touched.gender } > 
+  <FormControl isInvalid={formik.errors.save && formik.touched.save } > 
   <Checkbox name="save"  colorScheme='red' value="true" border="0px solid black" defaultChecked    onChange={formik.handleChange} onBlur={formik.handleBlur}   >
     
   </Checkbox>
-  <FormErrorMessage>{formik.errors.gender}</FormErrorMessage> 
+  <FormErrorMessage>{formik.errors.save}</FormErrorMessage> 
   </FormControl> 
  
 </Stack>  
 <Text display="block" >Mark this as Default Address</Text> 
     </Flex>
 
-{/* <Button type="submit" bgColor="blue.100" disabled={close} _hover={{color:"white"}} >A</Button> */}
-<Button type="submit" mt="20px" width="100%" bgColor={"#ff3f6c"} color="white" cursor="pointer"  _hover={{bgColor:"#ff3f6c"}} >Add Address</Button>
+<Button type="submit" mt="20px" width="100%" bgColor={"#ff3f6c"} color="white" cursor="pointer"  _hover={{bgColor:"#ff3f6c"}}  >Add Address</Button>
     </VStack>
     <VStack margin="0 auto" ml={[ "","","60px","100px"]} width={[ "90%","90%","300px","400px"]}  padding="20px" >
     <FormLabel mt="20px" >Price Details</FormLabel>

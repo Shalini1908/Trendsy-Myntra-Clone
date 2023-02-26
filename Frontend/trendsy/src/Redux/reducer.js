@@ -1,8 +1,10 @@
+
 import {
   GET_PRODUCTS_ERROR,
   GET_PRODUCTS_LOADING,
   GET_PRODUCTS_SUCCESS,
   GET_SINGLE_SUCCESS,
+  LoginSuccess
 } from "./action.types";
 
 const initialState = {
@@ -10,6 +12,8 @@ const initialState = {
   error: false,
   data: [],
   singleData: [],
+  isAuth:false,
+  name:""
 };
 
 export const ProductReducer = (state = initialState, { type, payload }) => {
@@ -43,7 +47,10 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
         singleData: payload,
       };
     }
-    default: {
+    case LoginSuccess:{
+      return{...state,isAuth:true,name:payload.name}
+    }
+      default: {
       return state;
     }
   }
