@@ -28,7 +28,7 @@ export default function AdminSignin() {
       pass,
     };
 
-    fetch("https://wild-red-bunny-tux.cyclic.app//admin/login", {
+    fetch("https://zany-bikini-bass.cyclic.app/admin/login", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {
@@ -137,7 +137,7 @@ export default function AdminSignin() {
 
 //   const handleSubmit = async()=>{
 
-//     let {data} =  await axios.post("https://wild-red-bunny-tux.cyclic.app/admin/login",form)
+//     let {data} =  await axios.post("https://zany-bikini-bass.cyclic.app/admin/login",form)
    
 //     localStorage.setItem("admindata",JSON.stringify(data))
 //     // localStorage.setItem("token",data.token)

@@ -46,7 +46,7 @@ const Inventory = () => {
 
   async function fetchData() {
     let res = await axios.get(
-      `https://wild-red-bunny-tux.cyclic.app/data?limit=10&page=${page}`,
+      `https://zany-bikini-bass.cyclic.app/data?limit=10&page=${page}`,
       {
         headers: {
           Authorization: JSON.parse(localStorage.getItem("token")),
@@ -72,7 +72,7 @@ const Inventory = () => {
 
   const DeleteProduct = (ID) => {
  
-    fetch(`https://wild-red-bunny-tux.cyclic.app/data/${ID}`, {
+    fetch(`https://zany-bikini-bass.cyclic.app/data/${ID}`, {
       method: "DELETE",
       headers: {
         Authorization: JSON.parse(localStorage.getItem("token")),
@@ -89,7 +89,7 @@ const Inventory = () => {
       is_in_stock
     };
     let res = await axios.patch(
-      `https://wild-red-bunny-tux.cyclic.app/data/${ID}`,
+      `https://zany-bikini-bass.cyclic.app/data/${ID}`,
       payload
     );
     console.log(res);
@@ -99,7 +99,7 @@ const Inventory = () => {
 
   const handleQuery = useCallback((search) => {
     if (search) {
-      const url = `https://wild-red-bunny-tux.cyclic.app/data/search?q=${search}`;
+      const url = `https://zany-bikini-bass.cyclic.app/data/search?q=${search}`;
       axios
         .get(url)
         .then((res) => {

@@ -71,7 +71,7 @@ const Signup = () => {
 
       //  console.log(payload)
 
-      fetch("https://wild-red-bunny-tux.cyclic.app/user/register", {
+      fetch("https://zany-bikini-bass.cyclic.app/user/register", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {

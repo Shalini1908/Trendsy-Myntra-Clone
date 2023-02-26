@@ -41,7 +41,7 @@ console.log(name,isAuth)
 
       //  console.log(payload)
 
-      fetch("https://wild-red-bunny-tux.cyclic.app/user/login", {
+      fetch("https://zany-bikini-bass.cyclic.app/user/login", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -71,7 +71,7 @@ console.log(name,isAuth)
       pass
     }
 
-    fetch("https://wild-red-bunny-tux.cyclic.app/user/login1", {
+    fetch("https://zany-bikini-bass.cyclic.app/user/login1", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {

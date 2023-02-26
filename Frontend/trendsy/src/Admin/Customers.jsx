@@ -22,7 +22,7 @@ import {
    
     
     async function fetchData() {
-      let res = await axios.get(`https://wild-red-bunny-tux.cyclic.app/user` );
+      let res = await axios.get(`https://zany-bikini-bass.cyclic.app/user` );
       console.log("user",res.data);
       setData(res.data);
 

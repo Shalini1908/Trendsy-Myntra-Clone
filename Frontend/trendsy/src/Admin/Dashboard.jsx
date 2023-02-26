@@ -30,7 +30,7 @@ export const Dashboard = () => {
   useEffect(() => {
     async function userData() {
       let res = await axios.get(
-        `https://wild-red-bunny-tux.cyclic.app/user`,
+        `https://zany-bikini-bass.cyclic.app/user`,
         );
 
       // console.log(res.data.length);

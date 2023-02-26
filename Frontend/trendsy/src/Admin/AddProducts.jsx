@@ -30,7 +30,7 @@ const AddProducts = () => {
       is_in_stock,
     };
     let res = await axios.post(
-      `https://wild-red-bunny-tux.cyclic.app/data/create`,
+      `https://zany-bikini-bass.cyclic.app/data/create`,
       payload
     );
     console.log(res);
