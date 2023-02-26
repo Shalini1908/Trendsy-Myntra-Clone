@@ -5,7 +5,7 @@ import {
   GET_PRODUCTS_ERROR,
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-   LoginSuccess
+   LoginSuccess,
    GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
@@ -95,4 +95,3 @@ export const getProducts = (Q) => (dispatch) => {
 //         console.log(err.message);
 //       });
 //   };
-

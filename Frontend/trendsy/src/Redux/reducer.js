@@ -7,7 +7,7 @@ import {
    GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
-} from "./action.types";
+} from "./action.type";
 
 
 const initialState = {
@@ -64,7 +64,7 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
       };
     }
     case LoginSuccess:{
-      return{...state,isAuth:true,name:payload.name}
+      return{...state,isAuth:true}
     }
       default: {
       return state;
