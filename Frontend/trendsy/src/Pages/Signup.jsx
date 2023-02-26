@@ -21,13 +21,17 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import swal from "sweetalert";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginFunctionSuccess } from '../Redux/actions'
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
+  const dispatch = useDispatch()
   const [num, Setnum] = useState("");
   const [pass, Setpass] = useState("");
   const [name, Setname] = useState("");
   const [email, Setemail] = useState("");
   const [gender, Setgender] = useState("");
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -78,7 +82,7 @@ const Signup = () => {
 
         .then((res) => {
           localStorage.setItem("trendsyToken", res.token);
-          console.log(res);
+          console.log(res);dispatch(LoginFunctionSuccess({name:values.name}));
           {
             res.Msg == "user already present"
               ? swal("user already present")
@@ -87,7 +91,7 @@ const Signup = () => {
                   "you are being redirected",
                   "success"
                 );
-          }
+          }; navigate("/")
         })
         .catch((err) => console.log(err));
     },

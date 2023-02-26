@@ -1,7 +1,10 @@
 import { Box, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 
+
+
 const posterData = [
+
   {
     heading: 'DEAL OF THE DAY',
     images: [
@@ -118,6 +121,8 @@ const posterData = [
 // TRENDING OUTFITS BY INFLUENCERS
 
 const Posters = () => {
+
+  
   return (
     <Box m="15px">
       {posterData.map((ele, i) => (

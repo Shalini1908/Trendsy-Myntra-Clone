@@ -1,19 +1,27 @@
 import { Box, Button, FormControl, Heading, Input, InputGroup, InputLeftElement, Text, VStack, FormErrorMessage,Image } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { PhoneIcon } from '@chakra-ui/icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate ,Link} from 'react-router-dom'
 import * as yup from "yup"
 import { useFormik } from 'formik'
 import swal from 'sweetalert';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginFunctionSuccess } from '../Redux/actions'
 
 const Login = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [num, Setnum] = useState("")
   const [pass, Setpass] = useState("")
   const [seen, Setseen] = useState(true)
 
-
-
+  const name =  useSelector((store)=>
+  store.name
+ )
+ const isAuth =  useSelector((store)=>
+ store.isAuth
+)
+console.log(name,isAuth)
   const formik = useFormik({
 
     initialValues: {
@@ -44,7 +52,8 @@ const Login = () => {
       }).then(res => res.json())
 
 
-        .then(res => { res.msg === "Login successfull" ? localStorage.setItem("num", res.num) : navigate("/signup"); Setseen(false) })
+        .then(res => { res.msg === "Login successfull" ? localStorage.setItem("num", res.num) : navigate("/signup");Setseen(false) 
+       })
 
         .catch(err => console.log(err))
 
@@ -69,7 +78,7 @@ const Login = () => {
         "Content-type": "application/json"
       },
     }).then(res => res.json())
-      .then(res => { localStorage.setItem("trendsyToken", res.token); console.log(res); swal("login Successfull", "you are being redirected" , "success") })
+      .then(res => { localStorage.setItem("trendsyToken", res.token);dispatch(LoginFunctionSuccess()); console.log(res); swal("login Successfull", "you are being redirected" , "success");navigate("/") })
       .catch(err => console.log(err))
 
   }
@@ -97,10 +106,10 @@ const Login = () => {
           <Text mt="10px" >By continuing, I agree to the <span style={{ color: "#ff3f6c" }} >  Terms of Use</span> &  <span style={{ color: "#ff3f6c" }} >Privacy policy</span></Text>
 
 
-          <Button mt="20px" onClick={formik.handleSubmit}    width={["85%","90%","90%","100%"]} color={"white"} bg="#ff3f6c" _hover={{ bgColor: "#ff3f6c", color: "white" }} >Continue</Button>
+          <Button mt="20px" onClick={formik.handleSubmit} width="100%" bg="pink.500" _hover={{ bgColor: "pink.500", color: "white" }} >Continue</Button>
 
 
-          <Button mt="20px"    width={["85%","90%","90%","100%"]} bg="#ff3f6c"   color={"white"}  _hover={{ bgColor: "#ff3f6c", color: "white" }} onClick={() => Setseen(false)} >Sign in as Admin</Button>
+         <Link to="/adminsignin" >  <Button mt="20px" width="100%" bg="pink.500" _hover={{ bgColor: "pink.500", color: "white" }}  >Sign in as Admin</Button> </Link>
 
         </Box>
       </Box>
@@ -123,7 +132,7 @@ const Login = () => {
             <Text mt="10px" >By continuing, I agree to the <span style={{ color: "#ff3f6c" }} >  Terms of Use</span> &  <span style={{ color: "#ff3f6c" }} >Privacy policy</span></Text>
           </Box>
 
-          <Button mt="20px" onClick={finalLogin}    width={["85%","90%","90%","100%"]} color={"white"} backgroundColor="#ff3f6c" _hover={{ bgColor: "#ff3f6c", color: "white" }} cursor={"pointer"}>Continue</Button>
+          <Button mt="20px" onClick={finalLogin} width="100%" bg="pink.500" _hover={{ bgColor: "pink.500", color: "white" }} >Continue</Button>
 
 
 

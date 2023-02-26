@@ -1,21 +1,29 @@
 import {
   GET_PRODUCTS_ERROR,
-  GET_PRODUCTS_LOADING,
+  GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
-  GET_SINGLE_SUCCESS,
-} from "./action.types";
+  LoginSuccess,
+  GET_TOTAL_PRODUCTS_ERROR,
+  GET_TOTAL_PRODUCTS_REQUEST,
+  GET_TOTAL_PRODUCTS_SUCCESS,
+  POST_ADDTOCART_REQUEST,
+  POST_ADDTOCART_SUCCESS,
+  POST_ADDTOCART_ERROR,
+} from "./action.type";
 
 const initialState = {
-  loading: false,
-  error: false,
-  data: [],
-  singleData: [],
+  isLoading: false,
+  isError: false,
+  products: [],
+  TotalData: [],
+  isAuth: false,
+  name: "",
+  cart: [],
 };
 
 export const ProductReducer = (state = initialState, { type, payload }) => {
-  console.log(type, payload);
   switch (type) {
-    case GET_PRODUCTS_LOADING: {
+    case GET_PRODUCTS_REQUEST: {
       return {
         ...state,
         loading: true,
@@ -26,7 +34,7 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        data: payload,
+        products: payload,
       };
     }
     case GET_PRODUCTS_ERROR: {
@@ -36,11 +44,49 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
         error: true,
       };
     }
-    case GET_SINGLE_SUCCESS: {
+    case GET_TOTAL_PRODUCTS_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case GET_TOTAL_PRODUCTS_SUCCESS: {
       return {
         ...state,
         loading: false,
-        singleData: payload,
+        TotalData: payload,
+      };
+    }
+    case GET_TOTAL_PRODUCTS_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    }
+    case LoginSuccess: {
+      return { ...state, isAuth: true };
+    }
+    case POST_ADDTOCART_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case POST_ADDTOCART_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        cart: [...state.cart, payload],
+      };
+    }
+    case POST_ADDTOCART_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true,
       };
     }
     default: {

@@ -52,50 +52,55 @@ dataroutes.post("/create", async (req, res) => {
 // for other all get request parameters and all sorting
 dataroutes.get("/", async (req, res) => {
   const {
-    ideal,
-    cat1,
-    cat2,
-    cat3,
+    category,
     brand,
-    lsprice,
-    gtprice,
-    color,
+    colors,
+    minPrice,
+    maxPrice,
+    size,
+    ideal,
     limit,
     page,
     sortBy,
   } = req.query;
-
   const query = {};
-  if (ideal) query.ideal_for = ideal;
-  // for categories
-  if (cat1 && cat2 && cat3) {
-    query.product_type = { or: [cat1, cat2, cat3] };
-  } else if (cat1 && cat2) {
-    query.product_type = { or: [cat1, cat2] };
-  } else if (cat1) {
-    query.product_type = cat1;
+  if (ideal) {
+    query.ideal_for = ideal;
   }
 
-  if (brand) query.brand = brand;
-  if (lsprice && gtprice) {
-    query.variant_price = { $lte: lsprice, $gte: gtprice };
+  if (brand) {
+    query.brand = { $in: brand };
   }
-  if (color) query.actual_color = color;
-  // Pagination code
-  const pageNo = parseInt(page, 10) || 1;
-  const setlimit = parseInt(limit, 10) || 15;
-  // sorting code
+
+  if (category) {
+    query.product_type = { $in: category };
+  }
+
+  if (colors) {
+    query.actual_color = { $in: colors };
+  }
+
+  if (size) {
+    query.size = { $in: size };
+  }
+
+  if (minPrice && maxPrice) {
+    query.variant_price = { $gte: minPrice, $lte: maxPrice };
+  }
+
   const sort = {};
+  const pageNumber = page || 1;
+  const pageLimit = limit || 20;
+  const pagination = pageNumber * pageLimit - pageLimit || 0;
   if (sortBy) {
-    const parts = sortBy.split(":");
-    // console.log(sort\);
-    sort.variant_price = parts[0] === "desc" ? -1 : 1;
+    sort["variant_price"] = sortBy === "asc" ? 1 : "dsc" ? -1 : "" || 1;
   }
+
   try {
     const data = await DataModel.find(query)
-      .skip((pageNo - 1) * setlimit)
-      .limit(setlimit)
-      .sort(sort);
+      .sort(sort)
+      .skip(pagination)
+      .limit(pageLimit);
     if (data) {
       res.send(data);
     } else {
