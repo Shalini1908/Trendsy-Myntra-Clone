@@ -7,7 +7,7 @@ import {
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
 
-  SET_CART_TOTALS
+  SET_CART_TOTALS,
 
   POST_ADDTOCART_REQUEST,
   POST_ADDTOCART_SUCCESS,
@@ -31,7 +31,7 @@ const initialState = {
     fee: 0,
     total_Amount: 0,
   }
-
+,
   isAuth: false,
   name: "",
   cart: [],
@@ -108,6 +108,7 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
     }
 
     case SET_CART_TOTALS: {
+      console.log(payload)
       return {
         ...state,
        

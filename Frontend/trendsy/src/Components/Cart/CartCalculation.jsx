@@ -13,7 +13,8 @@ import {
 import React, { useCallback, useEffect, useState } from "react";
 import { RiCoupon3Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setCartTotalS } from "../../Redux/actions";
 const initialCartTotals = {
   total: 0,
   discount: 0,
@@ -23,6 +24,7 @@ const initialCartTotals = {
   total_Amount: 0,
 };
 const CartCalculation = ({ cart }) => {
+  const dispatch = useDispatch()
   const [cartTotals, setCartTotals] = useState(initialCartTotals);
 const [clear,setClear]=useState("black")
 const navigate=useNavigate()
@@ -68,10 +70,12 @@ const toast = useToast();
     // Change the background color of the button to red
   }, []);
 
-  const handleSubmit=()=>{
+  const handleSubmit= async  ()=>{
     
-    if(cartTotals.total){
-      setCartTotals(cartTotals)
+     if(cartTotals.total){
+     dispatch(setCartTotalS(cartTotals))
+  
+    // console.log(cartTotals)
       navigate("/address")
     }else{
     

@@ -19,14 +19,6 @@ import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 
 
-
-import { FaRegUser } from 'react-icons/fa';
-import { GrFavorite } from 'react-icons/gr';
-import { HiOutlineShoppingBag } from 'react-icons/hi';
-import logo from '../Images/Trendsy-1.png';
-import Dropdown from './Dropdown';
-import { Link } from 'react-router-dom';
-
 import Search from './Search';
 import { useSelector } from 'react-redux';
 

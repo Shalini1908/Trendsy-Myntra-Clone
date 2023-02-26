@@ -12,6 +12,7 @@ import Graph from "../Admin/Graph";
 import Admin from "../Admin/Admin";
 import Address from "../Pages/Address";
 import Payment from "../Pages/Payment";
+import Cart from "../Pages/Cart";
 
 const AllRoutes = () => {
   return (
@@ -23,7 +24,7 @@ const AllRoutes = () => {
         <Route path="/adminsignin" element={<AdminSignin/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<Signup/>}></Route>
-
+        <Route path="/cart" element={<Cart/>}></Route>
         <Route path="/products/:Q" element={<Products />}></Route>
         <Route
           path="/products/:Q/:title/:_id"
