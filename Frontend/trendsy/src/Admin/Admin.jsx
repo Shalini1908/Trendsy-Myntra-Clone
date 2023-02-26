@@ -1,21 +1,14 @@
+import React from "react";
+import AdminNavSide from "../Admin/AdminNavSide";
 
-import React from 'react';
-import AdminNavSide from '../Admin/AdminNavSide';
-
-
-
-import "./css/Admin.css"
+import "./css/Admin.css";
 
 const Admin = () => {
   return (
-  <>
+    <>
+      <AdminNavSide />
+    </>
+  );
+};
 
-
-<AdminNavSide/>
-
-
-  </>
-  )
-}
-
-export default Admin
+export default Admin;

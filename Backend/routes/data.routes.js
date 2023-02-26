@@ -4,15 +4,15 @@ const dataroutes = express.Router();
 // for serach parameter get request parameters
 dataroutes.get("/search", async (req, res) => {
   const { q } = req.query;
-  const titel = {};
+  const title = {};
   const brand = {};
   const type = {};
   if (q) {
-    titel.titel = new RegExp(q, "i");
+    title.title = new RegExp(q, "i");
     brand.brand = new RegExp(q, "i");
     type.product_type = new RegExp(q, "i");
   }
-  const query = { $or: [titel, brand, type] };
+  const query = { $or: [title, brand, type] };
   try {
     const data = await DataModel.find(query);
     res.send(data);
@@ -21,8 +21,21 @@ dataroutes.get("/search", async (req, res) => {
   }
 });
 
+//for add products
+
+dataroutes.post("/create", async (req, res) => {
+  try {
+      const data = new DataModel(req.body)
+      await data.save()
+      res.send({ "msg": "Product has been added" })
+  } catch (err) {
+      res.send({ "msg": "Product is not added" })
+  }
+})
+
+
 // for other all get request parameters and all sorting
-dataroutes.get("/alldata", async (req, res) => {
+dataroutes.get("/", async (req, res) => {
   const {
     ideal,
     cat1,
