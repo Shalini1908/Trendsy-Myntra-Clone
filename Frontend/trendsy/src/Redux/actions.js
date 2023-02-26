@@ -8,9 +8,14 @@ import {
   GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
+
+  SET_CART_TOTALS,
+
+
   POST_ADDTOCART_REQUEST,
   POST_ADDTOCART_SUCCESS,
   POST_ADDTOCART_ERROR,
+
 } from "./action.type";
 
 export const productsGetRequestAction = () => {
@@ -69,8 +74,17 @@ export const getProducts = (Q) => (dispatch) => {
     });
 };
 
-// export const AddToCart = (data) => (dispatch) => {
-//   dispatch(addToCartPostRequestAction());
+
+export const setCartTotalS = (payload)=>{
+  console.log(payload)
+  return{
+      type:SET_CART_TOTALS , payload
+  }
+}
+
+// export const AddToCart = (_id) => (dispatch) => {
+//   dispatch(totalProductsGetRequestAction());
+
 //   axios
 //     .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data)
 //     .then((res) => {

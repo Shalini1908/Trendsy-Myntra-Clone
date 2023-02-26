@@ -18,7 +18,10 @@ import logo from "../Images/Trendsy-1.png";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 
-import Search from "./Search";
+
+import Search from './Search';
+import { useSelector } from 'react-redux';
+
 const navColor = {
   men: "tomato",
   women: "pink.700",
@@ -28,6 +31,8 @@ const navColor = {
 };
 
 const Navbar = () => {
+
+  //const {isAuth,name}=useSelector((store)=>store.ProductReducer)
   const [dropdown, setdropdown] = useState({
     status: false,
     category: "beauty",
@@ -35,8 +40,11 @@ const Navbar = () => {
 
   const [hover, setHover] = useState(false);
 
-  const isAuth = false;
-  const handleNav = (category) => {
+
+   const isAuth = false;
+   const name=""
+  const handleNav = category => {
+
     const newDropdown = { status: true, category: category };
     setdropdown(newDropdown);
   };
@@ -56,19 +64,23 @@ const Navbar = () => {
           <Image w="80px" src={logo} alt="Trendsy" />
         </Box>
 
-        <HStack fontWeight="600" position="relative">
+        <HStack fontWeight="600" position="relative"  fontSize={[ "5px","7px","10px","xs",'sm']}>
           {Object.keys(navColor).map((category, i) => (
             <Link to={`/products/${category}`}>
             <Text
               key={700 + i}
-              fontSize={"sm"}
-              p="30px 10px"
+
+             
+              p={["10px 5px","20px 7px","30px 10px"]}
+
+            
               onMouseEnter={() => handleNav(category)}
             >
               {category.toUpperCase()}
             </Text>
             </Link>
           ))}
+<<<<<<< HEAD
           <Text
             fontSize={"sm"}
             p="30px 10px"
@@ -79,11 +91,20 @@ const Navbar = () => {
             //   'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
             // }
           >
+=======
+
+          <Text  p="30px 10px" onMouseEnter={handleDropdown}  color={"#3e4152"}
+            fontWeight={750}
+            fontFamily={
+              'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
+            }>
+>>>>>>> 83e1e928aae6f7a18898875822f98f76ffa2b39b
             STUDIO
           </Text>
           <Text
-            fontSize="9px"
+            fontSize={["4px","6px","8px","9px"]}
             color="#ff7494"
+
             fontWeight="900"
             position="absolute"
             top="25px"
@@ -92,22 +113,22 @@ const Navbar = () => {
             NEW
           </Text>
         </HStack>
-        <Box onMouseLeave={() => setHover(false)}>
+        <Box onMouseLeave={() => setHover(false)} W={["200px","300px","500px"]}>
           <Search />
         </Box>
 
-        <HStack spacing="25px">
+        <HStack spacing={["10px","15px","25px"]}>
           <VStack onMouseEnter={() => setHover(true)}>
             {!isAuth ? (
               <FaRegUser />
             ) : (
               <Avatar
                 size="sm"
-                name="Ryan Florence"
-                src="https://bit.ly/ryan-florence"
+                name={name||"MK"}
+                // src="https://bit.ly/ryan-florence"
               />
             )}
-            <Text fontSize="12px" fontWeight="700">
+            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
               Profile
             </Text>
             {hover && (
@@ -139,14 +160,14 @@ const Navbar = () => {
           </VStack>
           <VStack onMouseLeave={() => setHover(false)}>
             <GrFavorite />
-            <Text fontSize="12px" fontWeight="700">
+            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
               Wishlist
             </Text>
           </VStack>
           <Link to="/cart">
           <VStack>
             <HiOutlineShoppingBag />
-            <Text fontSize="12px" fontWeight="700">
+            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
               Bag
             </Text>
           </VStack>

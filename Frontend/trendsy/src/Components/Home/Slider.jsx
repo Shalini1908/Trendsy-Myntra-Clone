@@ -22,28 +22,31 @@ const posters = {
 const Slider = () => {
   const [active, setActive] = useState(0);
 
-  console.log(active);
+ 
 
-  const handleImage = () => {
-    const totalPoster = Object.keys(posters).length - 1;
-    console.log(totalPoster);
-    if (totalPoster > active) {
-      setActive(active => active + 1);
-    } else {
-      setActive(0);
-    }
-    console.log(active);
-  };
+  // const handleImage = () => {
+  //   const totalPoster = Object.keys(posters).length - 1;
+  //   console.log(totalPoster);
+  //   totalPoster  > active?   setActive(active => active + 1):  setActive((active)=>0);
+  //   console.log(active);
+   
+  // };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      handleImage();
+    const totalPoster = Object.keys(posters).length - 1;
+    console.log(totalPoster);
+    const intervalId = setTimeout(async() => {
+      
+     
+      totalPoster  > active?   setActive(active => active + 1):  setActive((active)=>0);
+      console.log(active);
+     
     }, 5000);
 
     return () => {
       clearInterval(intervalId); // Clear the interval when the component unmounts
     };
-  }, []);
+  }, [active]);
 
   return (
     <Box m="50px 0px">
@@ -52,6 +55,7 @@ const Slider = () => {
         <HStack>
           {Object.keys(posters).map((poster, i) => (
             <Image
+            key={i+1256}
               src={posters[poster]}
               alt={poster}
               display={i == active ? 'block' : 'none'}
@@ -60,9 +64,10 @@ const Slider = () => {
           ))}
         </HStack>
       </SlideFade>
-      <HStack justify="center" m="10px">
+      <HStack justify="center" m="10px" cursor="pointer">
         {Object.keys(posters).map((el, i) => (
           <Circle
+          key={i+4561}
             size="10px"
             bg={i == active ? 'blackAlpha.600' : 'blackAlpha.300'}
             color="white"

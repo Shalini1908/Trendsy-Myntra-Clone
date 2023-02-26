@@ -7,7 +7,11 @@ import Footer from '../Components/Footer'
 const Home = () => {
   return (
     <Box>
+<<<<<<< HEAD
         <Navbar/>
+=======
+      <Navbar/>
+>>>>>>> 83e1e928aae6f7a18898875822f98f76ffa2b39b
       <Slider/>
       <Posters/>
       <Footer/>
