@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import { BiFilterAlt } from "react-icons/bi";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CheckBoxBrands } from "./CheckBoxBrands";
 import { CheckBoxCategory } from "./CheckBoxCategory";
@@ -40,6 +41,28 @@ export const FiltersDrawer = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
+
+  const { products, isLoading, TotalData } = useSelector((store) => {
+    return {
+      products: store.products,
+      isLoading: store.isLoading,
+      TotalData: store.TotalData,
+    };
+  });
+
+  const collections = (data, name) => {
+    const unique = [];
+
+    data.forEach((item) => {
+      if (!unique.includes(item[name])) {
+        unique.push(item[name]);
+      }
+    });
+
+    const newArr = unique.filter((str) => str !== "");
+
+    return newArr;
+  };
 
   return (
     <>
@@ -112,51 +135,27 @@ export const FiltersDrawer = ({
                 />
 
                 <CheckBoxCategory
-                  options={[
-                    "Tshirts",
-                    "Shirts",
-                    "Kurtas",
-                    "Dress",
-                    "Trausers",
-                    "Kurta sets",
-                  ]}
+                  options={collections(TotalData, "product_type")}
                   name={"Category"}
                   setCategory={setCategory}
                   category={category}
                 />
 
                 <CheckBoxBrands
-                  options={[
-                    "Roadster",
-                    "Tommy Hilfiger",
-                    "Jack & Jones",
-                    "WROGN",
-                    "max",
-                    "HERE&NOW",
-                    "HRX",
-                    "U.S. Polo Assn.",
-                  ]}
+                  options={collections(TotalData, "brand")}
                   name={"Brands"}
                   setBrands={setBrands}
                   brands={brands}
                 />
 
                 <CheckBoxColors
-                  options={[
-                    "Black",
-                    "Navy Blue",
-                    "Blue",
-                    "White",
-                    "Green",
-                    "Maroon",
-                    "Mustard",
-                  ]}
+                  options={collections(TotalData, "actual_color")}
                   name={"Colors"}
                   setColors={setColors}
                   colors={colors}
                 />
 
-                <CheckBoxPrice
+                {/* <CheckBoxPrice
                   options={[
                     "Rs.149 to Rs.500",
                     "Rs.500 to Rs.999",
@@ -169,7 +168,7 @@ export const FiltersDrawer = ({
                   ]}
                   setPrice={setPrice}
                   price={price}
-                />
+                /> */}
               </Stack>
             </Stack>
           </DrawerBody>
