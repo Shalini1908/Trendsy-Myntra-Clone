@@ -32,7 +32,7 @@ const navColor = {
 
 const Navbar = () => {
 
-  //const {isAuth,name}=useSelector((store)=>store.ProductReducer)
+  const {isAuth,name}=useSelector((store)=>store)
   const [dropdown, setdropdown] = useState({
     status: false,
     category: "beauty",
@@ -41,8 +41,8 @@ const Navbar = () => {
   const [hover, setHover] = useState(false);
 
 
-   const isAuth = false;
-   const name=""
+  //  const isAuth = false;
+  //  const name=""
   const handleNav = category => {
 
     const newDropdown = { status: true, category: category };
