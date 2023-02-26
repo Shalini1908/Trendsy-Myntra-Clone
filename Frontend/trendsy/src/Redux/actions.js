@@ -45,18 +45,18 @@ export const getProducts = (Q) => (dispatch) => {
     });
 };
 
-export const AddToCart = (_id) => (dispatch) => {
-  dispatch(totalProductsGetRequestAction());
-  axios
-    .get(`${process.env.REACT_APP_TRENDZY_ALL_DATA_URL}?ideal=${Q}&limit=200`)
-    .then((res) => {
-      dispatch(totalProductsGetSuccessAction(res.data));
-    })
-    .catch((err) => {
-      dispatch(totalProductsGetErrorAction());
-      console.log(err.message);
-    });
-};
+// export const AddToCart = (_id) => (dispatch) => {
+//   dispatch(totalProductsGetRequestAction());
+//   axios
+//     .get(`${process.env.REACT_APP_TRENDZY_ALL_DATA_URL}?ideal=${Q}&limit=200`)
+//     .then((res) => {
+//       dispatch(totalProductsGetSuccessAction(res.data));
+//     })
+//     .catch((err) => {
+//       dispatch(totalProductsGetErrorAction());
+//       console.log(err.message);
+//     });
+// };
 
 // export const getFilterProducts =
 //   (ideal) => (params) => (filterData) => (dispatch) => {
