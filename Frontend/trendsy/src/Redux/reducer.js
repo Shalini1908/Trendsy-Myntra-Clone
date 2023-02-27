@@ -79,7 +79,7 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
       };
     }
     case LoginSuccess: {
-      return { ...state, isAuth: true };
+      return { ...state, isAuth: true ,name:payload};
     }
 
     case LogoutSuccess: {

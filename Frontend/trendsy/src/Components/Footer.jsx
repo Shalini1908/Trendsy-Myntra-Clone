@@ -10,6 +10,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import React from 'react';
+import { shortID } from './short_key.generator';
 const onlineShoping = [
   'Men',
   ' Women',
@@ -110,7 +111,7 @@ const Footer = () => {
                 ONLINE SHOPPING
               </Heading>
               {onlineShoping.map((text, i) => (
-                <Text key={i} m="5px" fontSize="14px" color="gray">
+                <Text key={shortID ()} m="5px" fontSize="14px" color="gray">
                   {text}
                 </Text>
               ))}
@@ -120,7 +121,7 @@ const Footer = () => {
                 USEFUL LINKS
               </Heading>
               {useFulLink.map((text, i) => (
-                <Text key={i} m="5px" fontSize="14px" color="gray">
+                <Text key={shortID ()} m="5px" fontSize="14px" color="gray">
                   {text}
                 </Text>
               ))}
@@ -131,7 +132,7 @@ const Footer = () => {
               CUSTOMER POLICIES
             </Heading>
             {customerPolicies.map((text, i) => (
-              <Text key={i} m="5px" fontSize="14px" color="gray">
+              <Text key={shortID()} m="5px" fontSize="14px" color="gray">
                 {text}
               </Text>
             ))}
@@ -158,7 +159,7 @@ const Footer = () => {
             </Heading>
             <Flex gap="20px">
               {logoImages.map((image, i) => (
-                <Image w="25px" h="20px" src={image} alt={i} />
+                <Image key={shortID ()} w="25px" h="20px" src={image} alt={i} />
               ))}
             </Flex>
           </Box>
@@ -207,7 +208,7 @@ const Footer = () => {
         </Heading>
         <Box>
           {text.map((text, i) => (
-            <Box display="inline-flex" key={i} alignItems="center" gap="7px">
+            <Box display="inline-flex" key={shortID ()} alignItems="center" gap="7px">
               <Text color="gray">{text}</Text>
               <Text color="gray" fontSize="20px" fontWeight="600" pr="7px">
                 |

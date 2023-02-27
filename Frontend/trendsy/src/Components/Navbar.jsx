@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -18,11 +18,12 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../Images/Trendsy-1.png";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
-
+import {shortID } from "./short_key.generator"
 
 import Search from './Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutFunctionSuccess } from "../Redux/actions";
+import { getData } from "../api";
 
 const navColor = {
   men: "tomato",
@@ -66,6 +67,10 @@ const toast=useToast()
     });
   }
 
+  useEffect(()=>{
+dispatch(getData("/cart",[]))
+  },[])
+
   return (
     <Box
       boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px"}
@@ -82,7 +87,7 @@ const toast=useToast()
           {Object.keys(navColor).map((category, i) => (
             <Link to={`/products/${category}`}>
             <Text
-              key={700 + i}
+              key={shortID ()}
               fontWeight={750}
               p={["10px 5px","20px 7px","30px 10px"]}
               onMouseEnter={() => handleNav(category)}

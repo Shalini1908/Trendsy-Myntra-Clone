@@ -14,6 +14,7 @@ import { useThrottle } from '../Hooks/Throttle';
 import { getData } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { shortID } from './short_key.generator';
 
 const Search = () => {
   const dispatch=useDispatch()
@@ -34,7 +35,7 @@ const Search = () => {
    
     if(data.length>0){
     setShow(true)
-    console.log(data)
+  
     setSuggestion(data);
   }
   };
@@ -96,7 +97,7 @@ const Search = () => {
    const {ideal_for,title,_id}=result
     navigate(`/products/${ideal_for}/${title}/${_id}`);
   };
-  console.log(scrollDiv);
+  //console.log(scrollDiv);
   return (
     <HStack  pos="relative" onKeyUp={handleSuggetion} w="500px">
       <InputGroup>
@@ -132,7 +133,7 @@ const Search = () => {
             ref={element => (scrollDiv.current[i] = element)}
             bg={active === i ? 'blackAlpha.400' : 'white'}
             pb="4px"
-            key={i + 730}
+            key={shortID ()}
             cursor="pointer"
             onClick={() => handleSelection(result)}
             onMouseEnter={() => setActive(i)}

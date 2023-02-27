@@ -4,6 +4,7 @@ import Slider from "../Components/Home/Slider"
 import { Box } from '@chakra-ui/react'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
+import ScrollToTop from '../Components/ScrollToTop'
 const Home = () => {
   return (
     <Box>
@@ -11,6 +12,7 @@ const Home = () => {
       <Slider/>
       <Posters/>
       <Footer/>
+      <ScrollToTop/>
     </Box>
   )
 }
