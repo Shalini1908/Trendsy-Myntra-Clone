@@ -10,6 +10,7 @@ import {
   Button,
   Heading,
   useToast,
+  Circle,
 } from "@chakra-ui/react";
 
 import { FaRegUser } from "react-icons/fa";
@@ -43,7 +44,7 @@ const toast=useToast()
   });
 
   const [hover, setHover] = useState(false);
-
+  const [cartData, setCartData] = useState([]);
 
   
   const handleNav = category => {
@@ -68,7 +69,10 @@ const toast=useToast()
   }
 
   useEffect(()=>{
-dispatch(getData("/cart",[]))
+const data=dispatch(getData("/cart",[]))
+if(data){
+  setCartData(data)
+}
   },[])
 
   return (
@@ -79,15 +83,15 @@ dispatch(getData("/cart",[]))
       position="relative"
     >
       <Flex align="center" justify="space-around">
-        <Box ml="20px" onMouseEnter={handleDropdown}>
+       <Link to="/"><Box ml="20px" onMouseEnter={handleDropdown}>
           <Image w="80px" src={logo} alt="Trendsy" />
-        </Box>
+        </Box></Link> 
 
         <HStack fontWeight="600" position="relative"  fontSize={[ "5px","7px","10px","xs",'sm']}>
           {Object.keys(navColor).map((category, i) => (
-            <Link to={`/products/${category}`}>
+            <Link to={`/products/${category}`} key={shortID ()}>
             <Text
-              key={shortID ()}
+             
               fontWeight={750}
               p={["10px 5px","20px 7px","30px 10px"]}
               onMouseEnter={() => handleNav(category)}
@@ -168,12 +172,23 @@ dispatch(getData("/cart",[]))
             </Text>
           </VStack>
           <Link to="/cart">
-          <VStack>
-            <HiOutlineShoppingBag />
-            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
-              Bag
-            </Text>
-          </VStack>
+            <VStack position="relative" fontSize="12px">
+              <HiOutlineShoppingBag size="20px" />
+              {cartData.length && (
+                <Circle
+                  position="absolute"
+                  top="-15px"
+                  right="-10px"
+                  bg="tomato"
+                  color="white"
+                  size="20px"
+                  fontWeight="800"
+                >
+                  {cartData.length}
+                </Circle>
+              )}
+              <Text fontWeight="700">Bag</Text>
+            </VStack>
           </Link>
         </HStack>
       </Flex>
