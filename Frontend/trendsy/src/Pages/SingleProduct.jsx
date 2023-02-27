@@ -82,19 +82,19 @@ export const SingleProduct = () => {
   const handleAddToCart = (data) => {
     dispatch(addToCartPostRequestAction());
     axios
-      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`,data,{
-        headers:{
-         Authorization : JSON.parse(localStorage.getItem("token"))
-        }
+      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data, {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("trendsyToken")),
+        },
       })
       .then((res) => {
         console.log(res);
-        if(res.data="please login first"){
-          alert("please login first")
-        }else{
+        if (res.data == "please login first") {
+          alert("please login first");
+        } else {
+          alert("Product added successfully ");
           dispatch(addToCartPostSuccessAction(res.data));
         }
-   
       })
       .catch((err) => {
         dispatch(addToCartPostErrorAction());
@@ -111,8 +111,8 @@ export const SingleProduct = () => {
   // console.log(singleProduct);
   return (
     <>
-    <Navbar/>
-      <Box w={"100%"} >
+      <Navbar />
+      <Box w={"100%"}>
         <Stack
           w={"100%"}
           p={{ base: "15px", sm: "30px", md: "15px", lg: "25px" }}

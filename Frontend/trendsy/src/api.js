@@ -30,12 +30,14 @@ export const getData = (path, filter) => async (dispatch) => {
    
     return data
   }else if (path=="/cart"){ 
+
+    // console.log(  `${baseUrl}${path}`)
     let res = await axios.get(`${baseUrl}${path}`, {
       headers,
     });
     let data= await res.data
    console.log(data)
-   // return data
+   return data
 
   }
   } catch (err) {
