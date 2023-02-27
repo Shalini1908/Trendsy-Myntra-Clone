@@ -12,7 +12,7 @@ const baseUrl = process.env.REACT_APP_TRENDZY_BASE_URL;
 const token = localStorage.getItem("trendsyToken");
 
   const headers= {
-    Authorization: token,
+    Authorization: JSON.parse(token),
     "Content-Type": "application/json",
   };
 

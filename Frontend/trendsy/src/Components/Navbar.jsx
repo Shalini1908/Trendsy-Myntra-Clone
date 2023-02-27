@@ -19,10 +19,10 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../Images/Trendsy-1.png";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
-import {shortID } from "./short_key.generator"
+import { shortID } from "./short_key.generator";
 
-import Search from './Search';
-import { useDispatch, useSelector } from 'react-redux';
+import Search from "./Search";
+import { useDispatch, useSelector } from "react-redux";
 import { LogoutFunctionSuccess } from "../Redux/actions";
 import { getData } from "../api";
 
@@ -35,9 +35,9 @@ const navColor = {
 };
 
 const Navbar = () => {
-const dispatch=useDispatch()
-const toast=useToast()
-  const {isAuth,name}=useSelector((store)=>store)
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const { isAuth, name } = useSelector((store) => store);
   const [dropdown, setdropdown] = useState({
     status: false,
     category: "beauty",
@@ -46,9 +46,7 @@ const toast=useToast()
   const [hover, setHover] = useState(false);
   const [cartData, setCartData] = useState([]);
 
-  
-  const handleNav = category => {
-
+  const handleNav = (category) => {
     const newDropdown = { status: true, category: category };
     setdropdown(newDropdown);
   };
@@ -56,24 +54,26 @@ const toast=useToast()
     setdropdown({ ...dropdown, status: false });
   };
 
-  const handleLogout=()=>{
-    dispatch(LogoutFunctionSuccess())
+  const handleLogout = () => {
+    dispatch(LogoutFunctionSuccess());
     toast({
-      position: 'top',
-      title: 'Thanks, for using TRENDSY',
+      position: "top",
+      title: "Thanks, for using TRENDSY",
       description: "You are logged out",
-      status: 'info',
+      status: "info",
       duration: 3000,
       isClosable: true,
     });
-  }
+  };
 
-  useEffect(()=>{
-const data=dispatch(getData("/cart",[]))
-if(data){
-  setCartData(data)
-}
-  },[])
+  useEffect(() => {
+    dispatch(getData("/cart", [])).then((data) => {
+      // handle successful response
+      if (data) {
+        setCartData(data);
+      }
+    });
+  }, []);
 
   return (
     <Box
@@ -83,35 +83,43 @@ if(data){
       position="relative"
     >
       <Flex align="center" justify="space-around">
-       <Link to="/"><Box ml="20px" onMouseEnter={handleDropdown}>
-          <Image w="80px" src={logo} alt="Trendsy" />
-        </Box></Link> 
+        <Link to="/">
+          <Box ml="20px" onMouseEnter={handleDropdown}>
+            <Image w="80px" src={logo} alt="Trendsy" />
+          </Box>
+        </Link>
 
-        <HStack fontWeight="600" position="relative"  fontSize={[ "5px","7px","10px","xs",'sm']}>
+        <HStack
+          fontWeight="600"
+          position="relative"
+          fontSize={["5px", "7px", "10px", "xs", "sm"]}
+        >
           {Object.keys(navColor).map((category, i) => (
-            <Link to={`/products/${category}`} key={shortID ()}>
-            <Text
-             
-              fontWeight={750}
-              p={["10px 5px","20px 7px","30px 10px"]}
-              onMouseEnter={() => handleNav(category)}
-            >
-              {category.toUpperCase()}
-            </Text>
+            <Link to={`/products/${category}`} key={shortID()}>
+              <Text
+                fontWeight={750}
+                p={["10px 5px", "20px 7px", "30px 10px"]}
+                onMouseEnter={() => handleNav(category)}
+              >
+                {category.toUpperCase()}
+              </Text>
             </Link>
           ))}
 
-          <Text  p="30px 10px" onMouseEnter={handleDropdown}  color={"#3e4152"}
+          <Text
+            p="30px 10px"
+            onMouseEnter={handleDropdown}
+            color={"#3e4152"}
             fontWeight={750}
             fontFamily={
               'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
-            }>
+            }
+          >
             STUDIO
           </Text>
           <Text
-            fontSize={["4px","6px","8px","9px"]}
+            fontSize={["4px", "6px", "8px", "9px"]}
             color="#ff7494"
-
             fontWeight="900"
             position="absolute"
             top="25px"
@@ -120,22 +128,22 @@ if(data){
             NEW
           </Text>
         </HStack>
-        <Box onMouseLeave={() => setHover(false)} >
+        <Box onMouseLeave={() => setHover(false)}>
           <Search />
         </Box>
 
-        <HStack spacing={["10px","15px","25px"]}>
+        <HStack spacing={["10px", "15px", "25px"]}>
           <VStack onMouseEnter={() => setHover(true)}>
             {!isAuth ? (
               <FaRegUser />
             ) : (
               <Avatar
                 size="sm"
-                name={name||"MK"}
+                name={name || "MK"}
                 // src="https://bit.ly/ryan-florence"
               />
             )}
-            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
+            <Text fontSize={["7px", "10px", "12px"]} fontWeight="700">
               Profile
             </Text>
             {hover && (
@@ -158,7 +166,12 @@ if(data){
                     </Button>
                   </Link>
                 ) : (
-                  <Button variant="outline" size="sm" color="red" onClick={handleLogout}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    color="red"
+                    onClick={handleLogout}
+                  >
                     LOGOUT
                   </Button>
                 )}
@@ -167,7 +180,7 @@ if(data){
           </VStack>
           <VStack onMouseLeave={() => setHover(false)}>
             <GrFavorite />
-            <Text fontSize={[ "7px","10px","12px"]} fontWeight="700">
+            <Text fontSize={["7px", "10px", "12px"]} fontWeight="700">
               Wishlist
             </Text>
           </VStack>
