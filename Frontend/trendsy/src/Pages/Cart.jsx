@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import CartNav from "../Components/Cart/CartNav"
 import CartProducts from '../Components/Cart/CartProducts';
 import CartCalculation from '../Components/Cart/CartCalculation';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const cartData = [
   {
     _id: '63f5bd630df5745a1c6b7cac',
@@ -89,18 +91,19 @@ const cartData = [
 const numbers = [0 ,2, 7, 10, 15, 21, 30]
 
 const Cart = () => {
-  
-    
+  const {isAuth}=useSelector((store)=>store)
+    const navigate=useNavigate()
     const [cart,setCart]=useState([])
     const [data, setData] = useState([]);
    
-    
+    if(!isAuth){
+      navigate("/login")
+    }
     useEffect(() => {
       //console.log(cartData[0])
    const createdData =cartData.map((el,i)=>{
     return{...el,day:numbers[ Math.floor(Math.random() * numbers.length)]}
   })
-  
       setData(createdData)
       setCart(createdData);
     }, []);

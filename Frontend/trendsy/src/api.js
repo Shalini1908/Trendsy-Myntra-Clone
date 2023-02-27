@@ -9,27 +9,37 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_TRENDZY_BASE_URL;
 // console.log(baseUrl);
 
-const token=localStorage.getItem("trendsyToken");
+const token = localStorage.getItem("trendsyToken");
+
+  const headers= {
+    Authorization: token,
+    "Content-Type": "application/json",
+  };
+
+
 export const getData = (path, filter) => async (dispatch) => {
-   console.log(filter)
-
+  console.log(filter);
+  
   try {
+    if(path=="/data/search"){
+    let res = await axios.get(`${baseUrl}${path}`, {
+      headers,
+      params:filter
+    });
+    let data= await res.data
    
+    return data
+  }else if (path=="/cart"){ 
+    let res = await axios.get(`${baseUrl}${path}`, {
+      headers,
+    });
+    let data= await res.data
+   console.log(data)
+   // return data
 
-   
-      let res = await axios.get(`${baseUrl}${path}`, {
-        headers: {
-          'Authorization': token,
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log(res);
-      console.log(baseUrl);
-     
-    
+  }
   } catch (err) {
     console.log(err.message);
-  
   }
 };
 // const data=`[
@@ -346,12 +356,11 @@ export const postData = (path, data) => async (dispatch) => {
     //dispatch(getProductsRequestAction());
 
     if (typeof data === "object") {
-      let res = await axios.post(`${baseUrl}${path}`, data)
+      let res = await axios.post(`${baseUrl}${path}`, data);
       return await res.data;
-   
-  }
- } catch (err) {
+    }
+  } catch (err) {
     console.log(err.message);
-   //dispatch(getProductsFailureAction());
+    //dispatch(getProductsFailureAction());
   }
 };

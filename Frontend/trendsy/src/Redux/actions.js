@@ -5,17 +5,14 @@ import {
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
   LoginSuccess,
+  LogoutSuccess,
   GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
-
   SET_CART_TOTALS,
-
-
   POST_ADDTOCART_REQUEST,
   POST_ADDTOCART_SUCCESS,
   POST_ADDTOCART_ERROR,
-
 } from "./action.type";
 
 export const productsGetRequestAction = () => {
@@ -55,9 +52,22 @@ export const addToCartPostErrorAction = () => {
 };
 
 export const LoginFunctionSuccess = (payload) => {
+ if(payload.name)
   return {
     type: LoginSuccess,
-    payload,
+    payload:payload.name,
+  };
+  else{
+    return {
+      type: LoginSuccess,
+      payload:"",
+    };
+  }
+};
+
+export const LogoutFunctionSuccess = () => {
+  return {
+    type: LogoutSuccess,
   };
 };
 
@@ -74,13 +84,13 @@ export const getProducts = (Q) => (dispatch) => {
     });
 };
 
-
-export const setCartTotalS = (payload)=>{
-  console.log(payload)
-  return{
-      type:SET_CART_TOTALS , payload
-  }
-}
+export const setCartTotalS = (payload) => {
+  console.log(payload);
+  return {
+    type: SET_CART_TOTALS,
+    payload,
+  };
+};
 
 // export const AddToCart = (_id) => (dispatch) => {
 //   dispatch(totalProductsGetRequestAction());

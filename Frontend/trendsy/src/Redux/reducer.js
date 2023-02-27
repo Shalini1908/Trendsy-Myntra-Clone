@@ -3,16 +3,14 @@ import {
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_SUCCESS,
   LoginSuccess,
+  LogoutSuccess,
   GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
-
   SET_CART_TOTALS,
-
   POST_ADDTOCART_REQUEST,
   POST_ADDTOCART_SUCCESS,
   POST_ADDTOCART_ERROR,
-
 } from "./action.type";
 
 const initialState = {
@@ -21,21 +19,19 @@ const initialState = {
   products: [],
   TotalData: [],
 
-   isAuth:false,
-  name:"",
-  CartTotals : {
+  isAuth: false,
+  name: "",
+  CartTotals: {
     total: 0,
     discount: 0,
     coupen: 0,
     social: 0,
     fee: 0,
     total_Amount: 0,
-  }
-,
+  },
   isAuth: false,
   name: "",
   cart: [],
-
 };
 
 export const ProductReducer = (state = initialState, { type, payload }) => {
@@ -83,7 +79,11 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
       };
     }
     case LoginSuccess: {
-      return { ...state, isAuth: true };
+      return { ...state, isAuth: true ,name:payload};
+    }
+
+    case LogoutSuccess: {
+      return { ...state, isAuth: false };
     }
     case POST_ADDTOCART_REQUEST: {
       return {
@@ -108,17 +108,14 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
     }
 
     case SET_CART_TOTALS: {
-      console.log(payload)
+      console.log(payload);
       return {
         ...state,
-       
+
         CartTotals: payload,
       };
     }
-      default: {
-
-  
-
+    default: {
       return state;
     }
   }

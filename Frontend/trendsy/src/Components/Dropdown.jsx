@@ -406,7 +406,7 @@ const Dropdown = ({ category, color }) => {
               {dropDownData[category][subCategory][ele]}
             </Text>
           ))}
-          <Box border="0.01px solid gray" w="60%" m="5px 0px"   />
+          <Box  borderWidth="1px" w="60%" m="5px 0px"   />
         </Flex>
       ))}
     </Flex>

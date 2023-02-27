@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -9,6 +9,7 @@ import {
   Avatar,
   Button,
   Heading,
+  useToast,
 } from "@chakra-ui/react";
 
 import { FaRegUser } from "react-icons/fa";
@@ -17,10 +18,12 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import logo from "../Images/Trendsy-1.png";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
-
+import {shortID } from "./short_key.generator"
 
 import Search from './Search';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { LogoutFunctionSuccess } from "../Redux/actions";
+import { getData } from "../api";
 
 const navColor = {
   men: "tomato",
@@ -31,7 +34,8 @@ const navColor = {
 };
 
 const Navbar = () => {
-
+const dispatch=useDispatch()
+const toast=useToast()
   const {isAuth,name}=useSelector((store)=>store)
   const [dropdown, setdropdown] = useState({
     status: false,
@@ -41,8 +45,7 @@ const Navbar = () => {
   const [hover, setHover] = useState(false);
 
 
-  //  const isAuth = false;
-  //  const name=""
+  
   const handleNav = category => {
 
     const newDropdown = { status: true, category: category };
@@ -51,6 +54,22 @@ const Navbar = () => {
   const handleDropdown = () => {
     setdropdown({ ...dropdown, status: false });
   };
+
+  const handleLogout=()=>{
+    dispatch(LogoutFunctionSuccess())
+    toast({
+      position: 'top',
+      title: 'Thanks, for using TRENDSY',
+      description: "You are logged out",
+      status: 'info',
+      duration: 3000,
+      isClosable: true,
+    });
+  }
+
+  useEffect(()=>{
+dispatch(getData("/cart",[]))
+  },[])
 
   return (
     <Box
@@ -68,12 +87,9 @@ const Navbar = () => {
           {Object.keys(navColor).map((category, i) => (
             <Link to={`/products/${category}`}>
             <Text
-              key={700 + i}
-
-             
+              key={shortID ()}
+              fontWeight={750}
               p={["10px 5px","20px 7px","30px 10px"]}
-
-            
               onMouseEnter={() => handleNav(category)}
             >
               {category.toUpperCase()}
@@ -97,7 +113,7 @@ const Navbar = () => {
             NEW
           </Text>
         </HStack>
-        <Box onMouseLeave={() => setHover(false)} W={["200px","300px","500px"]}>
+        <Box onMouseLeave={() => setHover(false)} >
           <Search />
         </Box>
 
@@ -135,7 +151,7 @@ const Navbar = () => {
                     </Button>
                   </Link>
                 ) : (
-                  <Button variant="outline" size="sm" color="red">
+                  <Button variant="outline" size="sm" color="red" onClick={handleLogout}>
                     LOGOUT
                   </Button>
                 )}

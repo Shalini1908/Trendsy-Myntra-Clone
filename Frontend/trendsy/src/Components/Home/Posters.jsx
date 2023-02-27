@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
+import { shortID } from '../short_key.generator';
 
 const posterData = [
   {
@@ -283,7 +284,7 @@ const Posters = () => {
   
     <Box m="15px">
       {posterData.map((ele, i) => (
-        <Box key={1100 + i} al>
+        <Box key={shortID ()} al>
           {posterData[i].heading && (
             <Flex>
             <Heading fontSize="27px" m={'50px 0px 35px'} letterSpacing="5px">
@@ -301,7 +302,7 @@ const Posters = () => {
             spacing="15px"
           >
             {posterData[i].images.map((image, i) => (
-              <Box key={1200 + i * ele}>
+              <Box key={shortID ()}>
                 <Image src={image} alt={i} />
               </Box>
             ))}

@@ -23,6 +23,7 @@
     "recharts": "^2.4.3",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "shortid": "^2.2.16",
     "swal": "^0.1.0",
     "sweetalert": "^2.1.2",
     "yup": "^1.0.0"
