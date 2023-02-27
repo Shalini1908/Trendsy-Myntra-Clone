@@ -5,6 +5,7 @@ import {
   Tr,
   Th,
   Td,
+  Image,
   TableContainer,
   Input,
   CloseButton,
@@ -29,10 +30,12 @@ import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { useThrottle } from "./usethrottle";
 import Loader from "./Loader";
+import Trendsy from  "../../src/Images/trendsy.png"
 
 const Inventory = () => {
+
   const [data, setData] = useState();
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("");
   const [id, setID] = useState("");
@@ -43,6 +46,7 @@ const Inventory = () => {
   const [search, setSearch] = useState("");
   const [searchData, setsearchData] = useState([]);
   const [isloading, setIsloading] = useState(true);
+
 
   async function fetchData() {
     let res = await axios.get(
@@ -70,7 +74,7 @@ const Inventory = () => {
 
   console.log(searchData);
 
-  const DeleteProduct = (ID) => {
+  const DeleteProduct =(ID) => {
  
     fetch(`https://zany-bikini-bass.cyclic.app/data/${ID}`, {
       method: "DELETE",
@@ -157,7 +161,7 @@ const Inventory = () => {
                 <Th>PID</Th>
                 <Th>MRP(INR)</Th>
                 <Th>PRICE(INR)</Th>
-                {/* <Th>BRAND</Th> */}
+            
                 <Th>CATEGORY</Th>
                 <Th>STOCK</Th>
                 <Th>Edit</Th>
@@ -240,34 +244,45 @@ const Inventory = () => {
           </Table>
         </TableContainer>
 
-        <Button onClick={() => {setIsloading(true);setPage(page - 1);setIsloading(false)}}>Previous</Button>
-        <Button disabled>{page}</Button>
-        <Button onClick={() => {setIsloading(true);setPage(page + 1);setIsloading(false)}}>Next</Button>
+        <Button onClick={() => {setIsloading(true);setPage(page - 1);setIsloading(false)}} m={6}>Previous</Button>
+        <Button disabled  style={{
+        backgroundColor: "#ff3f6c",
+        color: "white"
+      }}>{page}</Button>
+        <Button onClick={() => {setIsloading(true);setPage(page + 1);setIsloading(false)}} m={6}>Next</Button>
 
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
+            <ModalHeader><Image src ={Trendsy} w={180} height={180} m={'auto'} mt={'-20px'} alt="logo"/></ModalHeader>
+            {/* <ModalCloseButton /> */}
+            <ModalBody  mt={'-65px'}>
               <Input
                 placeholder="Product Name"
                 m={[3, 4, 5, 2]}
+                _placeholder={{color:"gray"}}
+                border={'1px solid pink'}
                 onChange={(e) => setTitle(e.target.value)}
               ></Input>
               <Input
                 placeholder="Product ID"
                 m={[3, 4, 5, 2]}
+                _placeholder={{color:"gray"}}
+                border={'1px solid pink'}
                 onChange={(e) => setID(e.target.value)}
               ></Input>
               <Input
                 placeholder="MRP"
                 m={[3, 4, 5, 2]}
+                _placeholder={{color:"gray"}}
+                border={'1px solid pink'}
                 onChange={(e) => setVariant_mrp(e.target.value)}
               ></Input>
               <Input
                 placeholder="Add in Stock"
                 m={[3, 4, 5, 2]}
+                _placeholder={{color:"gray"}}
+                border={'1px solid pink'}
                 onChange={(e) => setStock(e.target.value)}
               ></Input>
             </ModalBody>
@@ -278,6 +293,7 @@ const Inventory = () => {
                 color={"#f41cb2"}
                 fontWeight={700}
                 mr={3}
+          
                 onClick={() => {
                   onClose();
                   Update(update);

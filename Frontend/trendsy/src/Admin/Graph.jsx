@@ -1,5 +1,4 @@
 import React from "react";
-
 import {Box} from "@chakra-ui/react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -8,50 +7,50 @@ const Graph = () => {
 
   const data = [
     {
-      name: 'Tata 1mg',
+      name: 'Manyawar',
       instock: 1800,
       priceRange: 2400,
       amt: 400,
     },
     {
-      name: 'Sugar Free',
+      name: 'Jewellery',
       instock: 3000,
       priceRange: 1598,
       amt: 210,
     },
     {
-      name: 'Proteinex',
+      name: 'Clothing',
       instock: 2000,
       priceRange: 4000,
       amt: 290,
     },
     {
-      name: 'Cetaphil',
+      name: 'Beauty',
       instock:2780,
       priceRange: 3908,
       amt: 700,
     },
   
     {
-      name: 'Dr Morphen',
+      name: 'Electronics',
       instock: 2390,
       priceRange: 3800,
       amt: 500,
     },
     {
-      name: 'Himalaya',
+      name:'Gifts',
     instock: 3490,
       priceRange: 5800,
       amt: 100,
     },
     {
-      name: 'Patanjali',
+      name: 'Gadgets',
       instock: 3490,
       priceRange: 5000,
       amt: 200,
     },
     {
-      name: 'Zandu',
+      name: 'Footwear',
       instock: 3490,
       priceRange: 3200,
       amt: 210,
@@ -59,8 +58,8 @@ const Graph = () => {
   ];
   return (
     
-    <Box id="boxes">
-        <ResponsiveContainer width="100%" height="100%">
+    <Box id="boxes"  width="100%" height="100%">
+        <ResponsiveContainer >
        <BarChart
           width={500}
           height={400}
@@ -77,8 +76,8 @@ const Graph = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="instock" stackId="a" fill="#8884d8" />
-          <Bar dataKey="priceRange"  stackId="a" fill="#ef5b7c" />
+          <Bar dataKey="instock" stackId="a" fill="#ff3f6c" />
+          <Bar dataKey="priceRange"  stackId="a" fill="#ff912e" />
         </BarChart>
         </ResponsiveContainer>
     </Box>
