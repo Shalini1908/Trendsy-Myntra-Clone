@@ -1,7 +1,8 @@
 import { Grid, Card, Text, Box } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { AiOutlineUser, AiFillDollarCircle } from "react-icons/ai";
+import { AiOutlineUser} from "react-icons/ai";
+import {ImUsers} from "react-icons/im"
 import { BsCartCheckFill, BsFillBagFill } from "react-icons/bs";
 import "./css/Admin.css";
 import Graph from "../Admin/Graph";
@@ -12,7 +13,7 @@ export const Dashboard = () => {
   useEffect(() => {
     async function fetchData() {
       let res = await axios.get(
-        `http://localhost:8080/data/all`,
+        `https://zany-bikini-bass.cyclic.app/data/all`,
         {
           headers: {
             Authorization: JSON.parse(localStorage.getItem("token")),
@@ -54,7 +55,7 @@ export const Dashboard = () => {
           <Card
             minW={{ base: 120, md: 190 }}
             minH={190}
-            border={"2px solid #f41cb2"}
+            border={"2px solid #ff3f6c"}
             backgroundColor={"white"}
             display={"flex"}
             justifyContent={"center"}
@@ -71,7 +72,7 @@ export const Dashboard = () => {
           <Card
             minW={{ base: 120, md: 190 }}
             minH={190}
-            border={"2px solid #f41cb2"}
+            border={"2px solid #ff3f6c"}      
             backgroundColor={"white"}
             display={"flex"}
             justifyContent={"center"}
@@ -90,11 +91,11 @@ export const Dashboard = () => {
             minH={190}
             backgroundColor={"white"}
             display={"flex"}
-            border={"2px solid #f41cb2"}
+            border={"2px solid #ff3f6c"}
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <AiOutlineUser color="black" fontSize={40} />
+            <AiOutlineUser color="black" fontSize={40} mt={"90px"} />
             <Text color={"#ff912e"} fontSize={30}>
               Customers
             </Text>
@@ -107,11 +108,11 @@ export const Dashboard = () => {
             minH={190}
             backgroundColor={"white"}
             display={"flex"}
-            border={"2px solid #f41cb2"}
+            border={"2px solid #ff3f6c"}
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <AiFillDollarCircle color="black" fontSize={40} />
+            <ImUsers color="black" fontSize={40} mt={"90px"}/>
             <Text color={"#ff912e"} fontSize={30}>
               Admins
             </Text>
@@ -121,7 +122,9 @@ export const Dashboard = () => {
           </Card>
         </>
       </Grid>
-      <Graph />
+      <Box  w={"90%"} h={"400px"} m={'auto'} mt={'20px'}>
+      <Graph/>
+      </Box>
     </>
   );
 };
