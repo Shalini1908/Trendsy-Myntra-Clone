@@ -24,22 +24,16 @@ const Slider = () => {
 
  
 
-  // const handleImage = () => {
-  //   const totalPoster = Object.keys(posters).length - 1;
-  //   console.log(totalPoster);
-  //   totalPoster  > active?   setActive(active => active + 1):  setActive((active)=>0);
-  //   console.log(active);
-   
-  // };
+
 
   useEffect(() => {
     const totalPoster = Object.keys(posters).length - 1;
-    console.log(totalPoster);
+   
     const intervalId = setTimeout(async() => {
       
      
       totalPoster  > active?   setActive(active => active + 1):  setActive((active)=>0);
-      console.log(active);
+     
      
     }, 5000);
 

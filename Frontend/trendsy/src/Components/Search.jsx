@@ -6,29 +6,40 @@ import {
   InputGroup,
   InputLeftElement,
   Text,
-  VStack,
+  useDisclosure,
+ 
 } from '@chakra-ui/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useThrottle } from '../Hooks/Throttle';
 import { getData } from '../api';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const Search = () => {
+  const dispatch=useDispatch()
   const [query, setQuery] = useState('');
   const [suggestion, setSuggestion] = useState([]);
   const [active, setActive] = useState();
   const [show,setShow]=useState(false)
   const scrollDiv = useRef([]);
   const navigate = useNavigate();
-  const handleSearch = async searchTerm => {
-    let data = await getData('/search', { query: searchTerm });
+
+  //serach request call from here
+  const handleSearch = async (searchTerm) => {
+    console.log(searchTerm)
+    const params= {
+      q: searchTerm,
+    }
+    let data = await dispatch( getData("/data/search",params));
+   
     if(data.length>0){
     setShow(true)
+    console.log(data)
     setSuggestion(data);
   }
   };
 
-  const throttledHandleSearch = useThrottle(handleSearch, 1000);
+  const throttledHandleSearch = useThrottle(handleSearch, 2000);
 
   const handleChange = event => {
     let newQuery = event.target.value;
@@ -41,6 +52,7 @@ const Search = () => {
     const suggestions = suggestion.length - 1;
     if (suggestions) {
       const scrollbox = scrollDiv.current;
+     
       switch (e.keyCode) {
         case 38:
          
@@ -51,14 +63,12 @@ const Search = () => {
           0 < active ? setActive(active - 1) : setActive(suggestions);
           break;
         case 40:
-          if (active == null) {
-            setActive(0);
-            break;
-          }
-          suggestions > active ? setActive(active + 1) : setActive(0);
+           (active == null)?setActive(0):suggestions > active ? setActive(active + 1) : setActive(0);
           break;
         case 13:
+          if(suggestion.length>1){
           handleSelection(suggestion[active].ID);
+          }
           break;
         default:
           return;
@@ -88,7 +98,7 @@ const Search = () => {
   };
   console.log(scrollDiv);
   return (
-    <HStack  pos="relative" onKeyUp={handleSuggetion}>
+    <HStack  pos="relative" onKeyUp={handleSuggetion} w="500px">
       <InputGroup>
         <InputLeftElement children={<SearchIcon color="gray.500" />} />
 
@@ -112,7 +122,7 @@ const Search = () => {
         boxShadow="md"
         p="10px 20px"
         left="-10px"
-        fontSize="sm"
+        fontSize="xs"
         bg="white"
         overflow="auto"
         onMouseLeave={() => {setShow(false);setActive(null);}}
@@ -121,13 +131,13 @@ const Search = () => {
           <Text
             ref={element => (scrollDiv.current[i] = element)}
             bg={active === i ? 'blackAlpha.400' : 'white'}
-            pb="3px"
+            pb="4px"
             key={i + 730}
             cursor="pointer"
             onClick={() => handleSelection(result)}
             onMouseEnter={() => setActive(i)}
           >
-            {result.name}
+            {result.title}
           </Text>
         ))}
       </Box>}
