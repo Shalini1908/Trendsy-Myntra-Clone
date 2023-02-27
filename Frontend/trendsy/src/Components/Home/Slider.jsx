@@ -1,5 +1,6 @@
 import { Box, Circle, HStack, Image, SlideFade } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import { shortID } from '../short_key.generator';
 
 const posters = {
   workwear:
@@ -49,7 +50,7 @@ const Slider = () => {
         <HStack>
           {Object.keys(posters).map((poster, i) => (
             <Image
-            key={i+1256}
+            key={shortID ()}
               src={posters[poster]}
               alt={poster}
               display={i == active ? 'block' : 'none'}
@@ -61,7 +62,7 @@ const Slider = () => {
       <HStack justify="center" m="10px" cursor="pointer">
         {Object.keys(posters).map((el, i) => (
           <Circle
-          key={i+4561}
+          key={shortID ()}
             size="10px"
             bg={i == active ? 'blackAlpha.600' : 'blackAlpha.300'}
             color="white"

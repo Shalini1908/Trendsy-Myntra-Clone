@@ -52,10 +52,17 @@ export const addToCartPostErrorAction = () => {
 };
 
 export const LoginFunctionSuccess = (payload) => {
+ if(payload.name)
   return {
     type: LoginSuccess,
-    payload,
+    payload:payload.name,
   };
+  else{
+    return {
+      type: LoginSuccess,
+      payload:"",
+    };
+  }
 };
 
 export const LogoutFunctionSuccess = () => {
