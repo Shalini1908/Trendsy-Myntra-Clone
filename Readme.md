@@ -7,15 +7,15 @@ Madhukar Balasaheb Kakade<br>
 Ganesh bahire
 
 TEACH STACKS-
-React
-Redux
-Redux-Thunk
-NodeJS
-Mongoose
-MongoDB
-ChakraUI
-HTML
-JavaScript
+React<br>
+Redux<br>
+Redux-Thunk<br>
+NodeJS<br>
+Mongoose<br>
+MongoDB<br>
+ChakraUI<br>
+HTML<br>
+JavaScript<br>
 CSS
 
 
