@@ -80,7 +80,12 @@ const Navbar = () => {
       boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px"}
       rounded="md"
       bg="white"
-      position="relative"
+      // position="relative"
+      position={"fixed"}
+      w={"100%"}
+      zIndex={"100"}
+     top={0}
+      
     >
       <Flex align="center" justify="space-around">
         <Link to="/">
@@ -110,11 +115,9 @@ const Navbar = () => {
           <Text
             p="30px 10px"
             onMouseEnter={handleDropdown}
-            color={"#3e4152"}
+            color={"black"}
             fontWeight={750}
-            fontFamily={
-              'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
-            }
+            
           >
 
             STUDIO
