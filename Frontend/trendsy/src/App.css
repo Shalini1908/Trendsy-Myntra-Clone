@@ -1,3 +1,12 @@
 .App {
   text-align: center;
 }
+
+ul.slick-dots {
+  bottom: 10px;
+  background-color: white;
+}
+
+ul.slick-dots li.slick-active button:before {
+  color: #ff3f6c !important;
+}

@@ -1,11 +1,12 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, HStack, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Grid, HStack, Image, Stack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Ratings } from "./Ratings";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoMdHeartEmpty } from "react-icons/io";
+import "../../App.css";
 
 export const OnHoverProducts = ({
   title,
@@ -27,7 +28,7 @@ export const OnHoverProducts = ({
   const settings = {
     autoplay: true,
     autoplaySpeed: 1000,
-    // dots: true,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -43,17 +44,25 @@ export const OnHoverProducts = ({
           {images
             .filter((e) => e !== "")
             .map((el) => (
-              <Image src={el} maxW={"250px"} w={"100%"} alt="demo" />
+              <Box mb={"10px"}>
+                <Image m={"0"} h={"50%"} src={el} w={"100%"} alt="demo" />
+              </Box>
             ))}
         </Slider>
       </Box>
 
-      <Stack justify={"space-between"} w={"100%"} p={"5px"}>
+      <Stack
+        position={"relative"}
+        bottom={"10px"}
+        justify={"space-between"}
+        w={"100%"}
+        p={"0px 10px"}
+      >
         <HStack
           border={"1px solid lightgray"}
           _hover={{ border: "1px solid black" }}
           cursor={"pointer"}
-          p={"5px 30px"}
+          p={"5px 20px"}
           borderRadius={"2px"}
           fontWeight={"600"}
           transition={"0.3s"}
@@ -65,8 +74,9 @@ export const OnHoverProducts = ({
           </Text>
           <Text pr={"15px"}>WISHLIST</Text>
         </HStack>
-        <Box>
+        <Box position={"relative"} top={"-5px"} lineHeight={"20px"}>
           <Text
+            m={"0px"}
             fontWeight={"400"}
             color={"gray.500"}
             textAlign={"left"}
@@ -75,18 +85,21 @@ export const OnHoverProducts = ({
             Sizes: {size}
           </Text>
 
-          <HStack justify={"space-between"} align={"center"}>
-            <HStack lineHeight={"8px"} letterSpacing={"2px"}>
+          <HStack
+            justify={"space-between"}
+            align={"center"}
+            fontSize={{
+              base: "13px",
+              sm: "12px",
+              md: "12px",
+              lg: "13px",
+            }}
+          >
+            <HStack letterSpacing={"2px"}>
               <Text
                 mt={"0"}
                 color={"green"}
                 fontWeight={"500"}
-                fontSize={{
-                  base: "14px",
-                  sm: "13px",
-                  md: "14px",
-                  lg: "15px",
-                }}
                 textAlign={"left"}
               >
                 ₹{variant_price}
@@ -94,12 +107,6 @@ export const OnHoverProducts = ({
 
               <Text
                 m={"0"}
-                fontSize={{
-                  base: "13px",
-                  sm: "12px",
-                  md: "13px",
-                  lg: "14px",
-                }}
                 color={"gray.500"}
                 fontWeight={"500"}
                 textDecor={"line-through"}
@@ -109,16 +116,7 @@ export const OnHoverProducts = ({
               </Text>
             </HStack>
 
-            <Box
-              fontWeight={"500"}
-              color={"#ef5d58"}
-              fontSize={{
-                base: "13px",
-                sm: "12px",
-                md: "13px",
-                lg: "14px",
-              }}
-            >
+            <Box fontWeight={"500"} color={"#ef5d58"}>
               {Math.floor(((variant_mrp - variant_price) * 100) / variant_mrp)}%
               OFF
             </Box>

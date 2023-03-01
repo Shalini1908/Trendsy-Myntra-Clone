@@ -23,7 +23,8 @@ export const Product = ({ props }) => {
     window.scrollTo(0, 0);
   };
 
-  let shortTitle = title.split("")?.filter((el, i) => i <= 18);
+  let shortTitle = title.split("")?.filter((el, i) => i <= 16);
+  let shortBrand = brand.split("")?.filter((el, i) => i <= 16);
 
   const [isHovering, setIsHovering] = useState(false);
 
@@ -74,12 +75,16 @@ export const Product = ({ props }) => {
           <>
             <Box w={"100%"}>
               {/* <Ratings rating={rating} /> */}
-              <Image src={images[0]} maxW={"250px"} w={"100%"} alt="demo" />
+              <Image src={images[0]} w={"100%"} alt="demo" />
             </Box>
 
-            <Stack justify={"space-between"} w={"100%"} p={"10px 5px"}>
-              <Box>
-                <Box p={"10px 0px"}>
+            <Stack
+              justify={"space-between"}
+              w={"100%"}
+              p={"10px 10px 14px 10px"}
+            >
+              <Box lineHeight={"20px"}>
+                <Box mb={"10px"}>
                   <Text
                     fontWeight={"500"}
                     m={"0px"}
@@ -91,7 +96,8 @@ export const Product = ({ props }) => {
                       lg: "14px",
                     }}
                   >
-                    {brand}
+                    {shortBrand}
+                    {brand.length > 20 ? "..." : ""}
                   </Text>
 
                   <Text
@@ -110,18 +116,21 @@ export const Product = ({ props }) => {
                   </Text>
                 </Box>
 
-                <HStack justify={"space-between"} align={"center"}>
+                <HStack
+                  justify={"space-between"}
+                  align={"center"}
+                  fontSize={{
+                    base: "13px",
+                    sm: "12px",
+                    md: "12px",
+                    lg: "13px",
+                  }}
+                >
                   <HStack lineHeight={"8px"} letterSpacing={"2px"}>
                     <Text
                       mt={"0"}
                       color={"green"}
                       fontWeight={"500"}
-                      fontSize={{
-                        base: "14px",
-                        sm: "13px",
-                        md: "14px",
-                        lg: "15px",
-                      }}
                       textAlign={"left"}
                     >
                       ₹{variant_price}
@@ -129,12 +138,6 @@ export const Product = ({ props }) => {
 
                     <Text
                       m={"0"}
-                      fontSize={{
-                        base: "13px",
-                        sm: "12px",
-                        md: "13px",
-                        lg: "14px",
-                      }}
                       color={"gray.500"}
                       fontWeight={"500"}
                       textDecor={"line-through"}
@@ -143,22 +146,12 @@ export const Product = ({ props }) => {
                       ₹{variant_mrp}
                     </Text>
                   </HStack>
-
-                  <Box
-                    fontWeight={"500"}
-                    color={"#ef5d58"}
-                    fontSize={{
-                      base: "13px",
-                      sm: "12px",
-                      md: "13px",
-                      lg: "14px",
-                    }}
-                  >
+                  <Text ml={"0px"} fontWeight={"500"} color={"#ef5d58"}>
                     {Math.floor(
                       ((variant_mrp - variant_price) * 100) / variant_mrp
                     )}
                     % OFF
-                  </Box>
+                  </Text>
                 </HStack>
               </Box>
             </Stack>
