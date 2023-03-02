@@ -21,7 +21,7 @@ const Login = () => {
  const isAuth =  useSelector((store)=>
  store.isAuth
 )
-console.log(name,isAuth)
+// console.log(name,isAuth)
   const formik = useFormik({
 
     initialValues: {
@@ -78,7 +78,21 @@ console.log(name,isAuth)
         "Content-type": "application/json"
       },
     }).then(res => res.json())
-      .then(res => { localStorage.setItem("trendsyToken", JSON.stringify(res.token));dispatch(LoginFunctionSuccess({name:res.name})); console.log(res); swal("login Successfull", "you are being redirected" , "success");navigate("/") })
+      .then(res => { 
+        console.log(res)
+        if(res.msg){
+          const token=res.token||""
+          const name=res.name||""
+          localStorage.setItem("trendsyToken", JSON.stringify({token,name}));
+          console.log(res);dispatch(LoginFunctionSuccess({name:res.name}));
+          }; console.log(res); if( res.err){
+            swal("please enter correct password")
+         }else{
+            swal(
+              "login Successfull", "you are being redirected" , "success"
+              );
+              navigate("/")
+            } })
       .catch(err => console.log(err))
 
   }

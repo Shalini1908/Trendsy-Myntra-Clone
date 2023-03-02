@@ -11,6 +11,7 @@ import {
   POST_ADDTOCART_REQUEST,
   POST_ADDTOCART_SUCCESS,
   POST_ADDTOCART_ERROR,
+  SET_CART_DATA,
 } from "./action.type";
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
     fee: 0,
     total_Amount: 0,
   },
+  cartData:[],
   isAuth: false,
   name: "",
   cart: [],
@@ -108,13 +110,22 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
     }
 
     case SET_CART_TOTALS: {
-      console.log(payload);
+     
       return {
         ...state,
 
         CartTotals: payload,
       };
     }
+    case SET_CART_DATA: {
+     
+      return {
+        ...state,
+
+        cartData: payload,
+      };
+    }
+    
     default: {
       return state;
     }

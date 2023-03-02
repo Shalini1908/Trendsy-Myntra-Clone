@@ -3,17 +3,15 @@ import {
   Button,
   Checkbox,
   HStack,
-  Heading,
   Icon,
   Text,
-  Toast,
   VStack,
   useToast,
 } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { RiCoupon3Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setCartTotalS } from "../../Redux/actions";
 const initialCartTotals = {
   total: 0,
@@ -24,15 +22,17 @@ const initialCartTotals = {
   total_Amount: 0,
 };
 const CartCalculation = ({ cart }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [cartTotals, setCartTotals] = useState(initialCartTotals);
-const [clear,setClear]=useState("black")
-const navigate=useNavigate()
-const toast = useToast();
+  const [clear, setClear] = useState("black");
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  
   const Calculate = () => {
     const cal = { ...initialCartTotals };
     cart.forEach((product) => {
-      console.log(cal.total);
+      // console.log(cal.total);
       cal.total += Number(product.variant_mrp) * Number(product.qty);
       cal.discount +=
         (Number(product.variant_mrp) - Number(product.variant_price)) *
@@ -49,49 +49,45 @@ const toast = useToast();
     // Get the clicked button element
     const button = event.target;
     const num = Number(button.innerText.slice(1));
-    if (cartTotals.social ) {
-     if(cartTotals.social!==num){
-      const total = cartTotals.total_Amount + num;
-      setCartTotals({ ...cartTotals, social: num, total_Amount: total });
-      setClear((clear)=>"black")
-      button.style.color = "red";
-    }else{
-      const total = cartTotals.total_Amount - num;
-      setCartTotals({ ...cartTotals, social: num, total_Amount: total });
-      button.style.color = "black";
-    }
+    if (cartTotals.social) {
+      if (cartTotals.social !== num) {
+        const total = cartTotals.total_Amount + num;
+        setCartTotals({ ...cartTotals, social: num, total_Amount: total });
+        setClear((clear) => "black");
+        button.style.color = "red";
+      } else {
+        const total = cartTotals.total_Amount - num;
+        setCartTotals({ ...cartTotals, social: num, total_Amount: total });
+        button.style.color = "black";
+      }
     } else {
-     
       const total = cartTotals.total_Amount + num;
       setCartTotals({ ...cartTotals, social: num, total_Amount: total });
-      setClear((clear)=>"black")
+      setClear((clear) => "black");
       button.style.color = "red";
     }
     // Change the background color of the button to red
   }, []);
 
-  const handleSubmit= async  ()=>{
-    
-     if(cartTotals.total){
-     dispatch(setCartTotalS(cartTotals))
-  
-    // console.log(cartTotals)
-      navigate("/address")
-    }else{
-    
+  const handleSubmit = async () => {
+    if (cartTotals.total) {
+      dispatch(setCartTotalS(cartTotals));
+
+      // console.log(cartTotals)
+      navigate("/address");
+    } else {
       toast({
-        position: 'top',
-        title: 'Select Items',
+        position: "top",
+        title: "Select Items",
         description: "please select product first",
-        status: 'info',
+        status: "info",
         duration: 3000,
         isClosable: true,
       });
-     
     }
-  }
+  };
 
-  console.log(cartTotals);
+  // console.log(cartTotals);
   useEffect(() => {
     Calculate();
   }, [cart]);
@@ -231,7 +227,13 @@ const toast = useToast();
           <Text>Total Amount</Text>
           <Text>₹ {cartTotals.total_Amount}</Text>
         </HStack>
-        <Button bg="#ff3f6c" w="full" color="white" mt="15px" onClick={handleSubmit}>
+        <Button
+          bg="#ff3f6c"
+          w="full"
+          color="white"
+          mt="15px"
+          onClick={handleSubmit}
+        >
           PLACE ORDER
         </Button>
       </Box>

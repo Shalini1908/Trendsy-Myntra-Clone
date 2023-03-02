@@ -1,4 +1,4 @@
-import { Box, Center, Flex, HStack, Image, Text } from '@chakra-ui/react'
+import { Box,  HStack, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import logo from "../../Images/Trendsy-1.png"
 import SecurePayImage from "../../Images/sprite-secure.png"
@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom'
 const CartNav = () => {
     const location = useLocation();
     const page=location.pathname.slice(1)
-    console.log(page)
+ 
   return (
     <HStack justify={["space-around" ]} m={["10px",null,"15px"]}>
         <Box h={["20px",null,"30px","50px"]} ><Link to="/"><Image src={logo} alt='Trendsy Logo' h="100%"/></Link></Box>

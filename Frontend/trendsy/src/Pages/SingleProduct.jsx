@@ -35,17 +35,13 @@ import {
   addToCartPostRequestAction,
   addToCartPostSuccessAction,
   getProducts,
+  setCartData,
 } from "../Redux/actions";
 import Navbar from "../Components/Navbar";
 
 export const SingleProduct = () => {
-  const { products, isLoading } = useSelector((store) => {
-    return {
-      products: store.products,
-      isLoading: store.isLoading,
-    };
-  });
-
+  const { products, isLoading ,cartData} = useSelector((store) =>  store);
+console.log(cartData)
   const person = (name) => {
     const idealFor =
       name === "Men"
@@ -79,21 +75,35 @@ export const SingleProduct = () => {
       });
   };
 
-  const handleAddToCart = (data) => {
+  const handleAddToCart = (product) => {
+    console.log(data)
+    const Product={...data,qty:1}
+    console.log(Product)
     dispatch(addToCartPostRequestAction());
     axios
-      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data, {
+      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, Product, {
         headers: {
-          Authorization: JSON.parse(localStorage.getItem("trendsyToken")),
+          Authorization: JSON.parse(localStorage.getItem("trendsyToken"))?.token,
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(Product);
         if (res.data == "please login first") {
           alert("please login first");
         } else {
           alert("Product added successfully ");
           dispatch(addToCartPostSuccessAction(res.data));
+            const newCart = [...cartData];
+          const index = newCart?.findIndex((product) => product._id == Product._id);
+          console.log(index);
+          // if (index == -1) {
+          //  newCart.push(Product)
+          // } 
+          // else {
+          //  newCart=cartData?.filter((product) => product._id == Product._id?{...product,qty:cartData[index].qty+1}:product);
+          // }
+          
+          dispatch(setCartData(newCart))
         }
       })
       .catch((err) => {
