@@ -9,7 +9,9 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_TRENDZY_BASE_URL;
 // console.log(baseUrl);
 
+
 const token = JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.token;
+
 
 const headers = {
   Authorization: token,
@@ -46,6 +48,7 @@ export const postData = async(path, filter) => {
     //dispatch(getProductsFailureAction());
   }
 };
+
 
 
 export const deleteData = async(path, filter) =>  {

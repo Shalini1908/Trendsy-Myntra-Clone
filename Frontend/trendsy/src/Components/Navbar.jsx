@@ -182,10 +182,12 @@ const Navbar = () => {
       // boxShadow={"rgba(149, 157, 165, 0.2) 0px 8px 24px"}
       rounded="md"
       bg="white"
+
       position="sticky"
       p={["5px 10px", null, null, "5px 40px", "5px 50px"]}
       zIndex={"99"}
       top="0px"
+
     >
       {/* justify={{ base: 'start', md: 'start' }} */}
       <HStack
@@ -265,10 +267,9 @@ const Navbar = () => {
           <Text
            p={["10px 3px", null, "20px 7px"]}
             onMouseEnter={handleDropdown}
+
             fontWeight={750}
-            fontFamily={
-              'Assistant, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;'
-            }
+            
           >
             STUDIO
           </Text>

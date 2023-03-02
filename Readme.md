@@ -6,6 +6,19 @@ Abhijeet Kale<br>
 Madhukar Balasaheb Kakade<br>
 Ganesh bahire
 
+TEACH STACKS-
+React<br>
+Redux<br>
+Redux-Thunk<br>
+NodeJS<br>
+Mongoose<br>
+MongoDB<br>
+ChakraUI<br>
+HTML<br>
+JavaScript<br>
+CSS
+
+
 LOGO
 
 ![trendsy-new-modified](https://user-images.githubusercontent.com/107534386/221490432-2176031a-5013-4c10-909e-bba47d6fc99f.png)
