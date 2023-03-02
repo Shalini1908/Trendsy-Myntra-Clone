@@ -116,11 +116,11 @@ const CartInfo = () => {
           <Heading size={["xs", "sm"]}>Available Offers</Heading>
         </HStack>
 
-        <Collapse startingHeight={20} in={show}>
+        <Collapse startingHeight={20} in={show} >
           {/* Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
              labore wes anderson cred nesciunt sapiente ea proident. */}
-          <UnorderedList fontSize="xs" pl="5px" spacing="10px">
+          <UnorderedList fontSize="xs" pl="5px" spacing="10px" textAlign="start">
             <ListItem>
               10% Instant Discount on YES Bank Credit Cards on a min spend of Rs
               3,000. TCA
