@@ -1,9 +1,3 @@
-
-
-
-
-
-
 const express = require("express");
 const cors = require("cors");
 const { authenticate } = require("./middleware/Authentication");
@@ -12,6 +6,7 @@ const { dataroutes } = require("./routes/data.routes");
 const { cartroutes } = require("./routes/cart.routes");
 const { userRouter } = require("./routes/user.routes");
 const { adminRouter } = require("./routes/admin.routes");
+const { wishlistRouter } = require("./routes/wishlist.routes");
 
 const app = express();
 app.use(express.json());
@@ -27,6 +22,7 @@ app.use("/data", dataroutes);
 app.use(authenticate);
 
 app.use("/cart", cartroutes);
+app.use("/wishlist", wishlistRouter);
 
 app.listen(process.env.PORT, async () => {
   try {
@@ -40,9 +36,3 @@ app.listen(process.env.PORT, async () => {
     console.log({ msg: error.message });
   }
 });
-
-
-
-
-
-

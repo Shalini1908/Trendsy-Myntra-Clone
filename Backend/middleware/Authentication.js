@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
 const jwt = require("jsonwebtoken")
 
 
 const authenticate = (req,res,next)=>{
- const navigate = useNavigate()
+//  const navigate = useNavigate()
    const token = req.headers.authorization
 
    if(token){
@@ -17,12 +16,12 @@ const authenticate = (req,res,next)=>{
 
        }else{
       res.send("please login first")
-      navigate("/login")
+      // navigate("/login")
        }
    }else{
 
        res.send("please login first")
-       navigate("/login")
+      //  navigate("/login")
    }
 
 }
