@@ -9,51 +9,56 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_TRENDZY_BASE_URL;
 // console.log(baseUrl);
 
-const token = JSON.parse(localStorage.getItem("trendsyToken"))
 
-  const headers= {
-    Authorization: token,
-    "Content-Type": "application/json",
-  };
+const token = JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.token;
 
 
-export const getData = (path, filter) => async (dispatch) => {
+const headers = {
+  Authorization: token,
+  "Content-Type": "application/json",
+};
+
+export const getData = async(path, filter) =>  {
   console.log(filter);
-  
+const serverRequestData ={...filter,headers}
   try {
-    if(path=="/data/search"){
-    let res = await axios.get(`${baseUrl}${path}`, {
-      headers,
-      params:filter
-    });
-    let data= await res.data
+    // if (path == "/data/search") {
+      let res = await axios.get(`${baseUrl}${path}`,serverRequestData);
+      let data = await res.data;
+//console.log(res)
+      return data;
    
-    return data
-  }else if (path=="/cart"){ 
-
-    // console.log(  `${baseUrl}${path}`)
-    let res = await axios.get(`${baseUrl}${path}`, {
-      headers,
-    });
-    let data= await res.data
-   console.log(data)
-   return data
-
-  }
   } catch (err) {
     console.log(err.message);
   }
 };
 
-
-export const postData = (path, data) => async (dispatch) => {
+export const postData = async(path, filter) => {
   // console.log(filter)
-
+  const serverRequestData ={...filter,headers}
   try {
     //dispatch(getProductsRequestAction());
 
     if (typeof data === "object") {
-      let res = await axios.post(`${baseUrl}${path}`, data);
+      let res = await axios.post(`${baseUrl}${path}`, serverRequestData );
+      return await res.data;
+    }
+  } catch (err) {
+    console.log(err.message);
+    //dispatch(getProductsFailureAction());
+  }
+};
+
+
+
+export const deleteData = async(path, filter) =>  {
+  // console.log(filter)
+  const serverRequestData ={...filter,headers}
+  try {
+    //dispatch(getProductsRequestAction());
+
+    if (typeof data === "object") {
+      let res = await axios.delete(`${baseUrl}${path}`, serverRequestData )
       return await res.data;
     }
   } catch (err) {

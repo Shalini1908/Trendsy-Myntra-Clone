@@ -1,4 +1,4 @@
-import { Box, Button, Circle, Flex, Square } from "@chakra-ui/react";
+import { Circle, Flex } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BsFillArrowUpSquareFill } from "react-icons/bs";
 
@@ -6,7 +6,16 @@ const ScrollToTop = () => {
   const [visible, setVisible] = useState();
 
   const goTo = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+      paddingTop: "100px",
+      snapType: " y mandatory",
+      snapPointsY: "repeat(1px)",
+      snapStop: "always",
+      transitionDuration: "2s",
+    });
   };
 
   const showHeight = () => {
@@ -37,8 +46,12 @@ const ScrollToTop = () => {
       fontSize={20}
     >
       {visible && (
-        <Circle size="50px" bgColor={"#ff3f6c"} color="yellow.200" onClick={goTo}>
-          {" "}
+        <Circle
+          size="50px"
+          bgColor={"#ff3f6c"}
+          color="yellow.200"
+          onClick={goTo}
+        >
           <BsFillArrowUpSquareFill />{" "}
         </Circle>
       )}

@@ -81,17 +81,24 @@ const Signup = () => {
         .then((res) => res.json())
 
         .then((res) => {
-          localStorage.setItem("trendsyToken", JSON.stringify(res.token));
+          if(res.msg){
+          const token=res.token||""
+          const name=res.name||""
+          localStorage.setItem("trendsyToken", JSON.stringify({token,name}));
           console.log(res);dispatch(LoginFunctionSuccess({name:values.name}));
+          }
           {
-            res.Msg == "user already present"
-              ? swal("user already present")
-              : swal(
+           if( res.Msg == "user already present"){
+              swal("user already present")
+           }else{
+              swal(
                   "account created Successfully",
                   "you are being redirected",
                   "success"
                 );
-          }; navigate("/")
+                navigate("/")
+              }
+          }; 
         })
         .catch((err) => console.log(err));
     },
