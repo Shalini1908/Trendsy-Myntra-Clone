@@ -1,23 +1,39 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, Grid, HStack, Image, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  HStack,
+  Image,
+  Stack,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Ratings } from "./Ratings";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoMdHeartEmpty } from "react-icons/io";
 import "../../App.css";
+import { CloseIcon } from "@chakra-ui/icons";
+import axios from "axios";
 
 export const OnHoverProducts = ({
-  title,
-  brand,
-  ideal_for,
-  variant_price,
-  variant_mrp,
-  images,
-  _id,
-  size,
+  props,
+  option,
+  handleOption,
+  handleDelete,
 }) => {
+  const {
+    title,
+    brand,
+    ideal_for,
+    variant_price,
+    variant_mrp,
+    images,
+    _id,
+    size,
+  } = props;
   const navigate = useNavigate();
 
   const handleProduct = () => {
@@ -39,7 +55,30 @@ export const OnHoverProducts = ({
 
   return (
     <>
-      <Box w={"100%"}>
+      {handleDelete && (
+        <Stack
+          zIndex={"10"}
+          justify={"center"}
+          align={"center"}
+          position={"absolute"}
+          top={"5px"}
+          right={"5px"}
+        >
+          <Text
+            bg={"#f1f2f6"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            border={"1px solid gray"}
+            borderRadius={"25px"}
+            p={"5px"}
+            onClick={() => handleDelete(_id)}
+          >
+            <CloseIcon boxSize={2} />
+          </Text>
+        </Stack>
+      )}
+      <Box w={"100%"} onClick={handleProduct}>
         <Slider {...settings}>
           {images
             .filter((e) => e !== "")
@@ -68,13 +107,20 @@ export const OnHoverProducts = ({
           transition={"0.3s"}
           justify={"center"}
           align={"center"}
+          onClick={() => handleOption(props)}
         >
           <Text>
             <IoMdHeartEmpty />
           </Text>
-          <Text pr={"15px"}>WISHLIST</Text>
+          <Text pr={"15px"}>{option}</Text>
         </HStack>
-        <Box position={"relative"} top={"-5px"} lineHeight={"20px"}>
+
+        <Box
+          onClick={() => handleProduct()}
+          position={"relative"}
+          top={"-5px"}
+          lineHeight={"20px"}
+        >
           <Text
             m={"0px"}
             fontWeight={"400"}

@@ -15,6 +15,7 @@ export const Pagination = (props) => {
 
   const pages = new Array(total).fill(0).map((e, i) => (
     <Button
+      key={i}
       m={"5px"}
       style={{
         backgroundColor: current === i + 1 ? "#ff3f6c" : "#edf2f7",

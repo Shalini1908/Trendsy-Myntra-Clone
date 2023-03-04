@@ -6,6 +6,7 @@ import {
   Stack,
   Text,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import { FiltersTop } from "../Components/Products-page/FiltersTop";
 import { BreadCrumb } from "../Components/Products-page/BreadCrumb";
@@ -141,6 +142,40 @@ export const Products = () => {
     setSize([]);
   };
 
+  const Auth = localStorage.getItem("trendsyToken");
+  //   console.log(Auth);
+  const token = JSON.parse(Auth);
+  const toast = useToast();
+
+  const AddToWishlist = (data) => {
+    axios
+      .post(
+        `${process.env.REACT_APP_TRENDZY_BASE_URL}/wishlist/addtowishlist`,
+        data,
+        { headers: { authorization: token.token } }
+      )
+      .then((res) => {
+        console.log(res);
+        toast({
+          position: "top",
+          title: res.data,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast({
+          position: "top",
+          title: err.message,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+  };
+
   // console.log(brands);
 
   return (
@@ -159,7 +194,7 @@ export const Products = () => {
               </Text>
               <Text fontSize={"14px"} color={"#696d7f"} fontWeight={"450"}>
                 {" "}
-                - {products?.length} items
+                - {TotalData?.length} items
               </Text>
             </HStack>
             <UnorderedList
@@ -293,20 +328,23 @@ export const Products = () => {
               w={"100%"}
               boxSizing={"border-box"}
             >
-              {products?.map((item, i) => {
-                if (i < 30) {
-                  return <Product key={item._id} props={item} />;
-                }
-              })}
+              {products?.map((item, i) => (
+                <Product
+                  handleOption={AddToWishlist}
+                  option={"WISHLIST"}
+                  key={item._id}
+                  props={item}
+                />
+              ))}
             </Grid>
 
-            {/* <Stack minW={"300px"} justify={"space-between"} align={"center"}>
+            <Stack minW={"300px"} justify={"space-between"} align={"center"}>
               <Pagination
                 current={page}
-                total={Math.ceil(products.length / limit)}
+                total={Math.ceil(TotalData.length / limit)}
                 onChange={(value) => setPage(value)}
               />
-            </Stack> */}
+            </Stack>
           </Stack>
         </Grid>
       </Stack>
