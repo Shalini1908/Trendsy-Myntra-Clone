@@ -117,6 +117,7 @@ const Navbar = () => {
             onMouseEnter={handleDropdown}
             color={"black"}
             fontWeight={750}
+            cursor="pointer"
             
           >
 
@@ -214,7 +215,7 @@ const Navbar = () => {
         <Box
           position="absolute"
           left="12%"
-          w="70%"
+          w="80%"
           zIndex={10}
           boxShadow="md"
           p="20px"

@@ -9,7 +9,7 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_TRENDZY_BASE_URL;
 // console.log(baseUrl);
 
-const token = JSON.parse(localStorage.getItem("trendsyToken"))
+const token = localStorage.getItem("trendsyToken")
 
   const headers= {
     Authorization: token,
