@@ -6,6 +6,7 @@ import {
   GET_PRODUCTS_SUCCESS,
   LoginSuccess,
   LogoutSuccess,
+ 
   GET_TOTAL_PRODUCTS_ERROR,
   GET_TOTAL_PRODUCTS_REQUEST,
   GET_TOTAL_PRODUCTS_SUCCESS,
@@ -13,6 +14,7 @@ import {
   POST_ADDTOCART_REQUEST,
   POST_ADDTOCART_SUCCESS,
   POST_ADDTOCART_ERROR,
+  SET_CART_DATA,
 } from "./action.type";
 
 export const productsGetRequestAction = () => {
@@ -70,6 +72,18 @@ export const LogoutFunctionSuccess = () => {
     type: LogoutSuccess,
   };
 };
+
+export const setCartData = (payload) => {
+ 
+ return {
+    type: SET_CART_DATA, payload
+  }
+};
+
+
+ 
+
+ 
 
 export const getProducts = (Q) => (dispatch) => {
   dispatch(totalProductsGetRequestAction());

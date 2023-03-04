@@ -29,7 +29,8 @@ import axios from "axios";
 import { PriceFilter } from "../Components/Products-page/Filters/PriceFilter";
 import { Pagination } from "../Components/Products-page/Pagination";
 import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer"
+import Footer from "../Components/Footer";
+import { OnHoverProducts } from "../Components/Products-page/OnHoverProducts";
 
 export const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -144,7 +145,7 @@ export const Products = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <Stack
         w={"100%"}
         p={{ base: "10px", sm: "10px", md: "15px", lg: "25px" }}
@@ -299,17 +300,17 @@ export const Products = () => {
               })}
             </Grid>
 
-            <Stack minW={"300px"} justify={"space-between"} align={"center"}>
+            {/* <Stack minW={"300px"} justify={"space-between"} align={"center"}>
               <Pagination
                 current={page}
                 total={Math.ceil(products.length / limit)}
                 onChange={(value) => setPage(value)}
               />
-            </Stack>
+            </Stack> */}
           </Stack>
         </Grid>
       </Stack>
-      <Footer/>
+      <Footer />
     </>
   );
 };

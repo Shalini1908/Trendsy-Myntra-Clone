@@ -390,7 +390,7 @@ const Dropdown = ({ category, color }) => {
   // const category = 'beauty';
   console.log();
   return (
-    <Flex  flexDirection="column" h="400px" wrap="wrap" justify="flex-start"   align="start" >
+    <Flex  flexDirection="column" h="full" wrap="wrap" justify="flex-start" gap="2px"   align="start" >
       {Object.keys(dropDownData[category])?.map((subCategory, i) => (
         <Flex flexDirection="column"   align="start" fontSize="sm" w="20%" cursor="pointer" gap="2px" >
           <Text key={(i + 12) * 2} fontWeight="bold" color={color} >

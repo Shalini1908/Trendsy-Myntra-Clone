@@ -1,4 +1,4 @@
-import { SearchIcon } from '@chakra-ui/icons';
+import { SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   HStack,
@@ -6,57 +6,53 @@ import {
   InputGroup,
   InputLeftElement,
   Text,
-  useDisclosure,
  
-} from '@chakra-ui/react';
-import React, { useEffect, useRef, useState } from 'react';
-import { useThrottle } from '../Hooks/Throttle';
-import { getData } from '../api';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { shortID } from './short_key.generator';
+} from "@chakra-ui/react";
+import React, { useEffect, useRef, useState } from "react";
+import { useThrottle } from "../Hooks/Throttle";
+import { getData } from "../api";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { shortID } from "./short_key.generator";
 
 const Search = () => {
-  const dispatch=useDispatch()
-  const [query, setQuery] = useState('');
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
   const [suggestion, setSuggestion] = useState([]);
   const [active, setActive] = useState();
-  const [show,setShow]=useState(false)
+  const [show, setShow] = useState(false);
   const scrollDiv = useRef([]);
   const navigate = useNavigate();
 
   //serach request call from here
   const handleSearch = async (searchTerm) => {
-    console.log(searchTerm)
-    const params= {
+    console.log(searchTerm);
+    const params = {
       q: searchTerm,
+    };
+    let data = await getData("/data/search", {params});
+
+    if (data.length > 0) {
+      setSuggestion(data);
     }
-    let data = await dispatch( getData("/data/search",params));
-   
-    if(data.length>0){
-    setShow(true)
-  
-    setSuggestion(data);
-  }
+    setShow(true);
   };
 
   const throttledHandleSearch = useThrottle(handleSearch, 2000);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     let newQuery = event.target.value;
     setQuery(newQuery);
-    if(newQuery.length>2)
-    throttledHandleSearch(newQuery);
+    if (newQuery.length > 2) throttledHandleSearch(newQuery);
   };
 
-  const handleSuggetion = e => {
+  const handleSuggetion = (e) => {
     const suggestions = suggestion.length - 1;
     if (suggestions) {
       const scrollbox = scrollDiv.current;
-     
+
       switch (e.keyCode) {
         case 38:
-         
           if (active == null) {
             setActive(suggestions);
             break;
@@ -64,11 +60,15 @@ const Search = () => {
           0 < active ? setActive(active - 1) : setActive(suggestions);
           break;
         case 40:
-           (active == null)?setActive(0):suggestions > active ? setActive(active + 1) : setActive(0);
+          active == null
+            ? setActive(0)
+            : suggestions > active
+            ? setActive(active + 1)
+            : setActive(0);
           break;
         case 13:
-          if(suggestion.length>1){
-          handleSelection(suggestion[active].ID);
+          if (suggestion.length > 0) {
+            handleSelection(suggestion[active]);
           }
           break;
         default:
@@ -94,18 +94,22 @@ const Search = () => {
   }, [active]);
 
   const handleSelection = (result) => {
-   const {ideal_for,title,_id}=result
+    const { ideal_for, title, _id } = result;
     navigate(`/products/${ideal_for}/${title}/${_id}`);
   };
   //console.log(scrollDiv);
   return (
-    <HStack  pos="relative" onKeyUp={handleSuggetion} w="500px">
+    <HStack
+      pos="relative"
+      onKeyUp={handleSuggetion}
+      w="full"
+      fontSize={["xs", "sm", "md"]}
+    >
       <InputGroup>
         <InputLeftElement children={<SearchIcon color="gray.500" />} />
 
         <Input
           variant="filled"
-          fontSize="14px"
           color="gray"
           value={query}
           type="text"
@@ -113,35 +117,47 @@ const Search = () => {
           onChange={handleChange}
         />
       </InputGroup>
-     { show&&<Box
-     align="start"
-        maxH="300px"
-        pos="absolute"
-        width="95%"
-        top="50px"
-        zIndex={10}
-        boxShadow="md"
-        p="10px 20px"
-        left="-10px"
-        fontSize="xs"
-        bg="white"
-        overflow="auto"
-        onMouseLeave={() => {setShow(false);setActive(null);}}
-      >
-        {suggestion?.map((result, i) => (
-          <Text
-            ref={element => (scrollDiv.current[i] = element)}
-            bg={active === i ? 'blackAlpha.400' : 'white'}
-            pb="4px"
-            key={shortID ()}
-            cursor="pointer"
-            onClick={() => handleSelection(result)}
-            onMouseEnter={() => setActive(i)}
+      {show && (
+        <Box
+          align="start"
+          pos="absolute"
+          width="95%"
+          top="50px"
+          zIndex={10}
+          boxShadow="md"
+          left="-10px"
+          bg="white"
+        >
+          <Box
+            overflow="auto"
+            maxH="300px"
+            m="4px 0px 10px 10px "
+            fontSize="xs"
+            onMouseLeave={() => {
+              setShow(false);
+              setActive(null);
+            }}
           >
-            {result.title}
-          </Text>
-        ))}
-      </Box>}
+            {suggestion.length > 0 ? (
+              suggestion?.map((result, i) => (
+                <Text
+                  ref={(element) => (scrollDiv.current[i] = element)}
+                  bg={active === i ? "blackAlpha.400" : "white"}
+                  p=" 2px 4px"
+                  key={shortID()}
+                  cursor="pointer"
+                  onClick={() => handleSelection(result)}
+                  onMouseEnter={() => setActive(i)}
+                >
+                  {result.title}
+                </Text>
+              ))
+            ) : (
+              <Text>No result fond please try another</Text>
+            )}
+          </Box>
+        </Box>
+      )}
     </HStack>
   );
 };
