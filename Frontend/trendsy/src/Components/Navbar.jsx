@@ -264,6 +264,7 @@ const Navbar = () => {
             p={["10px 3px", null, "20px 7px"]}
             onMouseEnter={handleDropdown}
             fontWeight={750}
+            cursor="pointer"
           >
             STUDIO
           </Text>

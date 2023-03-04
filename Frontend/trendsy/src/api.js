@@ -9,6 +9,10 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_TRENDZY_BASE_URL;
 // console.log(baseUrl);
 
+<<<<<<< HEAD
+const token = localStorage.getItem("trendsyToken")
+=======
+>>>>>>> fb1cd2ac2dc33d8fd420c72be9fccb97089de914
 
 const token = JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.token;
 
