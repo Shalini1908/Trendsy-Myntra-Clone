@@ -84,11 +84,8 @@ export const SingleProduct = () => {
     axios
       .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data, {
         headers: {
-<<<<<<< HEAD
-          Authorization: localStorage.getItem("trendsyToken"),
-=======
-          Authorization: JSON.parse(localStorage.getItem("trendsyToken"))?.token,
->>>>>>> fb1cd2ac2dc33d8fd420c72be9fccb97089de914
+          Authorization: JSON.parse(localStorage.getItem("trendsyToken"))
+            ?.token,
         },
       })
       .then((res) => {
