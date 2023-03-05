@@ -8,12 +8,19 @@ import {
   Box,
   Button,
   Checkbox,
+  Circle,
+  CloseButton,
   Flex,
   Grid,
   GridItem,
   HStack,
-  Icon,
   Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   SimpleGrid,
   Text,
   useDisclosure,
@@ -23,38 +30,77 @@ import React, { useRef, useState } from "react";
 import { BiCaretDown } from "react-icons/bi";
 import { GiReturnArrow } from "react-icons/gi";
 import CartInfo from "./CartInfo";
-import { SmallCloseIcon } from "@chakra-ui/icons";
+
 import { shortID } from "../short_key.generator";
-import { deleteData } from "../../api";
+import { deleteData, postData, updateData } from "../../api";
 import { setCartData } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
 
-const CartProducts = ({ cart, setCart, cartData}) => {
-  console.log(cartData)
+const CartProducts = ({ cart, setCart, cartData }) => {
   // const [check, setCheck] = useState(initialCheck);
   const [product, setProduct] = useState("");
-const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const productRef = useRef([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isQtyOpen,
+    onOpen: onQtyOpen,
+    onClose: onQtyClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isWishlistOpen,
+    onOpen: onWishlistOpen,
+    onClose: onWishlistClose,
+  } = useDisclosure();
+  const {
+    isOpen: isRemoveOpen,
+    onOpen: onRemoveOpen,
+    onClose: onRemoveClose,
+  } = useDisclosure();
+  const [quantity, setQuantity] = useState(1);
   const cancelRef = useRef();
+  const cancelQtyRef = useRef();
 
-  console.log(cart);
-
+  //console.log(cart);
 
   const handleProduct = (Product) => {
-    
     const newCart = [...cart];
-    console.log(Product.id, newCart);
+
     const index = newCart.findIndex((product) => product.id == Product.id);
-    console.log(index);
+
     if (index == -1) {
       setCart([...newCart, Product]);
     } else {
       newCart.splice(index, 1);
       setCart(newCart);
-
-      console.log(index, newCart);
     }
+  };
+  // /wishlist/addtowishlist`
+
+  // const handleWishlist=()=>{
+  //   onWishlistOpen()
+  // }
+
+  const handleWishlist = () => {
+    postData("/wishlist/addtowishlist", { data: cart }).then((res) => {
+      console.log(res);
+      if (res) {
+        handleRemove();
+      }
+      onWishlistClose();
+    });
+  };
+
+  const handleRemove = () => {
+    deleteData("/cart/deletecart", { data: cart }).then((res) => {
+      const newData = cartData.filter(
+        (el) => !cart.some((removeItem) => removeItem._id === el._id)
+      );
+      dispatch(setCartData(newData));
+      setCart([]);
+    });
+    onRemoveClose();
   };
 
   const handleAlart = (product) => {
@@ -62,14 +108,34 @@ const dispatch=useDispatch()
     onOpen();
   };
   const handleDelete = (product) => {
+    deleteData(`/cart/deletecart/${product._id}`).then((res) => {
+      const newCart = cart.filter((el) => el._id !== product._id);
+      setCart(newCart);
+      const newData = cartData.filter((el) => el._id !== product._id);
+      dispatch(setCartData(newData));
+    });
+  };
 
-    deleteData(`/deletecart/${product._id}`).then((res)=>{
-      console.log(res)
-    const newCart = cart.filter((el) => el._id !== product._id);
+  const handleQtyAlart = (product) => {
+    setProduct(product);
+    setQuantity(product.qty);
+    onQtyOpen();
+  };
+
+  const handleQuantity = (product) => {
+    const newProduct = { ...product, qty: quantity };
+    const newCart = cart.map((el) => (el._id == product._id ? newProduct : el));
     setCart(newCart);
-    const newData = cartData.filter((el) => el._id !== product._id);
-   dispatch( setCartData(newData))});
-    
+    const newData = cartData.map((el) =>
+      el._id == product._id ? newProduct : el
+    );
+    console.log(newProduct);
+    dispatch(setCartData(newData));
+    updateData(`/cart/updatecart/${newProduct._id}`, { data: newProduct }).then(
+      (res) => {
+        console.log(res);
+      }
+    );
   };
 
   return (
@@ -81,10 +147,12 @@ const dispatch=useDispatch()
             isChecked={cart.length == cartData.length}
             isIndeterminate={cart.length < cartData.length && cart.length != 0}
             colorScheme={
-              cart.length == cartData.length || cart.length == 0 ? "green" : "red"
+              cart.length == cartData.length || cart.length == 0
+                ? "green"
+                : "red"
             }
             size={["sm", null, "md"]}
-            onChange={(e) => cart.length?setCart([]):setCart(cartData)}
+            onChange={(e) => (cart.length ? setCart([]) : setCart(cartData))}
           />
 
           <Text as="b" fontSize={["10px", "xs", null, "sm", "md"]}>
@@ -93,11 +161,21 @@ const dispatch=useDispatch()
           </Text>
         </HStack>
         <HStack>
-          <Button colorScheme="blackAlpha" variant="link" size="xs">
+          <Button
+            colorScheme="blackAlpha"
+            variant="link"
+            size="xs"
+            onClick={onRemoveOpen}
+          >
             REMOVE
           </Button>
           <Box h="30PX" borderWidth="1px" m="0x 10px"></Box>
-          <Button colorScheme="blackAlpha" variant="link" size="xs">
+          <Button
+            colorScheme="blackAlpha"
+            variant="link"
+            size="xs"
+            onClick={onWishlistOpen}
+          >
             MOVE TO WISHLIST
           </Button>
         </HStack>
@@ -110,16 +188,15 @@ const dispatch=useDispatch()
             templateColumns={"30% 70%"}
             borderWidth="1px"
             borderRadius="lg"
-            templateRows={["100px", "150px"]}
+            templateRows={["100px", "200px"]}
             gap={["5px", "10px", "15px", "20px"]}
             p="10px"
             m={["5px 0px", null, "10px 0px"]}
             fontSize={["8px", "10px", "xs", "sm"]}
             position="relative"
           >
-            <Icon
-              fontWeight={100}
-              as={SmallCloseIcon}
+            <CloseButton
+              size="md"
               position="absolute"
               right="10px"
               top="10px"
@@ -136,6 +213,11 @@ const dispatch=useDispatch()
                 borderColor="blackAlpha.600"
                 bg="white"
                 size={["sm", null, "md"]}
+                colorScheme={
+                  cart.length == cartData.length || cart.length == 0
+                    ? "green"
+                    : "red"
+                }
                 onChange={() => handleProduct(product)}
                 isChecked={cart.some((el) => el.id === product.id)}
               />
@@ -145,6 +227,7 @@ const dispatch=useDispatch()
               direction="column"
               gap={["3px", "5px"]}
               fontSize={["7px", "xs"]}
+              alignItems="flex-start"
             >
               <Text as="b">{product.brand}</Text>
               <Text>
@@ -166,8 +249,9 @@ const dispatch=useDispatch()
                   color="black"
                   variant="ghost"
                   rightIcon={<BiCaretDown />}
+                  onClick={() => handleQtyAlart(product)}
                 >
-                  Qty:{product.qty}
+                  Qty : {product.qty}
                 </Button>
               </Box>
               <HStack>
@@ -241,6 +325,133 @@ const dispatch=useDispatch()
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
+      <AlertDialog
+        isOpen={isQtyOpen}
+        leastDestructiveRef={cancelQtyRef}
+        onClose={onQtyClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent w="330px">
+            <Box
+              alignSelf="end"
+              cursor="pointer"
+              mb="-30px"
+              p="5px"
+              pb="10px"
+              onClick={() => onQtyClose()}
+            >
+              <CloseButton size="lg" />
+            </Box>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Select Quantity
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              <Flex gap="10px" wrap={"wrap"} p="5px 20px">
+                {Array(10)
+                  .fill()
+                  .map((_, qty) => (
+                    <Circle
+                      cursor="pointer"
+                      key={shortID()}
+                      borderColor={qty + 1 == quantity ? "red" : "black"}
+                      borderWidth="1px"
+                      fontWeight="medium"
+                      color={qty + 1 == quantity ? "red" : "black"}
+                      size="40px"
+                      onClick={() => setQuantity(qty + 1)}
+                    >
+                      {qty + 1}
+                    </Circle>
+                  ))}
+              </Flex>
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button
+                w="full"
+                colorScheme="red"
+                onClick={() => {
+                  onQtyClose();
+                  handleQuantity(product);
+                }}
+              >
+                Done
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+      <Modal isOpen={isWishlistOpen} onClose={onWishlistClose} size="sm">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader size="xs">
+            Move {cart.length} items to wishlist
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>
+              {" "}
+              Are you sure you want to move {cart.length} items from bag.
+            </Text>
+            <Box mt="20px" borderWidth="1px" />
+          </ModalBody>
+
+          <HStack justify="space-around" p="10px">
+            <Button
+              colorScheme="blackAlpha"
+              variant="link"
+              size="xs"
+              onClick={onWishlistClose}
+            >
+              CANCEL
+            </Button>
+            <Box h="30PX" borderWidth="1px" m="0x 10px"></Box>
+            <Button
+              colorScheme="red"
+              variant="link"
+              size="xs"
+              onClick={handleWishlist}
+            >
+              MOVE TO WISHLIST
+            </Button>
+          </HStack>
+        </ModalContent>
+      </Modal>
+      <Modal isOpen={isRemoveOpen} onClose={onRemoveClose} size="sm">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader size="xs">Remove {cart.length} items</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>
+              {" "}
+              Are you sure you want to remove {cart.length} items from bag.
+            </Text>
+            <Box mt="20px" borderWidth="1px" />
+          </ModalBody>
+
+          <HStack justify="space-around" p="10px">
+            <Button
+              colorScheme="blackAlpha"
+              variant="link"
+              size="xs"
+              onClick={handleRemove}
+            >
+              REMOVE
+            </Button>
+            <Box h="30PX" borderWidth="1px" m="0x 10px"></Box>
+            <Button
+              colorScheme="red"
+              variant="link"
+              size="xs"
+              onClick={handleRemove}
+            >
+              MOVE TO WISHLIST
+            </Button>
+          </HStack>
+        </ModalContent>
+      </Modal>
     </SimpleGrid>
   );
 };

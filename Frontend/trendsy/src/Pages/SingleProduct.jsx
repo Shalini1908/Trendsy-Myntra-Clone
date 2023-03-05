@@ -80,10 +80,12 @@ export const SingleProduct = () => {
       });
   };
 
-  const handleAddToCart = (data) => {
+  const handleAddToCart = () => {
     dispatch(addToCartPostRequestAction());
+    const cartObj={...data,qty:1}
+    console.log(cartObj)
     axios
-      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data, {
+      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`,cartObj, {
         headers: {
           Authorization: JSON.parse(localStorage.getItem("trendsyToken"))
             ?.token,
@@ -95,7 +97,7 @@ export const SingleProduct = () => {
           alert("please login first");
         } else {
           alert("Product added successfully ");
-          dispatch(addToCartPostSuccessAction(res.data));
+          dispatch(addToCartPostSuccessAction(cartObj));
         }
       })
       .catch((err) => {
@@ -411,7 +413,7 @@ export const SingleProduct = () => {
                   borderRadius={"2px"}
                   fontWeight={"600"}
                   transition={"0.3s"}
-                  onClick={() => handleAddToCart(products)}
+                  onClick={() => handleAddToCart()}
                 >
                   <Text>
                     <HiShoppingBag />
