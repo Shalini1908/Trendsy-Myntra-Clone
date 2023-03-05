@@ -98,7 +98,7 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        cart: [...state.cart, payload],
+        cartData: [...state.cart, payload],
       };
     }
     case POST_ADDTOCART_ERROR: {

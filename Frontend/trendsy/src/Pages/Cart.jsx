@@ -1,18 +1,20 @@
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Button, Center, Grid, GridItem, HStack, Heading, Image, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import CartNav from "../Components/Cart/CartNav";
 import CartProducts from "../Components/Cart/CartProducts";
 import CartCalculation from "../Components/Cart/CartCalculation";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartData } from "../Redux/actions";
 import { getData } from "../api";
 import axios from "axios";
+import { Text } from "recharts";
 
 const numbers = [0, 2, 7, 10, 15, 21, 30];
 
 const Cart = () => {
   const { cartData } = useSelector((store) => store);
+  console.log(cartData)
   const dispatch = useDispatch();
   let isAuth = false;
   const name = JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.name;
@@ -48,40 +50,34 @@ const Cart = () => {
     }
   }, []);
 
-  // const Auth = localStorage.getItem("trendsyToken");
-  // const token = JSON.parse(Auth);
 
-  // const getCartData = () => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_TRENDZY_BASE_URL}/wishlist`, {
-  //       headers: { authorization: token.token },
-  //     })
-  //     .then((res) => {
-  //       setCart(res.data);
-  //       dispatch(setCartData(res.data));
-  //       // console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // };
 
   return (
     <Box>
-      <CartNav />
+      
+      {cartData.length?<Box><CartNav />
 
       <Grid
         justifyContent={"center"}
         gap={["5px", null, null, "15px"]}
         templateColumns={["auto", null, "auto auto"]}
       >
-        <GridItem maxW={["300px", "500px"]}>
+        <GridItem maxW={["300px", "600px"]}>
           <CartProducts cart={cart} setCart={setCart} cartData={cartData} />
         </GridItem>
         <GridItem maxW={["300px", "400px"]}>
           <CartCalculation cart={cart} />
         </GridItem>
       </Grid>
+      </Box>:
+      <VStack spacing="20px" mt="200px">
+        <Image src="https://constant.myntassets.com/checkout/assets/img/empty-bag.webp"  w="150px" alt="empty bag"/>
+        <Box>
+        <Heading size="md">Hay, it fills so light!</Heading>
+        <Text color ="blackAlpha">There is nothing in your bag. Let's add some items.</Text>
+        </Box>
+      < Link to="/wishlist" ><Button variant="outline" color="red" >ADD ITEMS FROM WISHLIST</Button></Link>
+      </VStack>}
     </Box>
   );
 };

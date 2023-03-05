@@ -23,7 +23,7 @@ import { MdLocalOffer } from "react-icons/md";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 const initialCheck = { color: "blackAlpha", status: false };
 
-let fee = false;
+const pinArray=[414203,]
 const CartInfo = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [check, setCheck] = useState(false);
@@ -40,8 +40,8 @@ const CartInfo = () => {
   };
   useEffect(() => {
     const intervalId = setTimeout(async () => {
-      const pin = initialRef.current.value;
-      if (pin == 414203) {
+      const pin = +initialRef.current.value;
+      if (pinArray.includes(pin)) {
         setCheckPin({ color: "green", status: true });
       } else if (pin) {
         setCheckPin({ color: "red", status: false });
@@ -110,7 +110,7 @@ const CartInfo = () => {
           </ModalContent>
         </Modal>
       </HStack>
-      <Box p="15px" borderWidth="1px" borderRadius="lg">
+      <Box p="15px" borderWidth="1px" borderRadius="lg" textAlign="start">
         <HStack spacing="20px" mb="10px">
           <MdLocalOffer />
           <Heading size={["xs", "sm"]}>Available Offers</Heading>
@@ -120,7 +120,7 @@ const CartInfo = () => {
           {/* Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
              labore wes anderson cred nesciunt sapiente ea proident. */}
-          <UnorderedList fontSize="xs" pl="5px" spacing="10px" textAlign="start">
+          <UnorderedList fontSize="xs" pl="5px" spacing="10px" >
             <ListItem>
               10% Instant Discount on YES Bank Credit Cards on a min spend of Rs
               3,000. TCA
@@ -147,6 +147,7 @@ const CartInfo = () => {
         </Collapse>
 
         <Button
+        alignSelf="start"
           size="sm"
           colorScheme="red"
           variant="ghost"

@@ -8,11 +8,12 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { RiCoupon3Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCartTotalS } from "../../Redux/actions";
+import { shortID } from "../short_key.generator";
 const initialCartTotals = {
   total: 0,
   discount: 0,
@@ -21,10 +22,13 @@ const initialCartTotals = {
   fee: 0,
   total_Amount: 0,
 };
+const support=[10,50,100]
 const CartCalculation = ({ cart }) => {
   const dispatch = useDispatch();
   const [cartTotals, setCartTotals] = useState(initialCartTotals);
   const [clear, setClear] = useState("black");
+  const [supportDiv,setSupportDiv]=useState(null)
+  const supportRef=useRef([])
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -45,29 +49,40 @@ const CartCalculation = ({ cart }) => {
     setCartTotals(cal);
   };
 
-  const handleSocial = useCallback((event) => {
-    // Get the clicked button element
-    const button = event.target;
-    const num = Number(button.innerText.slice(1));
-    if (cartTotals.social) {
-      if (cartTotals.social !== num) {
-        const total = cartTotals.total_Amount + num;
-        setCartTotals({ ...cartTotals, social: num, total_Amount: total });
-        setClear((clear) => "black");
-        button.style.color = "red";
-      } else {
-        const total = cartTotals.total_Amount - num;
-        setCartTotals({ ...cartTotals, social: num, total_Amount: total });
-        button.style.color = "black";
-      }
-    } else {
-      const total = cartTotals.total_Amount + num;
-      setCartTotals({ ...cartTotals, social: num, total_Amount: total });
-      setClear((clear) => "black");
-      button.style.color = "red";
-    }
-    // Change the background color of the button to red
-  }, []);
+  const handleSupport=()=>{
+    const newCartTotal={...cartTotals}
+    if(newCartTotal.social){
+   
+    newCartTotal.total_Amount=newCartTotal.total_Amount-newCartTotal.social
+    newCartTotal.social=0
+    setCartTotals( newCartTotal)
+    setSupportDiv(null)
+  }else{
+    newCartTotal.total_Amount=newCartTotal.total_Amount+support[0]
+    newCartTotal.social=support[0]
+    setCartTotals( newCartTotal)
+    setSupportDiv(0)
+  }
+}
+
+  const handleSocial =(supportID)=> {
+    console.log(supportID)
+
+
+    const newCartTotal={...cartTotals}
+if(supportID<3){
+ 
+    const diff=support[supportID]-newCartTotal.social
+    newCartTotal.social=support[supportID]
+    console.log(diff,newCartTotal.total_Amount)
+    newCartTotal.total_Amount=newCartTotal.total_Amount+diff
+setCartTotals( newCartTotal)
+setSupportDiv(supportID)
+
+}
+   
+   
+  };
 
   const handleSubmit = async () => {
     if (cartTotals.total) {
@@ -124,37 +139,22 @@ const CartCalculation = ({ cart }) => {
         {" Support transformative social work in India".toUpperCase()}
       </Text>
       <VStack w="full" align="start">
-        <Checkbox colorScheme="red" fontWeight="bold" spacing="15px">
+        <Checkbox colorScheme="red" fontWeight="bold" spacing="15px" isChecked={cartTotals.social} onChange={handleSupport}>
           Support Us
         </Checkbox>
         <HStack p="10px 0px" justify="space-between" w="full">
-          <Button
+          {support.map((price,i)=><Button
+          key={shortID()}
             size={["xs", "sm", null, "md"]}
             variant="outline"
-            colorScheme={clear}
+            colorScheme={supportDiv==i?"red":"black"}
             borderRadius="20px"
-            onClick={handleSocial}
+            onClick={()=>handleSocial(i)}
+ref={(ele)=>supportRef.current[i]=ele}
           >
-            ₹ 10
-          </Button>
-          <Button
-            size={["xs", "sm", null, "md"]}
-            variant="outline"
-            colorScheme={clear}
-            borderRadius="20px"
-            onClick={handleSocial}
-          >
-            ₹ 50
-          </Button>
-          <Button
-            size={["xs", "sm", null, "md"]}
-            variant="outline"
-            colorScheme={clear}
-            borderRadius="20px"
-            onClick={handleSocial}
-          >
-            ₹ 100
-          </Button>
+            ₹ {price}
+          </Button>)}
+       
           <Button
             size={["xs", "sm", null, "md"]}
             variant="outline"
@@ -162,7 +162,7 @@ const CartCalculation = ({ cart }) => {
             borderRadius="20px"
           >
             Other
-          </Button>
+          </Button> 
         </HStack>
         <Button size="sm" variant="unstyled" color="#ff3f6c">
           Know more
