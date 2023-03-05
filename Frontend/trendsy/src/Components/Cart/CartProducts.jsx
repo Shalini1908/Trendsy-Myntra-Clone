@@ -182,6 +182,7 @@ const CartProducts = ({ cart, setCart, cartData }) => {
       </HStack>
       <Box>
         {cartData?.map((product, i) => (
+         
           <Grid
             // ref={(el)=> productRef.current[i]=[el]}
             key={shortID()}
@@ -235,6 +236,7 @@ const CartProducts = ({ cart, setCart, cartData }) => {
                 {product.title?.split(" ").length > 7 ? " ...." : ""}
               </Text>
               <Text color="gray">Sold by: NAUGHTY NINOS PVT LTD (JIT)</Text>
+             
               <Box>
                 <Button
                   size={["xs", "sm", null, "md"]}
@@ -251,7 +253,7 @@ const CartProducts = ({ cart, setCart, cartData }) => {
                   rightIcon={<BiCaretDown />}
                   onClick={() => handleQtyAlart(product)}
                 >
-                  Qty : {product.qty}
+                  Qty : {product.qty?product.qty:1}
                 </Button>
               </Box>
               <HStack>

@@ -36,8 +36,12 @@ const CartCalculation = ({ cart }) => {
   const Calculate = () => {
     const cal = { ...initialCartTotals };
     cart.forEach((product) => {
-      // console.log(cal.total);
+      if(!product.qty){
+       product= {...product,qty:1}
+      }
+      // console.log(Number(product.variant_mrp) * Number(product.qty));
       cal.total += Number(product.variant_mrp) * Number(product.qty);
+
       cal.discount +=
         (Number(product.variant_mrp) - Number(product.variant_price)) *
         Number(product.qty);
