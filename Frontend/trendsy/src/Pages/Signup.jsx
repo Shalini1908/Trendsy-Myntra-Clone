@@ -85,6 +85,7 @@ const Signup = () => {
           const token=res.token||""
           const name=res.name||""
           localStorage.setItem("trendsyToken", JSON.stringify({token,name}));
+          localStorage.removeItem("num") 
           console.log(res);dispatch(LoginFunctionSuccess({name:values.name}));
           }
           {

@@ -28,6 +28,7 @@ const initialState = {
     coupen: 0,
     social: 0,
     fee: 0,
+    loginDic:0,
     total_Amount: 0,
   },
   cartData:[],
@@ -98,7 +99,7 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        cartData: [...state.cart, payload],
+        cartData: [...state.cartData, payload],
       };
     }
     case POST_ADDTOCART_ERROR: {

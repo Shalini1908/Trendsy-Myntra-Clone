@@ -29,9 +29,9 @@ const AllRoutes = () => {
         <Route
           path="/cart"
           element={
-            <PrivateRoutes>
+           
               <Cart />
-            </PrivateRoutes>
+          
           }
         ></Route>
         <Route path="/products/:Q" element={<Products />}></Route>

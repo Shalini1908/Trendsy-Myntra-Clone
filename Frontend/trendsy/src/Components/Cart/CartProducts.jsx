@@ -68,12 +68,15 @@ const CartProducts = ({ cart, setCart, cartData }) => {
     const newCart = [...cart];
 
     const index = newCart.findIndex((product) => product.id == Product.id);
-
+    const newCartData = cartData.filter((item) => ![...cart,Product].some((cartItem) => cartItem.id === item.id));
     if (index == -1) {
-      setCart([...newCart, Product]);
+      setCart([Product,...newCart]);
+    
+     dispatch(setCartData([Product,...cart,...newCartData]))
     } else {
       newCart.splice(index, 1);
-      setCart(newCart);
+      setCart((cart)=>newCart);
+      dispatch(setCartData([...newCart,Product,...newCartData]))
     }
   };
   // /wishlist/addtowishlist`
@@ -226,7 +229,7 @@ const CartProducts = ({ cart, setCart, cartData }) => {
 
             <Flex
               direction="column"
-              gap={["3px", "5px"]}
+              gap={["3px", "10px"]}
               fontSize={["7px", "xs"]}
               alignItems="flex-start"
             >
@@ -264,7 +267,7 @@ const CartProducts = ({ cart, setCart, cartData }) => {
                   </Text>
                 )}
                 {product.variant_price !== product.variant_mrp && (
-                  <Text color="red">
+                  <Text color="#ff3f6c">
                     {Math.floor(
                       (product.variant_price / product.variant_mrp) * 100
                     )}{" "}
@@ -288,14 +291,14 @@ const CartProducts = ({ cart, setCart, cartData }) => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Move from Bag
+              Remove from Bag
             </AlertDialogHeader>
 
             <AlertDialogBody>
               <Flex gap="10px">
                 {" "}
                 {product && <Image src={product.images[0]} w="70px" />}{" "}
-                <Text>Are you sure you want to move this item from bag?</Text>
+                <Text>Are you sure you want to remove this item from bag?</Text>
               </Flex>
             </AlertDialogBody>
 
@@ -356,10 +359,10 @@ const CartProducts = ({ cart, setCart, cartData }) => {
                     <Circle
                       cursor="pointer"
                       key={shortID()}
-                      borderColor={qty + 1 == quantity ? "red" : "black"}
+                      borderColor={qty + 1 == quantity ? "#ff3f6c" : "black"}
                       borderWidth="1px"
                       fontWeight="medium"
-                      color={qty + 1 == quantity ? "red" : "black"}
+                      color={qty + 1 == quantity ? "#ff3f6c" : "black"}
                       size="40px"
                       onClick={() => setQuantity(qty + 1)}
                     >

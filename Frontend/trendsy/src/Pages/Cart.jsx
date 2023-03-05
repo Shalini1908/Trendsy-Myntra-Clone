@@ -25,9 +25,9 @@ const Cart = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
 
-  if (!isAuth) {
-    navigate("/login");
-  }
+  // if (!isAuth) {
+  //   navigate("/login");
+  // }
   useEffect(() => {
     //console.log(cartData[0])
 
@@ -55,9 +55,9 @@ const Cart = () => {
   return (
     <Box>
       
-      {cartData.length?<Box><CartNav />
+      <CartNav />
 
-      <Grid
+      {cartData.length? <Grid
         justifyContent={"center"}
         gap={["5px", null, null, "15px"]}
         templateColumns={["auto", null, "auto auto"]}
@@ -69,8 +69,8 @@ const Cart = () => {
           <CartCalculation cart={cart} />
         </GridItem>
       </Grid>
-      </Box>:
-      <VStack spacing="20px" mt="200px">
+      :
+      <VStack spacing="20px" mt="150px">
         <Image src="https://constant.myntassets.com/checkout/assets/img/empty-bag.webp"  w="150px" alt="empty bag"/>
         <Box>
         <Heading size="md">Hay, it fills so light!</Heading>
