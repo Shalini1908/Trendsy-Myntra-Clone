@@ -168,6 +168,7 @@ const Navbar = () => {
                     // transform: "translate(-50%, -50%)",
                   },
                 }}
+                onClick={handleDropdown}
                 position="relative"
               >
                 {category.toUpperCase()}
