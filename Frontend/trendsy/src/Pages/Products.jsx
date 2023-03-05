@@ -148,34 +148,43 @@ export const Products = () => {
   const toast = useToast();
 
   const AddToWishlist = (data) => {
-    axios
-      .post(
-        `${process.env.REACT_APP_TRENDZY_BASE_URL}/wishlist/addtowishlist`,
-        data,
-        { headers: { authorization: token.token } }
-      )
-      .then((res) => {
-        console.log(res);
-        toast({
-          position: "top",
-          title: res.data,
-          status: "success",
-          duration: 3000,
-          isClosable: true,
+    if (token) {
+      axios
+        .post(
+          `${process.env.REACT_APP_TRENDZY_BASE_URL}/wishlist/addtowishlist`,
+          data,
+          { headers: { authorization: token.token } }
+        )
+        .then((res) => {
+          console.log(res);
+          toast({
+            position: "top",
+            title: res.data,
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+        })
+        .catch((err) => {
+          console.log(err.message);
+          toast({
+            position: "top",
+            title: err.message,
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
         });
-      })
-      .catch((err) => {
-        console.log(err.message);
-        toast({
-          position: "top",
-          title: err.message,
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
+    } else {
+      toast({
+        position: "top",
+        title: "Please login first",
+        status: "info",
+        duration: 3000,
+        isClosable: true,
       });
+    }
   };
-
   // console.log(brands);
 
   return (
