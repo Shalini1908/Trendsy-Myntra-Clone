@@ -1,13 +1,7 @@
 import axios from "axios";
-// import {
-//   getProductsFailureAction,
-//   getProductsRequestAction,
-//   setAllProductsData,
-//   setCurruntRoute,
-// } from "./redux/ProductsReducer/action";
 
 const baseUrl = process.env.REACT_APP_TRENDZY_BASE_URL;
-// console.log(baseUrl);
+
 
 const token = JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.token;
 
@@ -15,6 +9,8 @@ const headers = {
   Authorization: token,
   "Content-Type": "application/json",
 };
+
+
 
 export const getData = async (path, filter) => {
   console.log(filter);
@@ -24,7 +20,11 @@ export const getData = async (path, filter) => {
     let res = await axios.get(`${baseUrl}${path}`, serverRequestData);
     let data = await res.data;
     //console.log(res)
+    if(typeof (data)=="object")
     return data;
+    else{
+      return []
+    }
   } catch (err) {
     console.log(err.message);
   }

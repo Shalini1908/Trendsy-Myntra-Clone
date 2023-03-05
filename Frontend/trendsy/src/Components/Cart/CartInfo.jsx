@@ -50,7 +50,7 @@ const CartInfo = () => {
     }, 2000);
 
     return () => {
-      clearInterval(intervalId); // Clear the interval when the component unmounts
+      clearTimeout(intervalId); // Clear the interval when the component unmounts
     };
   }, [check]);
   return (
