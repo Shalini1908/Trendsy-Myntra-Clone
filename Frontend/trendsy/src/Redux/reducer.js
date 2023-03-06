@@ -21,7 +21,7 @@ const initialState = {
   TotalData: [],
 
   isAuth: false,
-  name: "",
+  name: JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.name||"",
   CartTotals: {
     total: 0,
     discount: 0,
@@ -32,8 +32,6 @@ const initialState = {
     total_Amount: 0,
   },
   cartData:[],
-  isAuth: false,
-  name: "",
   cart: [],
 };
 
@@ -86,7 +84,7 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
     }
 
     case LogoutSuccess: {
-      return { ...state, isAuth: false };
+      return { ...state, isAuth: false , cartData:[]};
     }
     case POST_ADDTOCART_REQUEST: {
       return {

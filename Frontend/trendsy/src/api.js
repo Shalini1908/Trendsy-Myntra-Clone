@@ -3,16 +3,19 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_TRENDZY_BASE_URL;
 
 
+
+const checkToken=()=>{
 const token = JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.token;
 
-const headers = {
+return {
   Authorization: token,
   "Content-Type": "application/json",
 };
 
-
+}
 
 export const getData = async (path, filter) => {
+ const headers= checkToken()
   console.log(filter);
   const serverRequestData = { ...filter, headers };
   try {
@@ -31,12 +34,10 @@ export const getData = async (path, filter) => {
 };
 
 export const postData = async (path, filter) => {
- 
+  const headers= checkToken()
   const serverRequestData = { ...filter, headers };
   console.log(serverRequestData,filter)
   try {
-   
-
  
       let res = await axios.post(`${baseUrl}${path}`, serverRequestData);
       return await res.data;
@@ -48,13 +49,11 @@ export const postData = async (path, filter) => {
 };
 
 export const updateData = async (path, filter) => {
- 
+  const headers= checkToken()
   const serverRequestData = { ...filter, headers };
   console.log(serverRequestData,filter)
   try {
    
-
- 
       let res = await axios.patch(`${baseUrl}${path}`, serverRequestData);
       return await res.data;
     
@@ -65,11 +64,10 @@ export const updateData = async (path, filter) => {
 };
 
 export const deleteData = async (path, filter) => {
+  const headers= checkToken()
    console.log(path,filter)
   const serverRequestData = { ...filter, headers };
   try {
- 
-
    
       let res = await axios.delete(`${baseUrl}${path}`, serverRequestData);
       return await res.data;
