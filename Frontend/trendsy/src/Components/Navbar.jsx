@@ -48,7 +48,7 @@ const Navbar = () => {
   const { cartData } = useSelector((store) => store);
   // console.log(cartData)
   let isAuth = false;
-  const name = JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.name;
+  const name = JSON.parse(localStorage.getItem("trendsyToken") || "{}")?.name.trim();
   if (name) {
     isAuth = true;
   }
@@ -71,6 +71,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(LogoutFunctionSuccess());
+    setHover(false)
     localStorage.removeItem("trendsyToken");
     toast({
       position: "top",

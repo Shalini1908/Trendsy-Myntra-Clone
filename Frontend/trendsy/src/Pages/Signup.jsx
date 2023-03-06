@@ -83,7 +83,7 @@ const Signup = () => {
         .then((res) => {
           if(res.msg){
           const token=res.token||""
-          const name=res.name||""
+          const name=payload.name||""
           localStorage.setItem("trendsyToken", JSON.stringify({token,name}));
           localStorage.removeItem("num") 
           console.log(res);dispatch(LoginFunctionSuccess({name:values.name}));
@@ -97,7 +97,7 @@ const Signup = () => {
                   "you are being redirected",
                   "success"
                 );
-                navigate("/")
+                navigate(-2);
               }
           }; 
         })

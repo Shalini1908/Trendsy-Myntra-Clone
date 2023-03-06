@@ -91,7 +91,7 @@ const Login = () => {
             swal(
               "login Successfull", "you are being redirected" , "success"
               );
-              navigate("/")
+              navigate(-1);
             } })
       .catch(err => console.log(err))
 
