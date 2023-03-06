@@ -36,6 +36,8 @@ import { deleteData, postData, updateData } from "../../api";
 import { setCartData } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
 
+
+const days=[2,4,7,15,21,30]
 const CartProducts = ({ cart, setCart, cartData }) => {
   // const [check, setCheck] = useState(initialCheck);
   const [product, setProduct] = useState("");
@@ -276,7 +278,7 @@ const CartProducts = ({ cart, setCart, cartData }) => {
                 )}
               </HStack>
               <HStack>
-                <GiReturnArrow /> <Text as="b">{product.days} days</Text>
+                <GiReturnArrow /> <Text as="b">{days[Math.floor(Math.random() * (5 - 0)) ]} days</Text>
                 <Text> return available</Text>
               </HStack>
             </Flex>
