@@ -3,8 +3,8 @@ Developers Name
 Shalini Singh<br>
 Kashif Rezvi<br>
 Abhijeet Kale<br>
-Madhukar Balasaheb Kakade<br>
-Ganesh bahire
+Madhukar Kakade<br>
+Ganesh Bahire
 
 TEACH STACKS-
 React<br>
