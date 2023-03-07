@@ -1,26 +1,26 @@
-Developers Name 
+ Developers Name 
 
-Shalini Singh<br>
-Kashif Rezvi<br>
-Abhijeet Kale<br>
-Madhukar Kakade<br>
-Ganesh Bahire
+Shalini Singh </br>
+Kashif Rezvi </br>
+Abhijeet Kale </br>
+Madhukar Kakade </br>
+Ganesh Bahire </br>
 
-TEACH STACKS-
-React<br>
-Redux<br>
-Redux-Thunk<br>
-NodeJS<br>
-Mongoose<br>
-MongoDB<br>
-ChakraUI<br>
-HTML<br>
-JavaScript<br>
-CSS
+
+TEACH STACKS
+  - React
+  - Redux
+  - Redux-Thunk
+  - NodeJS
+  - Mongoose
+  - MongoDB
+  - ChakraUI
+  - HTML
+  - JavaScript
+  - CSS
 
 
 LOGO
-
 ![trendsy-new-modified](https://user-images.githubusercontent.com/107534386/221490432-2176031a-5013-4c10-909e-bba47d6fc99f.png)
 
 
@@ -44,13 +44,16 @@ LANDING PAGE
 
 ![Screenshot (4)](https://user-images.githubusercontent.com/107534386/221490242-a308f6a3-f60a-4814-b18d-98775c060db4.png)
 
+
 PRODUCT PAGE
 
 ![Screenshot (5)](https://user-images.githubusercontent.com/107534386/221490283-c19e2529-a9ee-4e8f-8861-83e6d7ae361b.png)
 ![Screenshot (6)](https://user-images.githubusercontent.com/107534386/221490292-80be7b05-0faa-435b-9a36-16c2bba9104a.png)
 
+
 SIGN UP
 ![Screenshot (7)](https://user-images.githubusercontent.com/107534386/221490336-4a2d5172-3af1-468a-91f8-fba35cd9bc3d.png)
+
 
 CART PAGE
   - Cart Navbar
