@@ -1,10 +1,11 @@
-import { Box, HStack, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, HStack, Image, Stack, Text, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Ratings } from "./Ratings";
 import { useNavigate, useParams } from "react-router-dom";
 import { OnHoverProducts } from "./OnHoverProducts";
+import { CloseIcon } from "@chakra-ui/icons";
 
-export const Product = ({ props }) => {
+export const Product = ({ props, option, handleOption, handleDelete }) => {
   const {
     title,
     brand,
@@ -15,13 +16,6 @@ export const Product = ({ props }) => {
     _id,
     size,
   } = props;
-
-  const navigate = useNavigate();
-
-  const handleProduct = () => {
-    navigate(`/products/${ideal_for}/${title}/${_id}`);
-    window.scrollTo(0, 0);
-  };
 
   let shortTitle = title.split("")?.filter((el, i) => i <= 16);
   let shortBrand = brand.split("")?.filter((el, i) => i <= 16);
@@ -39,6 +33,7 @@ export const Product = ({ props }) => {
   return (
     <>
       <Box
+        position={"relative"}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
         maxW={"250px"}
@@ -56,25 +51,40 @@ export const Product = ({ props }) => {
         _hover={{
           boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
         }}
-        onClick={handleProduct}
       >
         {isHovering ? (
           <OnHoverProducts
-            title={title}
-            brand={brand}
-            ideal_for={ideal_for}
-            variant_price={variant_price}
-            variant_mrp={variant_mrp}
-            images={images}
-            _id={_id}
-            size={size}
+            props={props}
+            option={option}
+            handleOption={handleOption}
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
+            handleDelete={handleDelete}
           />
         ) : (
           <>
             <Box w={"100%"}>
-              {/* <Ratings rating={rating} /> */}
+              {handleDelete && (
+                <Stack
+                  justify={"center"}
+                  align={"center"}
+                  position={"absolute"}
+                  top={"5px"}
+                  right={"5px"}
+                >
+                  <Text
+                    bg={"#f1f2f6"}
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    border={"1px solid gray"}
+                    borderRadius={"25px"}
+                    p={"5px"}
+                  >
+                    <CloseIcon boxSize={2} />
+                  </Text>
+                </Stack>
+              )}
               <Image src={images[0]} w={"100%"} alt="demo" />
             </Box>
 

@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 
 import { AiFillStar } from "react-icons/ai";
@@ -79,12 +80,15 @@ export const SingleProduct = () => {
       });
   };
 
-  const handleAddToCart = (data) => {
+  const handleAddToCart = () => {
     dispatch(addToCartPostRequestAction());
+    const cartObj={...data,qty:1}
+    console.log(cartObj)
     axios
-      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`, data, {
+      .post(`${process.env.REACT_APP_TRENDZY_BASE_URL}/cart/addtocart`,cartObj, {
         headers: {
-          Authorization: JSON.parse(localStorage.getItem("trendsyToken"))?.token,
+          Authorization: JSON.parse(localStorage.getItem("trendsyToken"))
+            ?.token,
         },
       })
       .then((res) => {
@@ -93,7 +97,7 @@ export const SingleProduct = () => {
           alert("please login first");
         } else {
           alert("Product added successfully ");
-          dispatch(addToCartPostSuccessAction(res.data));
+          dispatch(addToCartPostSuccessAction(cartObj));
         }
       })
       .catch((err) => {
@@ -107,6 +111,50 @@ export const SingleProduct = () => {
   }, [_id, img]);
 
   const dummySize = ["XS", "S", "M", "L", "XL", "XXL"];
+
+  const Auth = localStorage.getItem("trendsyToken");
+  //   console.log(Auth);
+  const token = JSON.parse(Auth);
+  const toast = useToast();
+
+  const AddToWishlist = (data) => {
+    if (token) {
+      axios
+        .post(
+          `${process.env.REACT_APP_TRENDZY_BASE_URL}/wishlist/addtowishlist`,
+          data,
+          { headers: { authorization: token.token } }
+        )
+        .then((res) => {
+          console.log(res);
+          toast({
+            position: "top",
+            title: res.data,
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+        })
+        .catch((err) => {
+          console.log(err.message);
+          toast({
+            position: "top",
+            title: err.message,
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        });
+    } else {
+      toast({
+        position: "top",
+        title: "Please login first",
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
 
   // console.log(singleProduct);
   return (
@@ -365,7 +413,7 @@ export const SingleProduct = () => {
                   borderRadius={"2px"}
                   fontWeight={"600"}
                   transition={"0.3s"}
-                  onClick={() => handleAddToCart(products)}
+                  onClick={() => handleAddToCart()}
                 >
                   <Text>
                     <HiShoppingBag />
@@ -381,6 +429,7 @@ export const SingleProduct = () => {
                   borderRadius={"2px"}
                   fontWeight={"600"}
                   transition={"0.3s"}
+                  onClick={() => AddToWishlist(data)}
                 >
                   <Text
                     position={"relative"}

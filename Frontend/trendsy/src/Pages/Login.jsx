@@ -52,7 +52,7 @@ const Login = () => {
       }).then(res => res.json())
 
 
-        .then(res => { res.msg === "Login successfull" ? localStorage.setItem("num", res.num) : navigate("/signup");Setseen(false) 
+        .then(res => { res.msg === "Login successfull" ? localStorage.setItem("num", res.num) : navigate("/signup");Setseen(false);
        })
 
         .catch(err => console.log(err))
@@ -91,7 +91,7 @@ const Login = () => {
             swal(
               "login Successfull", "you are being redirected" , "success"
               );
-              navigate("/")
+              navigate(-1);
             } })
       .catch(err => console.log(err))
 

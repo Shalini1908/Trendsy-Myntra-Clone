@@ -1,22 +1,23 @@
-Developers Name 
+ Developers Name : 
+ 
+Shalini Singh </br>
+Kashif Rezvi </br>
+Abhijeet Kale </br>
+Madhukar Kakade </br>
+Ganesh Bahire </br>
 
-Shalini Singh<br>
-Kashif Rezvi<br>
-Abhijeet Kale<br>
-Madhukar Balasaheb Kakade<br>
-Ganesh bahire
 
-TEACH STACKS-
-React<br>
-Redux<br>
-Redux-Thunk<br>
-NodeJS<br>
-Mongoose<br>
-MongoDB<br>
-ChakraUI<br>
-HTML<br>
-JavaScript<br>
-CSS
+TEACH STACKS
+  - React
+  - Redux
+  - Redux-Thunk
+  - NodeJS
+  - Mongoose
+  - MongoDB
+  - ChakraUI
+  - HTML
+  - JavaScript
+  - CSS
 
 
 LOGO
@@ -24,22 +25,55 @@ LOGO
 ![trendsy-new-modified](https://user-images.githubusercontent.com/107534386/221490432-2176031a-5013-4c10-909e-bba47d6fc99f.png)
 
 
-HOME PAGE
-
+LANDING PAGE
+ - Navbar 
+    - logo : redirected to home page
+    - catagory menu bar : naviate to show perticular category products 
+    - dropdown menu : shows subcategory of respective category
+    - search bar : show the result for query params, serf on result using up , down key and select using enter key
+    - profile : user can login and logout from here
+    - favorite : navigate to favorite page
+    - bag : navigate to cart section
+ - Home Page
+    - slider : various banners slides automatically and user can also select manually.
+    - posters : posters shown on basis of different category such as poplar, intrend,deal,best brand,top pics,luxe,new,gift cards etc.
+    - scroll to top button
+ - Footer
+    - online shopping , usefull links , customer policies , social links , guarantee and policy
+    - popular search section 
 ![Screenshot (3)](https://user-images.githubusercontent.com/107534386/221490495-b11efa2e-2992-497d-bf90-be48e22022c2.png)
 
 ![Screenshot (4)](https://user-images.githubusercontent.com/107534386/221490242-a308f6a3-f60a-4814-b18d-98775c060db4.png)
+
 
 PRODUCT PAGE
 
 ![Screenshot (5)](https://user-images.githubusercontent.com/107534386/221490283-c19e2529-a9ee-4e8f-8861-83e6d7ae361b.png)
 ![Screenshot (6)](https://user-images.githubusercontent.com/107534386/221490292-80be7b05-0faa-435b-9a36-16c2bba9104a.png)
 
+
 SIGN UP
 ![Screenshot (7)](https://user-images.githubusercontent.com/107534386/221490336-4a2d5172-3af1-468a-91f8-fba35cd9bc3d.png)
 
-CART PAGE
 
+CART PAGE
+  - Cart Navbar
+     - logo : redirected to home page
+     - page bar : shows current page
+  - Cart Info
+      - pin code : user can check availability of pincode
+      - bank offers : all the offers sown
+   - Cart Products
+      - select or deselect all product for checkout
+      - shows all cart product with its information and image
+      - user can select deselect product using chekbox for checkout
+      - close icon for remove perticular product from cart
+      - user able to select quantity as per his/her requirement.
+    - Checkout Calulation
+      - new user discount
+      - add amount to donate
+      - apply coupen for discount
+      - calculate total amount for checkout
 ![Screenshot (19)](https://user-images.githubusercontent.com/107534386/221490661-ee1c8e54-d682-4bde-b12f-58bb317ea7e7.png)
 
 
