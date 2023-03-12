@@ -93,7 +93,7 @@ const AddProducts = () => {
                 onChange={(e) => setStock(e.target.value)}
                 _placeholder={{color:"gray"}}
                 style={ {border:"1px solid #ff3f6c",
-                    borderWidth: "1px"}}
+                borderWidth: "1px"}}
               ></Input>
             </Box>
 
