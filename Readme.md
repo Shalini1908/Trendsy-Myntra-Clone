@@ -1,6 +1,6 @@
 <h1 align="center">Trendsy</h1> 
 
-<h2 align="center">Trendsy is a clone of Myntra.com , It is E-Commerce Website for Shpoing Cloths.</h2>
+<h2 align="center">Trendsy is a clone of Myntra.com , It is E-Commerce Website for Shopping Clothes.</h2>
 
 <br />
 <p align="center">
@@ -57,7 +57,7 @@ LANDING PAGE
     - bag : navigate to cart section
  - Home Page
     - slider : various banners slides automatically and user can also select manually.
-    - posters : posters shown on basis of different category such as poplar, intrend,deal,best brand,top pics,luxe,new,gift cards etc.
+    - posters : posters shown on basis of different category such as poplar, in trend,deal,best brand,top pics,luxe,new,gift cards etc.
     - scroll to top button
  - Footer
     - online shopping , usefull links , customer policies , social links , guarantee and policy
@@ -104,6 +104,19 @@ CART PAGE
 
 ADMIN
 
+<hr>
+Email- singhparmar1908@gmail.com<br>
+Password - Shalini1908<br><br><br>
+
+
+- Admin can add the products , it will automatically added to api.
+- Admin can update any category of the product.
+- Admin can delete product , it will be deleted from database also.
+- Pagination is also implemented
+- Admin can Edit the product
+- We can see all the users who have logged in , all the important details.
+- Order details are also visible , exact data of the products , number of admins and order placed till date.
+
 ![Screenshot (23)](https://user-images.githubusercontent.com/107534386/221490758-2aa24146-f792-420a-b7ab-08cec597b516.png)
 
 
@@ -111,7 +124,6 @@ ADMIN
 
 ![Screenshot (26)](https://user-images.githubusercontent.com/107534386/221490797-3936c421-972b-4c8f-8eb2-df4450dde368.png)![Screenshot (27)](https://user-images.githubusercontent.com/107534386/221490826-f70a214d-908f-4c74-ae38-0eeda4a70ee1.png)
 
-![Uploading Screenshot (27).png…]()
 
 
 
