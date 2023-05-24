@@ -68,8 +68,23 @@ LANDING PAGE
 
 
 PRODUCT PAGE
+- Dynamic filtration using backend 
+- Each and every filter option is implemented as in myntra.com
+- On page refresh data stays as same as before using useSearchParams
+- Used Redux for data management.
+- On hover over products will slide the different product images
+- Wishlist and Add to cart button provided as well
+- Responsive UI (Desktop/Tablet/Phone)
 
 ![Screenshot (5)](https://user-images.githubusercontent.com/107534386/221490283-c19e2529-a9ee-4e8f-8861-83e6d7ae361b.png)
+
+SINGLE PRODUCT PAGE
+- On hover over products images will zoom in
+- Wishlist and Add to cart button provided as well
+- Image Layout will change asper screen sizes
+- Dynamic product recommendation carousel
+- Responsive UI (Desktop/Tablet/Phone)
+
 ![Screenshot (6)](https://user-images.githubusercontent.com/107534386/221490292-80be7b05-0faa-435b-9a36-16c2bba9104a.png)
 
 
